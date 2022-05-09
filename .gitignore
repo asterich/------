@@ -1,4 +1,1 @@
-./程序/*/build/*
-./程序/*/*.dSYM
-./程序/*/.vscode
-./DS_Store
+.DS_Store
