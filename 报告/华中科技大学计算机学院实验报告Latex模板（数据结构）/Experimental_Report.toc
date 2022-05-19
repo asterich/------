@@ -1,0 +1,80 @@
+\contentsline {section}{\numberline {1}基于顺序存储结构的线性表实现}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}问题描述}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}系统设计}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}系统实现}{2}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}线性表操作}{2}{subsubsection.1.3.1}%
+\contentsline {subparagraph}{InitList}{2}{subparagraph*.1}%
+\contentsline {subparagraph}{DestroyList}{2}{subparagraph*.2}%
+\contentsline {subparagraph}{CLearList}{2}{subparagraph*.3}%
+\contentsline {subparagraph}{ListEmpty}{3}{subparagraph*.4}%
+\contentsline {subparagraph}{ListLength}{3}{subparagraph*.5}%
+\contentsline {subparagraph}{ListTraverse}{3}{subparagraph*.6}%
+\contentsline {subparagraph}{GetElem}{3}{subparagraph*.7}%
+\contentsline {subparagraph}{LocateElem}{4}{subparagraph*.8}%
+\contentsline {subparagraph}{PriorElem}{4}{subparagraph*.9}%
+\contentsline {subparagraph}{NextElem}{4}{subparagraph*.10}%
+\contentsline {subparagraph}{ListInsert}{5}{subparagraph*.11}%
+\contentsline {subparagraph}{ListDelete}{5}{subparagraph*.12}%
+\contentsline {subsubsection}{\numberline {1.3.2}多线性表管理}{6}{subsubsection.1.3.2}%
+\contentsline {subparagraph}{AddList}{6}{subparagraph*.13}%
+\contentsline {subparagraph}{LocateList}{6}{subparagraph*.14}%
+\contentsline {subparagraph}{RemoveList}{6}{subparagraph*.15}%
+\contentsline {subsubsection}{\numberline {1.3.3}文件操作}{7}{subsubsection.1.3.3}%
+\contentsline {subparagraph}{SaveList}{7}{subparagraph*.16}%
+\contentsline {subparagraph}{LoadList}{7}{subparagraph*.17}%
+\contentsline {subsubsection}{\numberline {1.3.4}算法}{8}{subsubsection.1.3.4}%
+\contentsline {subparagraph}{sort\_list}{8}{subparagraph*.18}%
+\contentsline {subparagraph}{max\_partial\_sum}{9}{subparagraph*.19}%
+\contentsline {subparagraph}{k\_subarray}{9}{subparagraph*.20}%
+\contentsline {subsection}{\numberline {1.4}系统测试}{11}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}线性表操作}{11}{subsubsection.1.4.1}%
+\contentsline {subparagraph}{InitList}{11}{subparagraph*.22}%
+\contentsline {subparagraph}{DestroyList}{12}{subparagraph*.25}%
+\contentsline {subparagraph}{ListEmpty}{12}{subparagraph*.28}%
+\contentsline {subparagraph}{ClearList}{14}{subparagraph*.34}%
+\contentsline {subparagraph}{ListLength}{16}{subparagraph*.40}%
+\contentsline {subparagraph}{ListTraverse}{17}{subparagraph*.46}%
+\contentsline {subparagraph}{GetElem}{18}{subparagraph*.49}%
+\contentsline {subparagraph}{LocateElem}{20}{subparagraph*.54}%
+\contentsline {subparagraph}{PriorElem}{21}{subparagraph*.60}%
+\contentsline {subparagraph}{NextElem}{23}{subparagraph*.66}%
+\contentsline {subparagraph}{ListInsert}{25}{subparagraph*.72}%
+\contentsline {subparagraph}{ListDelete}{26}{subparagraph*.78}%
+\contentsline {subsubsection}{\numberline {1.4.2}多线性表管理}{28}{subsubsection.1.4.2}%
+\contentsline {subparagraph}{AddList}{28}{subparagraph*.84}%
+\contentsline {subparagraph}{切换线性表}{29}{subparagraph*.87}%
+\contentsline {subparagraph}{LocateList}{30}{subparagraph*.92}%
+\contentsline {subparagraph}{RemoveList}{31}{subparagraph*.95}%
+\contentsline {subsubsection}{\numberline {1.4.3}文件操作}{33}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.4}算法}{37}{subsubsection.1.4.4}%
+\contentsline {subparagraph}{sort\_list}{37}{subparagraph*.116}%
+\contentsline {subparagraph}{max\_partial\_sum}{38}{subparagraph*.119}%
+\contentsline {subparagraph}{k\_subarray}{38}{subparagraph*.122}%
+\contentsline {subsubsection}{\numberline {1.4.5}一些小功能}{40}{subsubsection.1.4.5}%
+\contentsline {subsection}{\numberline {1.5}实验小结}{41}{subsection.1.5}%
+\contentsline {section}{\numberline {2}基于链式存储结构的线性表实现}{42}{section.2}%
+\contentsline {subsection}{\numberline {2.1}问题描述}{42}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}系统设计}{42}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}系统实现}{43}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}系统测试}{43}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}实验小结}{44}{subsection.2.5}%
+\contentsline {section}{\numberline {3}基于二叉链表的二叉树实现}{45}{section.3}%
+\contentsline {subsection}{\numberline {3.1}问题描述}{45}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}系统设计}{45}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}系统实现}{45}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}系统测试}{46}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}实验小结}{46}{subsection.3.5}%
+\contentsline {section}{\numberline {4}基于邻接表的图实现}{48}{section.4}%
+\contentsline {subsection}{\numberline {4.1}问题描述}{48}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}系统设计}{48}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}系统实现}{48}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}系统测试}{48}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}实验小结}{49}{subsection.4.5}%
+\contentsline {section}{\numberline {5}课程的收获和建议}{50}{section.5}%
+\contentsline {subsection}{\numberline {5.1}基于顺序存储结构的线性表实现}{50}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}基于链式存储结构的线性表实现}{50}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}基于二叉链表的二叉树实现}{50}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}基于二叉链表的二叉树实现}{51}{subsection.5.4}%
+\contentsline {section}{参考文献}{52}{section*.130}%
+\contentsline {section}{\numberline {A}附录A 基于顺序存储结构线性表实现的源程序}{53}{appendix.A}%
+\contentsline {section}{\numberline {B}附录B 基于链表的线性表实现的源程序}{77}{appendix.B}%
