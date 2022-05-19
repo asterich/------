@@ -1,0 +1,7 @@
+main
+*.dat
+input.txt
+main.dSYM/
+build/*
+.vscode/
+bin/
