@@ -21,3 +21,6 @@ target_include_directories(main
     PRIVATE 
         ${PROJECT_SOURCE_DIR}/include
 )#设置这个可执行文件hello_headers需要包含的库的路径
+
+target_compile_features(main PUBLIC cxx_std_11)
+set_target_properties(main PROPERTIES CXX_EXTENSIONS OFF)

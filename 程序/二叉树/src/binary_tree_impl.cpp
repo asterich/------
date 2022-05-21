@@ -10,11 +10,18 @@
  * @return TElemType*
  */
 TElemType *create_binary_tree_by_preorder(BiTree &node, TElemType *elem) {
+    if (elem == NULL) {
+        return NULL;
+    }
     if (elem->key == 0 || elem->key == -1) {
         node = NULL;
         return elem;
     } else {
         node = (BiTNode *)malloc(sizeof(BiTNode));
+        if (node == NULL) {
+            perror("memory allocation failed");
+            return NULL;
+        }
         node->data = *elem;
         TElemType *rightest =
             create_binary_tree_by_preorder(node->lchild, elem + 1);
