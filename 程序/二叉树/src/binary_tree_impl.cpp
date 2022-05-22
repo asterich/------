@@ -133,7 +133,7 @@ BiTNode *get_sibling(BiTree T, KeyType e) {
     } else if (res_in_r) {
         return res_in_r;
     }
-    return T;
+    return NULL;
 }
 
 BiTNode *get_father(BiTree T, KeyType e) {
@@ -343,6 +343,11 @@ status save_to_file(BiTree root, char filename[]) {
             s.write(reinterpret_cast<char *>(&tmp), sizeof tmp);
         }
     }
+    TElemType end;
+    end.key = -1;
+    strcpy(end.others, "null");
+    s.write(reinterpret_cast<char *>(&end), sizeof end);
+    s.close();
     return OK;
 }
 

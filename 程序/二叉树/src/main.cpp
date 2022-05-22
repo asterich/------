@@ -74,6 +74,8 @@ int main(void) {
                     status s = CreateBiTree(current_tree->L, buf);
                     if (s == ERROR) {
                         printf("\n有重复的key\n");
+                    } else if (s == INFEASIBLE) {
+                        printf("INFEASIBLE");
                     } else {
                         printf("\n创建成功\n");
                         printf("\n树的先序遍历为:\n");
@@ -95,6 +97,8 @@ int main(void) {
                 status s = ClearBiTree(current_tree->L);
                 if (s == OK) {
                     printf("\n清除二叉树成功\n");
+                } else if (s == INFEASIBLE) {
+                    printf("\nINFEASIBLE\n");
                 }
             }
                 getchar();

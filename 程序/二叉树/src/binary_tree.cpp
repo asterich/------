@@ -12,7 +12,9 @@
  * @return status
  */
 status CreateBiTree(BiTree &T, TElemType definition[]) {
-    T = NULL;
+    if (T != NULL) {
+        return INFEASIBLE;
+    }
     if (check_if_repeated_in_elems(definition) != OK) {
         return ERROR;
     }
@@ -27,6 +29,9 @@ status CreateBiTree(BiTree &T, TElemType definition[]) {
  * @return status
  */
 status ClearBiTree(BiTree &T) {
+    if (T == NULL) {
+        return INFEASIBLE;
+    }
     clear_binary_tree(T);
     T = NULL;
     return OK;
