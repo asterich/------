@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.26)  19 MAY 2022 20:10
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.26)  22 MAY 2022 22:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1034,12 +1034,6 @@ Package fontspec Info: Font family 'Menlo(0)' created for font 'Menlo' with
 
 LaTeX Warning: Label `fig1-2' multiply defined.
 
-
-LaTeX Warning: Label `fig4-1' multiply defined.
-
-
-LaTeX Warning: Label `fig3-1' multiply defined.
-
 )
 \openout1 = `Experimental_Report.aux'.
 
@@ -1292,7 +1286,11 @@ LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <10.53937> not available
 
 [1
 
-] (./Experimental_Report.toc
+] (./Experimental_Report.toc)
+\tf@toc=\write5
+\openout5 = `Experimental_Report.toc'.
+
+
 
 Package fontspec Warning: Font "Kaiti SC" does not contain requested Script
 (fontspec)                "CJK".
@@ -1330,11 +1328,11 @@ Package fontspec Info: Font family 'KaitiSC(0)' created for font 'Kaiti SC'
 [1
 
 
-])
-\tf@toc=\write5
-\openout5 = `Experimental_Report.toc'.
+]
 
- [2]
+Package natbib Warning: Citation `DataStructure' on page 1 undefined on input line 109.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
@@ -1419,8 +1417,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 320--328
  []
 
 [5]
-Overfull \hbox (4.10922pt too wide) in paragraph at lines 344--346
-\TU/SongtiSCLight(0)/m/n/12.045 使 用 时 先 声 明 一 个 \TU/TimesNewRoman(0)/m/n/12.045 LISTS \TU/SongtiSCLight(0)/m/n/12.045 类 型 的 变 量 \TU/TimesNewRoman(0)/m/n/12.045 lists \TU/SongtiSCLight(0)/m/n/12.045 和 一 个 \TU/TimesNewRoman(0)/m/n/12.045 ListInfo* \TU/SongtiSCLight(0)/m/n/12.045 类 型 的 指 针 \TU/TimesNewRoman(0)/m/n/12.045 current_list,
+Overfull \hbox (4.9044pt too wide) in paragraph at lines 344--346
+\TU/SongtiSCLight(0)/m/n/12.045 使 用 时 先 声 明 一 个 \TU/TimesNewRoman(0)/m/n/12.045 LISTS \TU/SongtiSCLight(0)/m/n/12.045 类 型 的 变 量 \TU/TimesNewRoman(0)/m/n/12.045 lists \TU/SongtiSCLight(0)/m/n/12.045 和 一 个 \TU/TimesNewRoman(0)/m/n/12.045 ListInfo* \TU/SongtiSCLight(0)/m/n/12.045 类 型 的 指 针 \TU/TimesNewRoman(0)/m/n/12.045 current_list\TU/SongtiSCLight(0)/m/n/12.045 ，|
  []
 
 
@@ -1786,52 +1784,618 @@ File: ./figure/sq_list/algo/k_subarray/result2.png Graphic file (type bmp)
 Package natbib Warning: Citation `CopyAssignmentCppReference' on page 41 undefined on input line 1886.
 
 [41]
-File: images/2-1.jpg Graphic file (type bmp)
-<images/2-1.jpg>
- [42
+Underfull \hbox (badness 10000) in paragraph at lines 1899--1900
 
-]
-File: images/1-1.pdf Graphic file (type pdf)
-<use images/1-1.pdf>
- [43] [44] [45
+ []
 
-]
-File: images/1-1.pdf Graphic file (type pdf)
-<use images/1-1.pdf>
+[42
+
+] [43]
+Underfull \hbox (badness 10000) in paragraph at lines 2013--2014
+
+ []
 
 
-LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/sc' undefined
-(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 1969.
+Underfull \hbox (badness 10000) in paragraph at lines 2022--2024
+
+ []
+
+[44]
+Underfull \hbox (badness 10000) in paragraph at lines 2032--2034
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2042--2044
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2052--2055
+
+ []
+
+[45]
+Underfull \hbox (badness 10000) in paragraph at lines 2078--2080
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2089--2092
+
+ []
 
 [46]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 1986.
+Underfull \hbox (badness 10000) in paragraph at lines 2149--2150
+
+ []
+
+[47] [48]
+Underfull \hbox (badness 10000) in paragraph at lines 2258--2260
+
+ []
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 1989.
+Underfull \hbox (badness 10000) in paragraph at lines 2268--2270
 
-[47] [48
+ []
+
+[49]
+Underfull \hbox (badness 10000) in paragraph at lines 2278--2280
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2288--2290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2300--2303
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2311--2313
+
+ []
+
+[50]
+Underfull \hbox (badness 10000) in paragraph at lines 2323--2325
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2333--2335
+
+ []
+
+[51] [52]
+File: ./figure/binary_tree/menu.png Graphic file (type bmp)
+<./figure/binary_tree/menu.png>
+File: ./figure/binary_tree/basic/CreateBiTree/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/basic/CreateBiTree/prelude.png>
+ [53]
+File: ./figure/binary_tree/basic/CreateBiTree/ok.png Graphic file (type bmp)
+<./figure/binary_tree/basic/CreateBiTree/ok.png>
+File: ./figure/binary_tree/basic/CreateBiTree/error.png Graphic file (type bmp)
+<./figure/binary_tree/basic/CreateBiTree/error.png>
+File: ./figure/binary_tree/basic/CreateBiTree/infeasible.png Graphic file (type bmp)
+<./figure/binary_tree/basic/CreateBiTree/infeasible.png>
+ [54] [55]
+File: ./figure/binary_tree/basic/ClearBiTree/ok.png Graphic file (type bmp)
+<./figure/binary_tree/basic/ClearBiTree/ok.png>
+File: ./figure/binary_tree/basic/ClearBiTree/infeasible.png Graphic file (type bmp)
+<./figure/binary_tree/basic/ClearBiTree/infeasible.png>
+ [56
 
 ]
-File: images/1-1.pdf Graphic file (type pdf)
-<use images/1-1.pdf>
- [49] [50
-
-] [51] (./Experimental_Report.bbl
-Invalid UTF-8 byte or sequence at line 28 replaced by U+FFFD.
-
-Missing character: There is no � (U+FFFD) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
-) [52
-
+File: ./figure/binary_tree/basic/TreeDepth/prelude1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/TreeDepth/prelude1.png>
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+ [57
 
 ]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 2060.
- [53
+File: ./figure/binary_tree/basic/TreeDepth/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/TreeDepth/ok1_1.png>
+File: ./figure/binary_tree/basic/TreeDepth/prelude2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/TreeDepth/prelude2.png>
+ [58
 
-] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76]
+]
+File: ./figure/binary_tree/tree2.png Graphic file (type bmp)
+<./figure/binary_tree/tree2.png>
+File: ./figure/binary_tree/basic/TreeDepth/ok2_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/TreeDepth/ok2_2.png>
+ [59
+
+]
+File: ./figure/binary_tree/basic/TreeDepth/ok_empty.png Graphic file (type bmp)
+<./figure/binary_tree/basic/TreeDepth/ok_empty.png>
+File: ./figure/binary_tree/basic/Assign/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/prelude.png>
+ [60
+
+]
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+File: ./figure/binary_tree/basic/Assign/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/ok1_1.png>
+File: ./figure/binary_tree/basic/Assign/ok1_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/ok1_2.png>
+File: ./figure/binary_tree/basic/Assign/ok2_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/ok2_1.png>
+ [61
+
+]
+File: ./figure/binary_tree/basic/Assign/ok2_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/ok2_2.png>
+ [62]
+File: ./figure/binary_tree/basic/Assign/error1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/error1.png>
+File: ./figure/binary_tree/basic/Assign/error2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/Assign/error2.png>
+ [63
+
+]
+File: ./figure/binary_tree/basic/GetSibling/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/prelude.png>
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+ [64
+
+]
+File: ./figure/binary_tree/basic/GetSibling/ok1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/ok1.png>
+File: ./figure/binary_tree/basic/GetSibling/ok2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/ok2.png>
+File: ./figure/binary_tree/basic/GetSibling/ok3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/ok3.png>
+
+Overfull \hbox (47.42018pt too wide) in paragraph at lines 2762--2774
+ [][][][][][] 
+ []
+
+File: ./figure/binary_tree/basic/GetSibling/error1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/error1.png>
+File: ./figure/binary_tree/basic/GetSibling/error2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/error2.png>
+[65
+
+]
+File: ./figure/binary_tree/basic/GetSibling/error_empty.png Graphic file (type bmp)
+<./figure/binary_tree/basic/GetSibling/error_empty.png>
+File: ./figure/binary_tree/basic/InsertNode/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/prelude.png>
+ [66
+
+] [67]
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+File: ./figure/binary_tree/basic/InsertNode/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok1_1.png>
+ [68
+
+]
+File: ./figure/binary_tree/basic/InsertNode/ok1_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok1_2.png>
+File: ./figure/binary_tree/basic/InsertNode/ok1_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok1_3.png>
+File: ./figure/binary_tree/basic/InsertNode/ok2_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok2_1.png>
+File: ./figure/binary_tree/basic/InsertNode/ok2_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok2_2.png>
+File: ./figure/binary_tree/basic/InsertNode/ok2_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok2_3.png>
+
+Overfull \hbox (20.56245pt too wide) in paragraph at lines 2881--2881
+[][]
+ []
+
+
+Overfull \hbox (27.615pt too wide) in paragraph at lines 2881--2881
+[] 
+ []
+
+File: ./figure/binary_tree/basic/InsertNode/ok3_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok3_1.png>
+File: ./figure/binary_tree/basic/InsertNode/ok3_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok3_2.png>
+File: ./figure/binary_tree/basic/InsertNode/ok3_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok3_3.png>
+
+Overfull \hbox (30.57631pt too wide) in paragraph at lines 2896--2896
+[][]
+ []
+
+
+Overfull \hbox (14.62376pt too wide) in paragraph at lines 2896--2896
+[] 
+ []
+
+File: ./figure/binary_tree/basic/InsertNode/ok4_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok4_1.png>
+File: ./figure/binary_tree/basic/InsertNode/ok4_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok4_2.png>
+File: ./figure/binary_tree/basic/InsertNode/ok4_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok4_3.png>
+
+Overfull \hbox (47.10004pt too wide) in paragraph at lines 2911--2911
+[][]
+ []
+
+
+Overfull \hbox (58.67274pt too wide) in paragraph at lines 2911--2911
+[] 
+ []
+
+[69
+
+]
+File: ./figure/binary_tree/basic/InsertNode/ok5_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok5_1.png>
+File: ./figure/binary_tree/basic/InsertNode/ok5_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok5_2.png>
+File: ./figure/binary_tree/basic/InsertNode/ok5_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/ok5_3.png>
+
+Overfull \hbox (66.88216pt too wide) in paragraph at lines 2926--2926
+[][]
+ []
+
+
+Overfull \hbox (83.03993pt too wide) in paragraph at lines 2926--2926
+[] 
+ []
+
+[70]
+File: ./figure/binary_tree/basic/InsertNode/error_not_exist.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/error_not_exist.png>
+File: ./figure/binary_tree/basic/InsertNode/error_repeated.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/error_repeated.png>
+File: ./figure/binary_tree/basic/InsertNode/error_empty.png Graphic file (type bmp)
+<./figure/binary_tree/basic/InsertNode/error_empty.png>
+
+Overfull \hbox (22.78287pt too wide) in paragraph at lines 2939--2951
+ [][][][][][] 
+ []
+
+[71]
+File: ./figure/binary_tree/basic/DeleteNode/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/prelude.png>
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+ [72
+
+]
+File: ./figure/binary_tree/basic/DeleteNode/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/ok1_1.png>
+File: ./figure/binary_tree/basic/DeleteNode/ok1_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/ok1_2.png>
+File: ./figure/binary_tree/basic/DeleteNode/ok1_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/ok1_3.png>
+
+Overfull \hbox (100.81793pt too wide) in paragraph at lines 2996--2996
+[][]
+ []
+
+
+Overfull \hbox (97.7743pt too wide) in paragraph at lines 2996--2996
+[] 
+ []
+
+File: ./figure/binary_tree/basic/DeleteNode/ok2_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/ok2_1.png>
+File: ./figure/binary_tree/basic/DeleteNode/ok2_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/ok2_2.png>
+File: ./figure/binary_tree/basic/DeleteNode/ok2_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/ok2_3.png>
+
+Overfull \hbox (57.7239pt too wide) in paragraph at lines 3014--3014
+[][]
+ []
+
+
+Overfull \hbox (45.90009pt too wide) in paragraph at lines 3014--3014
+[] 
+ []
+
+File: ./figure/binary_tree/basic/DeleteNode/error.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/error.png>
+[73
+
+]
+File: ./figure/binary_tree/basic/DeleteNode/error_empty.png Graphic file (type bmp)
+<./figure/binary_tree/basic/DeleteNode/error_empty.png>
+ [74]
+File: ./figure/binary_tree/basic/LocateNode/prelude1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/prelude1.png>
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+ [75
+
+]
+File: ./figure/binary_tree/basic/LocateNode/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/ok1_1.png>
+File: ./figure/binary_tree/basic/LocateNode/ok1_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/ok1_2.png>
+ [76
+
+]
+File: ./figure/binary_tree/basic/LocateNode/error1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/error1_1.png>
+File: ./figure/binary_tree/basic/LocateNode/prelude2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/prelude2.png>
+ [77
+
+]
+File: ./figure/binary_tree/tree2.png Graphic file (type bmp)
+<./figure/binary_tree/tree2.png>
+File: ./figure/binary_tree/basic/LocateNode/ok2_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/ok2_1.png>
+File: ./figure/binary_tree/basic/LocateNode/ok2_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/ok2_2.png>
+File: ./figure/binary_tree/basic/LocateNode/error2_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/error2_1.png>
+
+Overfull \hbox (21.48317pt too wide) in paragraph at lines 3148--3160
+ [][][][][][] 
+ []
+
+[78
+
+]
+File: ./figure/binary_tree/basic/LocateNode/error_empty.png Graphic file (type bmp)
+<./figure/binary_tree/basic/LocateNode/error_empty.png>
+File: ./figure/binary_tree/basic/traverse/menu.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/menu.png>
+ [79
+
+]
+File: ./figure/binary_tree/basic/traverse/prelude1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/prelude1.png>
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+ [80
+
+]
+File: ./figure/binary_tree/basic/traverse/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok1_1.png>
+File: ./figure/binary_tree/basic/traverse/ok1_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok1_2.png>
+File: ./figure/binary_tree/basic/traverse/ok1_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok1_3.png>
+File: ./figure/binary_tree/basic/traverse/ok1_4.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok1_4.png>
+ [81
+
+]
+File: ./figure/binary_tree/basic/traverse/prelude2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/prelude2.png>
+File: ./figure/binary_tree/basic/traverse/ok2_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok2_1.png>
+File: ./figure/binary_tree/basic/traverse/ok2_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok2_2.png>
+File: ./figure/binary_tree/basic/traverse/ok2_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok2_3.png>
+File: ./figure/binary_tree/basic/traverse/ok2_4.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok2_4.png>
+ [82
+
+] [83]
+File: ./figure/binary_tree/basic/traverse/ok_empty_1.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok_empty_1.png>
+File: ./figure/binary_tree/basic/traverse/ok_empty_2.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok_empty_2.png>
+File: ./figure/binary_tree/basic/traverse/ok_empty_3.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok_empty_3.png>
+File: ./figure/binary_tree/basic/traverse/ok_empty_4.png Graphic file (type bmp)
+<./figure/binary_tree/basic/traverse/ok_empty_4.png>
+File: ./figure/binary_tree/file/menu.png Graphic file (type bmp)
+<./figure/binary_tree/file/menu.png>
+ [84
+
+]
+File: ./figure/binary_tree/file/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/file/prelude.png>
+File: ./figure/binary_tree/file/save1_1.png Graphic file (type bmp)
+<./figure/binary_tree/file/save1_1.png>
+File: ./figure/binary_tree/file/file_tree.png Graphic file (type bmp)
+<./figure/binary_tree/file/file_tree.png>
+ [85
+
+]
+File: ./figure/binary_tree/file/riemann_dat.png Graphic file (type bmp)
+<./figure/binary_tree/file/riemann_dat.png>
+File: ./figure/binary_tree/file/save1_2.png Graphic file (type bmp)
+<./figure/binary_tree/file/save1_2.png>
+File: ./figure/binary_tree/file/load1_3.png Graphic file (type bmp)
+<./figure/binary_tree/file/load1_3.png>
+ [86
+
+]
+File: ./figure/binary_tree/file/load1_4.png Graphic file (type bmp)
+<./figure/binary_tree/file/load1_4.png>
+File: ./figure/binary_tree/file/abel_dat.png Graphic file (type bmp)
+<./figure/binary_tree/file/abel_dat.png>
+File: ./figure/binary_tree/file/error.png Graphic file (type bmp)
+<./figure/binary_tree/file/error.png>
+ [87
+
+]
+File: ./figure/binary_tree/algo/menu.png Graphic file (type bmp)
+<./figure/binary_tree/algo/menu.png>
+File: ./figure/binary_tree/algo/InvertTree/prelude1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/InvertTree/prelude1.png>
+
+Overfull \hbox (62.98825pt too wide) in paragraph at lines 3420--3422
+ [][] 
+ []
+
+File: ./figure/binary_tree/algo/InvertTree/ok1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/InvertTree/ok1.png>
+[88
+
+]
+File: ./figure/binary_tree/algo/InvertTree/prelude_empty.png Graphic file (type bmp)
+<./figure/binary_tree/algo/InvertTree/prelude_empty.png>
+File: ./figure/binary_tree/algo/InvertTree/ok_empty.png Graphic file (type bmp)
+<./figure/binary_tree/algo/InvertTree/ok_empty.png>
+ [89
+
+]
+File: ./figure/binary_tree/algo/MaxPathSum/prelude1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/MaxPathSum/prelude1.png>
+
+Overfull \hbox (62.98825pt too wide) in paragraph at lines 3475--3477
+ [][] 
+ []
+
+File: ./figure/binary_tree/algo/MaxPathSum/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/MaxPathSum/ok1_1.png>
+[90
+
+]
+File: ./figure/binary_tree/algo/MaxPathSum/prelude2.png Graphic file (type bmp)
+<./figure/binary_tree/algo/MaxPathSum/prelude2.png>
+File: ./figure/binary_tree/algo/MaxPathSum/ok2_1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/MaxPathSum/ok2_1.png>
+ [91
+
+]
+File: ./figure/binary_tree/algo/MaxPathSum/prelude_empty.png Graphic file (type bmp)
+<./figure/binary_tree/algo/MaxPathSum/prelude_empty.png>
+File: ./figure/binary_tree/algo/MaxPathSum/ok_empty.png Graphic file (type bmp)
+<./figure/binary_tree/algo/MaxPathSum/ok_empty.png>
+ [92
+
+]
+File: ./figure/binary_tree/algo/LCA/prelude1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/prelude1.png>
+
+Overfull \hbox (62.98825pt too wide) in paragraph at lines 3557--3559
+ [][] 
+ []
+
+File: ./figure/binary_tree/tree1.png Graphic file (type bmp)
+<./figure/binary_tree/tree1.png>
+
+Overfull \hbox (43.67908pt too wide) in paragraph at lines 3570--3572
+ [][] 
+ []
+
+[93
+
+]
+File: ./figure/binary_tree/algo/LCA/ok1_1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/ok1_1.png>
+File: ./figure/binary_tree/algo/LCA/ok1_2.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/ok1_2.png>
+File: ./figure/binary_tree/algo/LCA/ok1_3.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/ok1_3.png>
+File: ./figure/binary_tree/algo/LCA/error1_1.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/error1_1.png>
+File: ./figure/binary_tree/algo/LCA/prelude_empty.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/prelude_empty.png>
+File: ./figure/binary_tree/algo/LCA/error_empty.png Graphic file (type bmp)
+<./figure/binary_tree/algo/LCA/error_empty.png>
+ [94
+
+]
+File: ./figure/binary_tree/multi_tree/menu.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/menu.png>
+File: ./figure/binary_tree/multi_tree/prelude.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/prelude.png>
+ [95
+
+]
+File: ./figure/binary_tree/multi_tree/1_append.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/1_append.png>
+File: ./figure/binary_tree/multi_tree/2_switch.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/2_switch.png>
+File: ./figure/binary_tree/multi_tree/2_switch_after.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/2_switch_after.png>
+ [96
+
+] [97]
+File: ./figure/binary_tree/multi_tree/3_init.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/3_init.png>
+
+Overfull \hbox (33.48431pt too wide) in paragraph at lines 3699--3701
+ [][] 
+ []
+
+File: ./figure/binary_tree/multi_tree/4_switch.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/4_switch.png>
+File: ./figure/binary_tree/multi_tree/4_switch_after.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/4_switch_after.png>
+
+Overfull \hbox (7.17601pt too wide) in paragraph at lines 3712--3718
+ [][][][] 
+ []
+
+[98
+
+]
+File: ./figure/binary_tree/multi_tree/5_traverse.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/5_traverse.png>
+File: ./figure/binary_tree/multi_tree/6_locate.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/6_locate.png>
+File: ./figure/binary_tree/multi_tree/7_remove.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/7_remove.png>
+ [99
+
+]
+File: ./figure/binary_tree/multi_tree/7_remove_after_1.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/7_remove_after_1.png>
+File: ./figure/binary_tree/multi_tree/7_remove_after_1.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/7_remove_after_1.png>
+
+Overfull \hbox (28.54745pt too wide) in paragraph at lines 3770--3777
+ [][][][] 
+ []
+
+File: ./figure/binary_tree/multi_tree/8_remove_fail.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/8_remove_fail.png>
+[100
+
+]
+File: ./figure/binary_tree/multi_tree/9_locate_fail.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/9_locate_fail.png>
+File: ./figure/binary_tree/multi_tree/10_switch_fail.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/10_switch_fail.png>
+File: ./figure/binary_tree/multi_tree/11_switch_fail.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/11_switch_fail.png>
+ [101
+
+]
+File: ./figure/binary_tree/multi_tree/12_remove.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/12_remove.png>
+File: ./figure/binary_tree/multi_tree/12_remove_after_2.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/12_remove_after_2.png>
+ [102
+
+]
+File: ./figure/binary_tree/multi_tree/12_remove_after_3.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/12_remove_after_3.png>
+File: ./figure/binary_tree/multi_tree/12_remove_after_4.png Graphic file (type bmp)
+<./figure/binary_tree/multi_tree/12_remove_after_4.png>
+ [103
+
+] [104] [105
+
+] [106]
+No file Experimental_Report.bbl.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 3924.
+[107
+
+
+] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120] [121] [122] [123] [124] [125] [126] [127] [128] [129] [130]
 
 Package natbib Warning: There were undefined citations.
 
-[77
+[131
 
 ] (./Experimental_Report.aux)
 
@@ -1839,21 +2403,18 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.34248pt have occurred.
 
 
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Experimental_Report.out' has not changed.
-(rerunfilecheck)             Checksum: 7EABC40CC84A55EF6FCBA3713AB36693;3590.
+(rerunfilecheck)             Checksum: A9F10E8586A62F7ED6FE0EF081E9EA55;2418.
  ) 
 Here is how much of TeX's memory you used:
- 44986 strings out of 476179
- 1093744 string characters out of 5809544
- 1711503 words of memory out of 5000000
- 64804 multiletter control sequences out of 15000+600000
+ 46080 strings out of 476179
+ 1140625 string characters out of 5809544
+ 1715865 words of memory out of 5000000
+ 65825 multiletter control sequences out of 15000+600000
  486954 words of font info for 173 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  88i,12n,103p,1209b,1839s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Experimental_Report.pdf (80 pages).
+Output written on Experimental_Report.pdf (133 pages).

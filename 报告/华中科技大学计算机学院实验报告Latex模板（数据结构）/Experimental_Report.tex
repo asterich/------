@@ -166,12 +166,12 @@ status InitList(SqList &L);
 
 \noindent
 实现: \\
-先检查 L.elem 是否为 NULL, 如果不是 NULL, 则显然是已经创建过了, 返回 INFEASIBLE; \\
-然后为 L.elem 分配初始大小的内存, 如果分配失败, 返回 ERROR; \\
-分配成功后, 将L.length赋值为0, L.listsize赋值为初始大小, 返回OK. \\
+先检查 L.elem 是否为 NULL，如果不是 NULL，则显然是已经创建过了，返回 INFEASIBLE; \\
+然后为 L.elem 分配初始大小的内存，如果分配失败，返回 ERROR; \\
+分配成功后，将L.length赋值为0，L.listsize赋值为初始大小，返回OK。\\
 \\
 \noindent
-注: 由于判断线性表是否创建过的标准是 L.elem == NULL , 一个未创建的线性表, 一定要确保它的 L.elem 是 NULL.\\
+注: 由于判断线性表是否创建过的标准是 L.elem == NULL ，一个未创建的线性表，一定要确保它的 L.elem 是 NULL.\\
 
 \subparagraph{DestroyList}
 \noindent
@@ -182,9 +182,9 @@ status DestroyList(SqList &L);
 
 \noindent
 实现: \\
-先检查 L.elem是否为 NULL, 如果是, 则是未创建或已销毁, 返回INFEASIBLE; \\
+先检查 L.elem是否为 NULL，如果是，则是未创建或已销毁，返回INFEASIBLE; \\
 然后释放 L.elem 的内存并将其赋值为 NULL; \\
-再将 L.length 和 L.listsize 赋值为0, 返回OK. \\
+再将 L.length 和 L.listsize 赋值为0，返回OK。\\
 
 \subparagraph{CLearList}
 \noindent
@@ -195,9 +195,9 @@ status ClearList(SqList &L);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
 然后使用memset将 L.elem 指向的内存空间清零; \\
-再将 L.length 赋值为0, 返回OK.\\
+再将 L.length 赋值为0，返回OK.\\
 
 \subparagraph{ListEmpty}
 \noindent
@@ -208,8 +208,8 @@ status ListEmpty(SqList &L);
 
 \noindent
 实现: \\
-先检查 L.elem 是否为 NULL, 如果是, 则表明线性表未创建或已销毁, 长度操作无意义, 返回INFEASIBLE; \\
-然后判断 L.length == 0, 如果为真, 则返回TRUE, 否则返回FALSE. \\
+先检查 L.elem 是否为 NULL，如果是，则表明线性表未创建或已销毁，长度操作无意义，返回INFEASIBLE; \\
+然后判断 L.length == 0，如果为真，则返回TRUE，否则返回FALSE。\\
 
 \subparagraph{ListLength}
 \noindent
@@ -220,8 +220,8 @@ status ListLength(SqList L);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-再返回 L.length. \\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+再返回 L.length。\\
 
 \subparagraph{ListTraverse}
 \noindent
@@ -232,10 +232,10 @@ status ListTraverse(SqList L);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后判断 L.length == 0, 如果为真, 则返回ERROR; \\
-再用for循环遍历整个数组, 并打印到终端. \\
-输出格式: 每个元素间一个空格, 输出完成后换行. \\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后判断 L.length == 0，如果为真，则返回ERROR; \\
+再用for循环遍历整个数组，并打印到终端。\\
+输出格式: 每个元素间一个空格，输出完成后换行。\\
 
 \subparagraph{GetElem}
 \noindent
@@ -246,9 +246,9 @@ status GetElem(SqList L, int i, ElemType &e);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后检查索引 i, 如果 i < 1 || i > L.length, 则说明该索引非法, 返回ERROR; \\
-如果索引合法, 则将引用 e 赋值为 L.elem 中对应的值, 返回OK.\\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后检查索引 i，如果 i < 1 || i > L.length，则说明该索引非法，返回ERROR; \\
+如果索引合法，则将引用 e 赋值为 L.elem 中对应的值，返回OK.\\
 
 \subparagraph{LocateElem}
 \noindent
@@ -259,10 +259,10 @@ int LocateElem(SqList L, ElemType e);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后创建一个变量 pos, 赋初值 0. 如果找到元素, pos 显然不会是 0; \\
-再通过for循环遍历数组, 将 e 逐一与 L.elem 中元素进行比较, 如果有元素等于 e, 则将 pos 赋值为for循环中目前的索引值, 跳出循环; \\
-最后返回 pos. 由于 pos 的初值是 0, 并且查找成功时 pos 的值会改变, 直接返回 pos 对于查找成功/失败两种情况是通用的.\\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后创建一个变量 pos，赋初值 0。如果找到元素，pos 显然不会是 0; \\
+再通过for循环遍历数组，将 e 逐一与 L.elem 中元素进行比较，如果有元素等于 e，则将 pos 赋值为for循环中目前的索引值，跳出循环; \\
+最后返回 pos。由于 pos 的初值是 0，并且查找成功时 pos 的值会改变，直接返回 pos 对于查找成功/失败两种情况是通用的.\\
 
 \subparagraph{PriorElem}
 \noindent
@@ -273,11 +273,11 @@ status PriorElem(SqList L, ElemType e);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后调用函数LocateElem, 将返回值存储于变量 pos; \\
-接着检查pos的值, 如果 pos <= 1, 则所求元素要么不存在, 要么是第一个元素, 不存在前驱, 返回ERROR; \\
-否则返回 L.elem[pos - 2]. \\
-为什么索引是 pos - 2: 线性表所提供接口的下标从1开始, 但是底层数据的下标从0开始, 相对接口前移一位.\\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后调用函数LocateElem，将返回值存储于变量 pos; \\
+接着检查pos的值，如果 pos <= 1，则所求元素要么不存在，要么是第一个元素，不存在前驱，返回ERROR; \\
+否则返回 L.elem[pos - 2]。\\
+为什么索引是 pos - 2: 线性表所提供接口的下标从1开始，但是底层数据的下标从0开始，相对接口前移一位.\\
 
 \subparagraph{NextElem}
 \noindent
@@ -288,10 +288,10 @@ status NextElem(SqList L, ElemType e);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后调用函数LocateElem, 将返回值存储于变量 pos; \\
-接着检查pos的值, 如果 pos < 1 || pos >= L.length, 则所求元素要么不存在, 要么是最后一个元素, 不存在后继, 返回ERROR; \\
-否则返回 L.elem[pos]. \\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后调用函数LocateElem，将返回值存储于变量 pos; \\
+接着检查pos的值，如果 pos < 1 || pos >= L.length，则所求元素要么不存在，要么是最后一个元素，不存在后继，返回ERROR; \\
+否则返回 L.elem[pos]。\\
 为什么索引是 pos: 同PriorElem.\\
 
 \subparagraph{ListInsert}
@@ -303,11 +303,11 @@ status ListInsert(SqList &L, int i, ElemType e);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后检查插入位置 i. 这里 i 可以是线性表末尾的后一位, 如果i <= 0 || i > L.length + 1, 返回ERROR; \\
-然后将 L.length自增1, 并检查线性表的容量 L.listsize, 如果不够, 就用realloc重新分配内存. 这里的内存分配策略是每次多分配固定大小的内存空间. \\
-接着使用for循环将位置在 i 之后的元素后移一位. for循环必须从后到前遍历, 在i处停止; \\
-最后将 L.elem[i - 1] 赋值为 e, 返回OK. \\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后检查插入位置 i。这里 i 可以是线性表末尾的后一位，如果i <= 0 || i > L.length + 1，返回ERROR; \\
+然后将 L.length自增1，并检查线性表的容量 L.listsize，如果不够，就用realloc重新分配内存。这里的内存分配策略是每次多分配固定大小的内存空间。\\
+接着使用for循环将位置在 i 之后的元素后移一位。for循环必须从后到前遍历，在i处停止; \\
+最后将 L.elem[i - 1] 赋值为 e，返回OK。\\
 为什么最后的索引是 i - 1: 同PriorElem.\\
 
 \subparagraph{ListDelete}
@@ -319,11 +319,11 @@ status ListDelete(SqList &L, int i, ElemType &e);
 
 \noindent
 实现: \\
-先检查 L.elem是否为NULL, 如果是, 返回INFEASIBLE; \\
-然后检查插入位置 i. 如果i <= 0 || i > L.length, 返回ERROR; \\
+先检查 L.elem是否为NULL，如果是，返回INFEASIBLE; \\
+然后检查插入位置 i。如果i <= 0 || i > L.length，返回ERROR; \\
 然后将 e 赋值为 L.elem[i - 1];
-接着使用for循环将位置在 i 之后的元素前移一位. for循环必须 从i + 1 处开始,从前往后遍历; \\
-最后将 L.length 自减1. \\
+接着使用for循环将位置在 i 之后的元素前移一位。for循环必须 从i + 1 处开始,从前往后遍历; \\
+最后将 L.length 自减1。\\
 为什么e对应的索引是 i - 1: 同PriorElem.\\
 
 \newpage
@@ -341,7 +341,7 @@ typedef struct {  //线性表的管理表定义
     int listsize;
 } LISTS;
 \end{lstlisting}
-使用时先声明一个 LISTS 类型的变量 lists 和一个 ListInfo* 类型的指针 current\_list, 切换线性表时移动current\_list, 线性表操作通过current\_list进行.\\
+使用时先声明一个 LISTS 类型的变量 lists 和一个 ListInfo* 类型的指针 current\_list，切换线性表时移动current\_list，线性表操作通过current\_list进行.\\
 (一种更好的做法是把指针current\_list写进LISTS中) \\
 
 \subparagraph{AddList}
@@ -353,10 +353,10 @@ status AddList(LISTS &Lists, const char *ListName);
 
 \noindent
 实现: \\
-先检查 Lists.length, 若 Lists.length > Lists.listsize || Lists.length < 0, 则返回ERROR; \\
-然后创建一个空线性表并将其初始化, 如果初始化失败, 返回ERROR; \\
+先检查 Lists.length，若 Lists.length > Lists.listsize || Lists.length < 0，则返回ERROR; \\
+然后创建一个空线性表并将其初始化，如果初始化失败，返回ERROR; \\
 接着使用strcpy将形参中的 ListName 复制到待添加位置的 name 字段; \\
-最后将之前创建的线性表整体复制到待添加位置的 L 字段. \\
+最后将之前创建的线性表整体复制到待添加位置的 L 字段。\\
 
 \subparagraph{LocateList}
 \noindent
@@ -367,8 +367,8 @@ status LocateList(LISTS &Lists, const char *ListName);
 
 \noindent
 实现: \\
-先检查 Lists.length, 若 Lists.length <= 0, 则返回ERROR; \\
-然后如同在单线性表中一样查找对应于 ListName 的多线性表, 返回对应位置. \\
+先检查 Lists.length，若 Lists.length <= 0，则返回ERROR; \\
+然后如同在单线性表中一样查找对应于 ListName 的多线性表，返回对应位置。\\
 
 \subparagraph{RemoveList}
 \noindent
@@ -379,11 +379,11 @@ status RemoveList(LISTS &Lists, const char *ListName);
 
 \noindent
 实现: \\
-先检查 Lists.length, 若 Lists.length <= 0, 则返回ERROR; \\
-然后查找对应于 ListName 的线性表, 若查找失败, 则返回 ERROR; \\
-找到对应线性表以后, 对其调用 DestroyList; \\
-然后从对应线性表位置后一位遍历到 Lists 末尾, 把每一个遍历到的线性表前移一位; \\
-最后将 Lists 末尾的线性表置 0, Lists.length 自减 1, 返回OK. \\
+先检查 Lists.length，若 Lists.length <= 0，则返回ERROR; \\
+然后查找对应于 ListName 的线性表，若查找失败，则返回 ERROR; \\
+找到对应线性表以后，对其调用 DestroyList; \\
+然后从对应线性表位置后一位遍历到 Lists 末尾，把每一个遍历到的线性表前移一位; \\
+最后将 Lists 末尾的线性表置 0，Lists.length 自减 1，返回OK。\\
 
 \subsubsection{文件操作}
 
@@ -396,10 +396,10 @@ status SaveList(SqList L, char FileName[]);
 
 \noindent
 实现: \\
-先检查 L.elem, 若为 NULL, 则返回INFEASIBLE; \\
-然后用 FileName 打开一个文件, 如果发生错误, 返回 ERROR; \\
+先检查 L.elem，若为 NULL，则返回INFEASIBLE; \\
+然后用 FileName 打开一个文件，如果发生错误，返回 ERROR; \\
 接着依次用 fwrite 将 L.length 、L.listsize 、L.elem中元素写入文件; \\
-最后关闭文件, 返回 OK. \\
+最后关闭文件，返回 OK。\\
 
 \subparagraph{LoadList}
 \noindent
@@ -410,13 +410,13 @@ status LoadList(SqList L, char FileName[]);
 
 \noindent
 实现: \\
-先检查 L.elem, 若为 NULL, 则返回INFEASIBLE; \\
-然后用 FileName 打开一个文件, 如果发生错误, 返回 ERROR; \\
-接着声明变量 length、listsize, 依次用 fread 将它们从文件读入; \\
-然后声明一个 ElemType* 类型的指针 tmp, 给它分配 listsize * sizeof(ElemType) 的内存, 如果失败, 返回ERROR; \\
-申请内存成功后, 把 length、listsize、tmp 依次赋值给 L.length、L.listsize、L.elem; \\
+先检查 L.elem，若为 NULL，则返回INFEASIBLE; \\
+然后用 FileName 打开一个文件，如果发生错误，返回 ERROR; \\
+接着声明变量 length、listsize，依次用 fread 将它们从文件读入; \\
+然后声明一个 ElemType* 类型的指针 tmp，给它分配 listsize * sizeof(ElemType) 的内存，如果失败，返回ERROR; \\
+申请内存成功后，把 length、listsize、tmp 依次赋值给 L.length、L.listsize、L.elem; \\
 接着从文件读入 L.elem; \\
-最后关闭文件, 返回 OK. \\
+最后关闭文件，返回 OK。\\
 
 \newpage
 
@@ -431,8 +431,8 @@ status sort_list(SqList &L);
 
 \noindent
 实现: \\
-基于比较的排序算法时间复杂度下界为$O(nlogn)$. 目前有多种排序算法能够达到此下界, 包括但不限于快速排序、归并排序、堆排序等. gcc(libstdc++) 对std::sort的实现采用了一种叫introsort的算法, 它优先采用快速排序, 但在递归深度过深时切换到堆排序, 同时在小区间上采用插入排序, 较常规的随机化快速排序快数倍. \\
-本实现采用常规的随机化快速排序. \\
+基于比较的排序算法时间复杂度下界为$O(nlogn)$。目前有多种排序算法能够达到此下界，包括但不限于快速排序、归并排序、堆排序等。gcc(libstdc++) 对std::sort的实现采用了一种叫introsort的算法，它优先采用快速排序，但在递归深度过深时切换到堆排序，同时在小区间上采用插入排序，较常规的随机化快速排序快数倍。\\
+本实现采用常规的随机化快速排序。\\
 
 \noindent
 以下为生成随机数的函数:
@@ -449,7 +449,7 @@ int gen_rand(int l, int r) {
 \end{lstlisting}
 
 \noindent
-以下是partition函数. 难点在于边界条件的判定.
+以下是partition函数。难点在于边界条件的判定.
 \begin{lstlisting}[language=C++, frame=single]
 template <typename T, typename Func>
 int partition(T arr[], int l, int r, Func cmp) {
@@ -507,8 +507,8 @@ ElemType max_partial_sum(SqList L);
 
 \noindent
 实现: \\
-使用动态规划, 以数组sum[i]表示以i为结尾的最大子数组和, 则有如下递推式: $$sum[i] = max(sum[i - 1] + nums[i], nums[i])$$
-求出sum[i]后, 再找出最大的sum[i]即可. 时间复杂度为$O(n)$.\\
+使用动态规划，以数组sum[i]表示以i为结尾的最大子数组和，则有如下递推式: $$sum[i] = max(sum[i - 1] + nums[i], nums[i])$$
+求出sum[i]后，再找出最大的sum[i]即可。时间复杂度为$O(n)$.\\
 代码:
 \begin{lstlisting}[language=C++, frame=single]
 ElemType max_partial_sum(SqList L) {
@@ -527,17 +527,17 @@ ElemType max_partial_sum(SqList L) {
 
 \subparagraph{k\_subarray}
 \noindent
-函数k\_subarray为和为k的子数组数目, 签名如下:
+函数k\_subarray为和为k的子数组数目，签名如下:
 \begin{lstlisting}[language=C++, frame=single]
 int k_subarray(SqList &L, ElemType k);
 \end{lstlisting}
 
 \noindent
 实现: \\
-首先, 考虑数组的前缀和sum[i]. 和为k的连续数组满足: $$sum[i] - sum[j - 1] == k$$
+首先，考虑数组的前缀和sum[i]。和为k的连续数组满足: $$sum[i] - sum[j - 1] == k$$
 即: $$sum[i] - k == sum[j - 1]$$
-故只需考虑对于sum[i], 有多少个满足该条件的sum[j - 1]. \\
-为了能够快速找到sum[j - 1], 我们可以使用哈希表存储这个信息.具体而言, 我们声明一个哈希表sum\_map, 以sum[j - 1]为键, sum[j - 1]出现的次数为值, 从左到右更新sum\_map并计算答案. 显然, 每一次迭代中, sum[j - 1]对应的出现次数能够在$O(1)$内找到. 同时, 由于是从左往右更新答案, 且sum[i]的计算只与前一项有关, 故sum[i]可简化成current\_sum, 表示该次迭代中的前缀和. \\
+故只需考虑对于sum[i]，有多少个满足该条件的sum[j - 1]。\\
+为了能够快速找到sum[j - 1]，我们可以使用哈希表存储这个信息.具体而言，我们声明一个哈希表sum\_map，以sum[j - 1]为键，sum[j - 1]出现的次数为值，从左到右更新sum\_map并计算答案。显然，每一次迭代中，sum[j - 1]对应的出现次数能够在$O(1)$内找到。同时，由于是从左往右更新答案，且sum[i]的计算只与前一项有关，故sum[i]可简化成current\_sum，表示该次迭代中的前缀和。\\
 \noindent
 代码:
 \begin{lstlisting}[language=C++, frame=single]
@@ -574,7 +574,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \subparagraph{InitList}
 \noindent
-在初始界面中输入1, 执行InitList操作, 成功时如图所示
+在初始界面中输入1，执行InitList操作，成功时如图所示
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -592,7 +592,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-如果线性表已初始化, 则提示:
+如果线性表已初始化，则提示:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -606,7 +606,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \subparagraph{DestroyList}
 \noindent
-在初始界面输入2, 执行DestroyList操作, 成功时如图所示:
+在初始界面输入2，执行DestroyList操作，成功时如图所示:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -624,7 +624,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-如果线性表未初始化, 则提示:
+如果线性表未初始化，则提示:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -657,7 +657,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-然后在初始界面输入4. 输出如下:
+然后在初始界面输入4。输出如下:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -711,7 +711,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \subparagraph{ClearList}
 \noindent
-首先创建一个空表, 并插入元素:
+首先创建一个空表，并插入元素:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -729,7 +729,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-然后在初始界面输入3, 执行ClearList操作, 成功时如图所示:
+然后在初始界面输入3，执行ClearList操作，成功时如图所示:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -748,7 +748,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-现在执行InitList操作, 失败, 符合ClearList的语义.
+现在执行InitList操作，失败，符合ClearList的语义.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -761,7 +761,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-现在表是空表. 再执行一遍功能3:
+现在表是空表。再执行一遍功能3:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -802,7 +802,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-然后执行操作5. 现在表是空表.
+然后执行操作5。现在表是空表.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -829,7 +829,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-再进行一遍操作5. 可以看到, 表长变成了7.
+再进行一遍操作5。可以看到，表长变成了7.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -907,7 +907,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-然后执行操作6. 可以看到, 操作界面输出了对应位置的元素值.
+然后执行操作6。可以看到，操作界面输出了对应位置的元素值.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -921,7 +921,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-下面输入一个越界的数据, 操作界面提示了一个错误.
+下面输入一个越界的数据，操作界面提示了一个错误.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -967,7 +967,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面输入一个只出现过一次的数据, 操作界面输出它的位置.
+下面输入一个只出现过一次的数据，操作界面输出它的位置.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -980,7 +980,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面输入一个重复出现的数据, 操作界面输出它第一次出现的位置.
+下面输入一个重复出现的数据，操作界面输出它第一次出现的位置.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -994,7 +994,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-下面输入一个表中没有的数据, 操作界面提示错误.
+下面输入一个表中没有的数据，操作界面提示错误.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1040,7 +1040,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-下面输入一个只出现过一次的数据, 操作界面输出它的前驱.
+下面输入一个只出现过一次的数据，操作界面输出它的前驱.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1053,7 +1053,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面输入一个重复出现的数据, 操作界面输出它第一次出现位置的前驱元素.
+下面输入一个重复出现的数据，操作界面输出它第一次出现位置的前驱元素.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1066,7 +1066,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面输入一个没有前驱的数据, 操作界面提示错误.
+下面输入一个没有前驱的数据，操作界面提示错误.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1112,7 +1112,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面输入一个只出现过一次的数据, 操作界面输出它的后继.
+下面输入一个只出现过一次的数据，操作界面输出它的后继.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1126,7 +1126,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-下面输入一个重复出现的数据, 操作界面输出它第一次出现位置的后继元素.
+下面输入一个重复出现的数据，操作界面输出它第一次出现位置的后继元素.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1139,7 +1139,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面输入一个没有后继的数据, 操作界面提示错误.
+下面输入一个没有后继的数据，操作界面提示错误.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1185,7 +1185,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面将一个元素插入到线性表的中间位置, 再进行遍历. 可以看到, 遍历的结果是正确的.
+下面将一个元素插入到线性表的中间位置，再进行遍历。可以看到，遍历的结果是正确的.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1202,7 +1202,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-然后将一个元素插入到线性表的末尾, 再进行遍历. 可以看到, 遍历的结果是正确的.
+然后将一个元素插入到线性表的末尾，再进行遍历。可以看到，遍历的结果是正确的.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1220,7 +1220,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-下面将元素插入到错误的位置(分别是表的末尾以后和开头之前), 均产生错误.
+下面将元素插入到错误的位置(分别是表的末尾以后和开头之前)，均产生错误.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1251,8 +1251,8 @@ int k_subarray(T arr[], int n, T k) {
 
 \subparagraph{ListDelete}
 \noindent
-为方便起见, 使用ListInsert操作后的数据来测试.\\
-下面删除一个线性表中间位置的元素, 再进行遍历. 可以看到, 遍历的结果是正确的.
+为方便起见，使用ListInsert操作后的数据来测试.\\
+下面删除一个线性表中间位置的元素，再进行遍历。可以看到，遍历的结果是正确的.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1270,7 +1270,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-然后删除线性表末尾的元素, 再进行遍历. 可以看到, 遍历的结果是正确的.
+然后删除线性表末尾的元素，再进行遍历。可以看到，遍历的结果是正确的.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1287,7 +1287,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-下面删除错误位置的元素(分别是表的末尾以后和开头之前), 均产生错误.
+下面删除错误位置的元素(分别是表的末尾以后和开头之前)，均产生错误.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1333,7 +1333,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \subparagraph{AddList}
 \noindent
-首先进行操作1, 输入待添加线性表的名字ok\_computer, 操作界面显示插入成功.
+首先进行操作1，输入待添加线性表的名字ok\_computer，操作界面显示插入成功.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1346,7 +1346,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-回到操作界面后, 我们发现线性表多了一个ok\_computer.
+回到操作界面后，我们发现线性表多了一个ok\_computer.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1361,8 +1361,8 @@ int k_subarray(T arr[], int n, T k) {
 \clearpage
 \subparagraph{切换线性表}
 \noindent
-这个功能没有做成函数, 姑且看一下吧.\\
-先看一下错误情况, 即没有这个线性表:
+这个功能没有做成函数，姑且看一下吧.\\
+先看一下错误情况，即没有这个线性表:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1375,7 +1375,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-如果有这个线性表, 那么切换成功. 回到操作界面以后, 星号在切换到的表上.
+如果有这个线性表，那么切换成功。回到操作界面以后，星号在切换到的表上.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1392,7 +1392,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-现在回到主界面, 查看我们刚刚建的新表. 很显然, 它是个空表.
+现在回到主界面，查看我们刚刚建的新表。很显然，它是个空表.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1410,7 +1410,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-现在对新表插入元素, 再切换到旧表. 遍历一遍旧表, 发现对新表的操作并不影响旧表的数据.
+现在对新表插入元素，再切换到旧表。遍历一遍旧表，发现对新表的操作并不影响旧表的数据.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1434,7 +1434,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \subparagraph{LocateList}
 \noindent
-先看一下错误情况, 即没有这个线性表:
+先看一下错误情况，即没有这个线性表:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1447,7 +1447,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-再看一下正确情况, 即有这个线性表:
+再看一下正确情况，即有这个线性表:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1462,7 +1462,7 @@ int k_subarray(T arr[], int n, T k) {
 \clearpage
 \subparagraph{RemoveList}
 \noindent
-先看一下错误情况, 即没有这个线性表:
+先看一下错误情况，即没有这个线性表:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1475,8 +1475,8 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-如果有这个线性表, 那么删除成功. \\
-如果被删除的线性表就是现在正进行操作的线性表, 则删除后线性表指针切换到头一个线性表.查找、切换到原来的线性表, 均显示未找到.
+如果有这个线性表，那么删除成功。\\
+如果被删除的线性表就是现在正进行操作的线性表，则删除后线性表指针切换到头一个线性表.查找、切换到原来的线性表，均显示未找到.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1497,7 +1497,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-看一下现在的线性表. 可以看到数据不受影响.
+看一下现在的线性表。可以看到数据不受影响.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1511,7 +1511,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-如果被删除的线性表不是现在正进行操作的线性表, 则删除后线性表指针不变.
+如果被删除的线性表不是现在正进行操作的线性表，则删除后线性表指针不变.
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1532,7 +1532,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-如果只剩一个线性表, 让我们删掉它:
+如果只剩一个线性表，让我们删掉它:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1545,7 +1545,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-删除后, 各种操作均失效, 需要添加线性表:
+删除后，各种操作均失效，需要添加线性表:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1581,7 +1581,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-首先新建一个线性表, 并插入元素:
+首先新建一个线性表，并插入元素:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1608,7 +1608,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-现在看一看目录树, 发现根目录下有一个新增的list3.dat:
+现在看一看目录树，发现根目录下有一个新增的list3.dat:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1635,7 +1635,7 @@ int k_subarray(T arr[], int n, T k) {
 
 
 \noindent
-在文件的操作界面中选择1, 输入加载的文件名, 如果文件不存在, 就会提示错误:
+在文件的操作界面中选择1，输入加载的文件名，如果文件不存在，就会提示错误:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1649,7 +1649,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-文件存在时, 提示加载成功:
+文件存在时，提示加载成功:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1662,7 +1662,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-回到主界面, 遍历线性表, 可以看到文件当中的数据已经加载进了表里:
+回到主界面，遍历线性表，可以看到文件当中的数据已经加载进了表里:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1675,7 +1675,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-现在, 我们要从另一个文件中加载数据, 并且覆盖掉这张已经有数据的表. 先看看它原来的样子:
+现在，我们要从另一个文件中加载数据，并且覆盖掉这张已经有数据的表。先看看它原来的样子:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1689,7 +1689,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-切换到文件的操作界面, 输入一个不存在的文件名, 提示出错:
+切换到文件的操作界面，输入一个不存在的文件名，提示出错:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1702,7 +1702,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-输入一个存在的文件名, 则提示成功并输出覆盖后的表. (114514并不是乱码)
+输入一个存在的文件名，则提示成功并输出覆盖后的表。(114514并不是乱码)
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1728,7 +1728,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-切换到主界面, 遍历一遍该表, 可以发现数据也是如此:
+切换到主界面，遍历一遍该表，可以发现数据也是如此:
 \begin{figure}[H]
 	\centering
 	\subfloat{
@@ -1771,7 +1771,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-然后切换到算法菜单, 输入2对其进行排序, 界面会输出排序过后的线性表:
+然后切换到算法菜单，输入2对其进行排序，界面会输出排序过后的线性表:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1799,7 +1799,7 @@ int k_subarray(T arr[], int n, T k) {
 \end{figure}
 
 \noindent
-然后切换到算法界面, 输入1, 界面输出最大子段和:
+然后切换到算法界面，输入1，界面输出最大子段和:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1827,7 +1827,7 @@ int k_subarray(T arr[], int n, T k) {
 
 \clearpage
 \noindent
-然后切换到算法界面, 输入3进入该功能, 然后输入k值, 界面输出和为k的子数组数目:
+然后切换到算法界面，输入3进入该功能，然后输入k值，界面输出和为k的子数组数目:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
@@ -1859,7 +1859,7 @@ int k_subarray(T arr[], int n, T k) {
 \begin{lstlisting}[language=C++, frame=single]
 system("cls");
 \end{lstlisting}
-这对*nix系统来说并不友好, 因此需要封装一个多平台版本:
+这对*nix系统来说并不友好，因此需要封装一个多平台版本:
 \begin{lstlisting}[language=C++, frame=single]
 void clean_terminal() {
 #if defined(__APPLE__) || defined(__linux__) || defined(__FreeBSD__)
@@ -1875,156 +1875,2020 @@ void clean_terminal() {
 
 \subsection{实验小结}
 
-该实验难度不大, 但是附加功能和代码整合有一定难度.
+该实验难度不大，但是附加功能和代码整合有一定难度.
 
-先说说代码整合. 由于本项目代码量较大, 如果每一个小功能都新建一个文件, 那将会很丑陋, 也会给代码构建造成很大困扰. 因此, 有必要把同类型的功能归于一个文件中. 同时, 对于C/C++, 函数的声明与实现分离, 也是正式项目中惯常的做法. 一般把结构体定义与函数声明放到.h文件, 而函数实现放到.c/.cpp文件中. 头文件和实现分别放在src和include目录下(似乎是因为链接第三方库的需要, 不过线性表这个项目其实用不到).这里有个坑: 如果用了C++的模板, 这么做会出现链接问题. 解决方法是把模板函数放到.hpp文件中, 再如同\#include "xxx.h"文件一样include它.
+先说说代码整合。由于本项目代码量较大，如果每一个小功能都新建一个文件，那将会很丑陋，也会给代码构建造成很大困扰。因此，有必要把同类型的功能归于一个文件中。同时，对于C/C++，函数的声明与实现分离，也是正式项目中惯常的做法。一般把结构体定义与函数声明放到.h文件，而函数实现放到.c/.cpp文件中。头文件和实现分别放在src和include目录下(似乎是因为链接第三方库的需要，不过线性表这个项目其实用不到).这里有个坑: 如果用了C++的模板，这么做会出现链接问题。解决方法是把模板函数放到.hpp文件中，再如同\#include "xxx.h"文件一样include它.
 
-然后是附加功能, 尤其是文件操作和多线性表管理.
+然后是附加功能，尤其是文件操作和多线性表管理.
 
-首先是文件操作. 据观察, 诸多学生被误用fscanf/fprintf产生的预料之外的错误消耗掉了大量时间(我没有, 哈哈哈). 线性表的数据格式较为简单, 因而难度还算可以接受; 数据格式的复杂性将会在后面的实验中大大凸显.
+首先是文件操作。据观察，诸多学生被误用fscanf/fprintf产生的预料之外的错误消耗掉了大量时间(我没有，哈哈哈)。线性表的数据格式较为简单，因而难度还算可以接受; 数据格式的复杂性将会在后面的实验中大大凸显.
 
-然后是多线性表管理. 指向当前多线性表的指针被声明在线性表管理表的结构体之外, 徒增许多难度. 一方面, 它使得切换线性表的操作与其他操作形式上不统一; 另一方面, 删除操作的函数内部无法很好地利用这个指针. 这一问题曾造成了删除后指针指向不正确的bug. 另外, 删除线性表的操作较为复杂. 它涉及查找、销毁、移动等操作, 稍有不慎就会遗漏其中某个方面. 幸运的是, C语言支持结构体的整体赋值(C++则是通过编译器合成的复制赋值运算符\cite{CopyAssignmentCppReference}), 移动的操作简单了一些.
+然后是多线性表管理。指向当前多线性表的指针被声明在线性表管理表的结构体之外，徒增许多难度。一方面，它使得切换线性表的操作与其他操作形式上不统一; 另一方面，删除操作的函数内部无法很好地利用这个指针。这一问题曾造成了删除后指针指向不正确的bug。另外，删除线性表的操作较为复杂。它涉及查找、销毁、移动等操作，稍有不慎就会遗漏其中某个方面。幸运的是，C语言支持结构体的整体赋值(C++则是通过编译器合成的复制赋值运算符\cite{CopyAssignmentCppReference})，移动的操作简单了一些.
 
-与任何C/C++项目一样, 指针是令人头疼的问题. 线性表的elem成员是动态分配的, 这对内存管理和调试提出了一些要求.(阿伟, 你又野指针辣! 给我去写rust, 三回啊三回)
+与任何C/C++项目一样，指针是令人头疼的问题。线性表的elem成员是动态分配的，这对内存管理和调试提出了一些要求。指针的威力将在后面的实验中凸显出来。
 
-\newpage
-
-\section{基于链式存储结构的线性表实现}
-
-描述主页的结构，给出主页截图，描述主要设计思路等，请见图\ref{fig2-1}。描述主页的结构，给出主页截图，描述主要设计思路等。描述主页的结构，给出主页截图，描述主要设计思路等。描述主页的结构，给出主页截图，描述主要设计思路等。描述主页的结构，给出主页截图，描述主要设计思路等。描述主页的结构，给出主页截图，描述主要设计思路等。描述主页的结构，给出主页截图，描述主要设计思路等。
-
-\begin{figure}[htb]
-	\begin{center}
-		\includegraphics[scale=0.40]{images/2-1.jpg}
-		\caption{主页举例}
-		\label{fig55-1}
-	\end{center}
-\end{figure}
-
-\subsection{问题描述}
-
-说明此实验要解决的基本问题。大力出奇迹！！！参考文献无法显示怎么办？陈老师正在想办法解决\cite{STR2021Neurocom, AVS2021Neurocom}！我是参考文献。我是第二小节\cite{Mehrabian1974An}。我是第二小节\cite{Rezaei2014CVPR}。我是第二小节\cite{Ramnath2008IJCV}。
-
-\subsection{系统设计}
-
-包括整体系统结构设计和数据结构设计等。先在文件夹里的bib文件里添加新的参考文献，给每篇参考文献取一个索引的名字，然后再引用比如\cite{STR2021Neurocom}\cite{AVS2021Neurocom, Rezaei2014CVPR}。请注意书籍、期刊论文、专利等bib条目的格式是不一样的。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\subsection{系统实现}
-
-主要说明各个主要函数的实现思想，复杂函数可辅助流程图进行说明，函数和系统实现的源代码放在附录中。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\subsection{系统测试}
-
-主要说明针对各个函数正常和异常的测试用例及测试结果画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\begin{figure}[htb] % here top bottom
-	\begin{center}
-		\includegraphics[scale=0.80]{images/1-1.pdf}
-		\caption{网页整体框架举例}
-		\label{fig4-1}
-	\end{center}
-\end{figure}
-
-\subsection{实验小结}
+(阿伟，你又野指针辣! 给我去写rust，三回啊三回)
 
 \newpage
+
 
 \section{基于二叉链表的二叉树实现}
 
-给出分页面截图，描述主要设计思路等。给出分页面截图，描述主要设计思路等。给出分页面截图，描述主要设计思路等。给出分页面截图，描述主要设计思路等。
-
 \subsection{问题描述}
 
-说明此实验要解决的基本问题。大力出奇迹！！！参考文献无法显示怎么办？陈老师正在想办法解决\cite{STR2021Neurocom, AVS2021Neurocom}！我是参考文献。我是第二小节\cite{Mehrabian1974An}。我是第二小节\cite{Rezaei2014CVPR}。我是第二小节\cite{Ramnath2008IJCV}。
+树是没有环的一种图，是一种非常常见的数据结构，在计算机科学的诸多领域中都有着广泛的应用。当然，树有很多种不同的类型和不同的实现方式。本实验采用二叉链表形式实现一个普通的二叉树。 \\
 
 \subsection{系统设计}
 
-包括整体系统结构设计和数据结构设计等。先在文件夹里的bib文件里添加新的参考文献，给每篇参考文献取一个索引的名字，然后再引用比如\cite{STR2021Neurocom}\cite{AVS2021Neurocom, Rezaei2014CVPR}。请注意书籍、期刊论文、专利等bib条目的格式是不一样的。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
+与线性表一样，本项目采用CMake构建。文件树如下：
+\dirtree{%
+ .1 {.} .
+  .2 {CMakeLists.txt} .
+  .2 {build.sh} .
+  .2 {test.dat} .
+  .2 {build} .
+  .2 {include} .
+   .3 {binary\_tree.h} .
+   .3 {binary\_tree\_impl.h} .
+   .3 {multi\_tree\_management.h} .
+   .3 {multi\_tree\_management\_impl.h} .
+   .3 {utils.h} .
+  .2 {src} .
+   .3 {binary\_tree.cpp} .
+   .3 {binary\_tree\_impl.cpp} .
+   .3 {main.cpp} .
+   .3 {multi\_tree\_management.cpp} .
+   .3 {multi\_tree\_management\_impl.cpp} .
+   .3 {utils.cpp} .
+  .2 {test} .
+   .3 {abel.dat} .
+   .3 {galois.dat} .
+   .3 {test1.txt} .
+}
+
+其中，不带"\_impl"字样的文件(如binary\_tree.h)是实验提供的接口和大致实现；带"\_impl"字样的文件(如binary\_tree\_impl.h)是自己封装的具体实现。utils.h和utils.cpp是终端清屏功能的接口和实现。
+
+各种类型的定义如下：
+\begin{lstlisting}[language=C++, frame=single]
+typedef int status;
+typedef int KeyType;
+typedef struct {
+	KeyType key;
+	char others[20];
+} TElemType;  //二叉树结点类型定义
+
+typedef struct BiTNode {  //二叉链表结点的定义
+	TElemType data;
+	struct BiTNode *lchild, *rchild;
+} BiTNode, *BiTree;
+\end{lstlisting}
 
 \subsection{系统实现}
 
-主要说明各个主要函数的实现思想，复杂函数可辅助流程图进行说明，函数和系统实现的源代码放在附录中。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
+\subsubsection{基本操作}
+
+\subparagraph{CreateBiTree}
+\noindent
+从带空节点的先序遍历创建二叉树。\\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status CreateBiTree(BiTree &T, TElemType definition[]);
+\end{lstlisting}
+
+\noindent
+实现: \\
+本函数从二叉树带空节点的先序遍历 definition[] 创建整颗二叉树。 \\
+具体实现分成两个部分: 先检查有无重复的关键字 key，再从先序遍历建树。具体代码如下:
+\begin{lstlisting}[language=C++, frame=single]
+status CreateBiTree(BiTree &T, TElemType definition[]) {
+	T = NULL;
+	if (check_if_repeated_in_elems(definition) != OK) {
+		return ERROR;
+	}
+	create_binary_tree_by_preorder(T, definition);
+	return OK;
+}
+\end{lstlisting}
+\noindent
+检查重复关键字的函数实现如下:
+\begin{lstlisting}[language=C++, frame=single]
+status check_if_repeated_in_elems(const TElemType elems[]) {
+	std::unordered_set<KeyType> keys;
+	const TElemType *p_elem = elems;
+	while (p_elem->key != -1) {
+		if (keys.find(p_elem->key) != keys.end()) {
+			return ERROR;
+		}
+		if (p_elem->key != 0) {
+			keys.insert(p_elem->key);
+		}
+		++p_elem;
+	}
+	return OK;
+}
+\end{lstlisting}
+其中用到了std::unordered\_set, 其作用相当于一个集合。每次迭代时先检查本次的关键字是否已经在集合 keys 里，若存在则返回ERROR, 否则将它加入 keys. 需要注意的是关键字为0的节点。 \\
+先序建树的函数实现如下:
+\begin{lstlisting}[language=C++, frame=single]
+TElemType *create_binary_tree_by_preorder(BiTree &node, TElemType *elem) {
+	if (elem == NULL) {
+        return NULL;
+    }
+    if (elem->key == 0 || elem->key == -1) {
+        node = NULL;
+        return elem;
+    } else {
+        node = (BiTNode *)malloc(sizeof(BiTNode));
+        if (node == NULL) {
+            perror("memory allocation failed");
+            return NULL;
+        }
+        node->data = *elem;
+        TElemType *rightest =
+            create_binary_tree_by_preorder(node->lchild, elem + 1);
+        return create_binary_tree_by_preorder(node->rchild, rightest + 1);
+    }
+}
+\end{lstlisting}
+为什么是这样呢？这是因为在先序遍历中，一个节点左子树的最右节点与右子树的根节点是相邻的。这就意味着在分离左右子树时，左子树的最右节点是有必要知道的。为了取得一个节点的最右节点，我们可以递归地创建左子树和右子树，在创建左子树时把目前节点在elem中的位置前推一位，在创建右子树到头时返回最后节点在先序遍历中的位置。左子树最右节点取得以后，就可以确定左右子树在elem数组中的分界。在含空节点的先序遍历中，这个最右节点一般就是一个空节点，因此递归终止条件是空节点。 \\
+
+\subparagraph{ClearBiTree}
+\noindent
+删除二叉树，并释放所有节点。\\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status ClearBiTree(BiTree &T);
+\end{lstlisting}
+实现: \\
+后序遍历二叉树，释放当前节点，将当前节点设置成 NULL. \\
+
+\subparagraph{BiTreeDepth}
+\noindent
+求树的深度。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+int BiTreeDepth(BiTree T);
+\end{lstlisting}
+实现: \\
+从下到上求深度。递归遍历二叉树，如果遍历到空节点，返回0；否则取左右子树深度的最大值+1。 \\
+
+\subparagraph{LocateNode}
+\noindent
+由关键字查找节点。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *LocateNode(BiTree T, KeyType e);
+\end{lstlisting}
+实现: \\
+递归从左右子树查找节点。每次将e与当前节点的关键字进行比较，如果相同，返回当前节点的指针；否则返回NULL. 节点为空时也返回NULL. \\
+
+\subparagraph{Assign}
+\noindent
+修改节点的数据域，包括关键字和others。
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status Assign(BiTree &T, KeyType e, TElemType value);
+\end{lstlisting}
+实现: \\
+首先判断对节点关键字的修改操作是否合法，若合法则将value赋值给节点的数据域。
+判断操作的实现: \\
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *locate_node_if_changeable(BiTree T, KeyType target_key,
+								   TElemType elem_to_change) {
+	BiTNode *target = locate_node(T, target_key);
+	if (!target) {
+		return NULL;
+	}
+	BiTNode *node_to_change = locate_node(T, elem_to_change.key);
+	if (node_to_change && node_to_change != target) {
+		return NULL;
+	}
+	return target;
+}
+\end{lstlisting}
+分别查找待修改节点与新关键字对应节点，如果前者找不到或者后者存在且不等于前者，那么插入操作就是不合法的。
+
+\subparagraph{GetSibling}
+\noindent
+由关键字查找节点的兄弟。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *GetSibling(BiTree T, KeyType e);
+\end{lstlisting}
+实现: \\
+递归遍历左右子树。每次都比较当前节点的左右孩子，如果其中一个孩子的关键字等于e, 则返回另一孩子的指针。\\
+
+
+\subparagraph{InsertNode}
+\noindent
+插入新节点。
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status InsertNode(BiTree &T, KeyType e, int LR, TElemType c);
+\end{lstlisting}
+实现: \\
+首先判断插入操作是否合法，若合法则按规则插入。LR决定插入节点与插入位置的相对关系: 0时为左节点，1时为右节点，-1时作为整颗树的根节点。\\
+判断操作的实现: \\
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *locate_node_if_insertable(BiTree T, KeyType target_key,
+								   TElemType elem_to_insert) {
+	BiTNode *target = locate_node(T, target_key);
+	if (!target) {
+		return NULL;
+	}
+	BiTNode *node_to_insert = locate_node(T, elem_to_insert.key);
+	if (node_to_insert) {
+		return NULL;
+	}
+	return target;
+}
+\end{lstlisting}
+相较于Assign功能的合法性判断较为简单，少了两节点的相等判断。 \\
+插入操作的实现:
+\begin{lstlisting}[language=C++, frame=single]
+status insert_node(BiTree &node, int LR, TElemType c) {
+	BiTNode *new_node = (BiTNode *)malloc(sizeof(BiTNode));
+	if (!new_node) {
+		return ERROR;
+	}
+	new_node->lchild = NULL;
+	switch (LR) {
+		case 0: {
+			new_node->rchild = node->lchild;
+			node->lchild = new_node;
+		} break;
+		case 1: {
+			new_node->rchild = node->rchild;
+			node->rchild = new_node;
+		} break;
+		case -1: {  // insert as root; ignoring %node's parent node
+			new_node->rchild = node;
+			node = new_node;
+		} break;
+	}
+	new_node->data = c;
+	return OK;
+}
+
+status InsertNode(BiTree &T, KeyType e, int LR, TElemType c) {
+    status s = OK;
+    BiTNode *target = LR == -1 ? T : locate_node_if_insertable(T, e, c);
+    if (!target) {
+        return ERROR;
+    }
+    s = insert_node(target, LR, c);
+    if (s == ERROR) {
+        return s;
+    }
+    if (LR == -1) {
+        T = target;
+    }
+    return OK;
+}
+\end{lstlisting}
+LR == -1的情况，变换根节点的操作并没有放到locate\_node中，并不是很优雅，但目前也没有什么好办法。 \\
+
+\subparagraph{DeleteNode}
+\noindent
+删除节点。原先的左节点替换掉原节点的位置，右节点作为原左子树最右节点的右节点。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status DeleteNode(BiTree &T, KeyType e);
+\end{lstlisting}
+实现: \\
+非常麻烦。首先要找到待删除节点的父亲节点和左子树最右节点，然后才能进行删除操作。 \\
+找父亲节点的函数实现如下:
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *get_father(BiTree T, KeyType e) {
+	if (!T) {
+		return NULL;
+	}
+	if (T->lchild && T->lchild->data.key == e) {
+		return T;
+	} else if (T->rchild && T->rchild->data.key == e) {
+		return T;
+	}
+	BiTNode *res_in_l = get_father(T->lchild, e);
+	BiTNode *res_in_r = get_father(T->rchild, e);
+	if (res_in_l) {
+		return res_in_l;
+	} else if (res_in_r) {
+		return res_in_r;
+	}
+	return NULL;
+}
+\end{lstlisting}
+即递归遍历整颗树。每次将当前节点儿子的关键字与e进行比较，如果为真，返回当前节点，否则递归查找左右子树。只有在空节点时才返回NULL. \\
+找左子树最右节点的函数实现如下:
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *get_rightest_node(BiTree T) {
+	if (T->rchild) {
+		return get_rightest_node(T->rchild);
+	} else if (T->lchild) {
+		return get_rightest_node(T->lchild);
+	} else {
+		return T;
+	}
+}
+\end{lstlisting}
+即优先遍历右子树。\\
+真正的删除操作需要判断左、右子树是否为空，具体实现比较复杂，就直接放代码罢:
+\begin{lstlisting}[language=C++, frame=single]
+status delete_node(BiTree &root, KeyType e) {
+	if (root->data.key == e) {
+		BiTNode *target = root;
+		if (!target->lchild && !target->rchild) {
+			free(target);
+			root = NULL;
+		} else if ((!target->lchild && target->rchild) ||
+					(target->lchild && !target->rchild)) {
+			BiTNode *target_child =
+				target->lchild ? target->lchild : target->rchild;
+			root = target_child;
+			free(target);
+		} else {
+			BiTNode *target_child = target->lchild;
+			BiTNode *rightest_node = get_rightest_node(target_child);
+			rightest_node->rchild = target->rchild;
+			free(target);
+			root = target_child;
+		}
+	} else {
+		BiTNode *father = get_father(root, e);
+		BiTNode **p_target = &((father->lchild && e == father->lchild->data.key)
+									? father->lchild
+									: father->rchild);
+		if (!(*p_target)->lchild && !(*p_target)->rchild) {
+			free(*p_target);
+			*p_target = NULL;
+		} else if ((!(*p_target)->lchild && (*p_target)->rchild) ||
+					((*p_target)->lchild && !(*p_target)->rchild)) {
+			BiTNode *target_child =
+				(*p_target)->lchild ? (*p_target)->lchild : (*p_target)->rchild;
+			free(*p_target);
+			*p_target = target_child;
+		} else {
+			BiTNode *target_child = (*p_target)->lchild;
+			BiTNode *rightest_node = get_rightest_node(target_child);
+			rightest_node->rchild = (*p_target)->rchild;
+			free(*p_target);
+			*p_target = target_child;
+		}
+	}
+	return OK;
+}
+
+status DeleteNode(BiTree &T, KeyType e) {
+    BiTNode *target = locate_node(T, e);
+    if (!target) {
+        return ERROR;
+    }
+    delete_node(T, e);
+    return OK;
+}
+\end{lstlisting}
+
+\subparagraph{PreOrderTraverse}
+\noindent
+前序遍历整颗树。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status PreOrderTraverse(BiTree T, void (*visit)(BiTree));
+\end{lstlisting}
+实现(非递归): \\
+设置一个栈。先让根节点入栈; 每次先访问栈顶节点(调用函数visit())并出栈，然后先后让原栈顶节点的左右孩子入栈。 \\
+
+\subparagraph{PostOrderTraverse}
+\noindent
+后序遍历整颗树。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status PostOrderTraverse(BiTree T, void (*visit)(BiTree));
+\end{lstlisting}
+实现(非递归): \\
+设置两个栈，称为stack1和stack2. 先在stack1上对树进行前序遍历，不过调用函数visit()换成把节点推入stack2; 再把stack2中的节点全部出栈，出栈同时调用visit(). stack2起到将先序遍历反转的作用。\\
+
+\subparagraph{LevelOrderTraverse}
+\noindent
+层序遍历整颗树。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status LevelOrderTraverse(BiTree T, void (*visit)(BiTree));
+\end{lstlisting}
+实现(非递归): \\
+设置一个队列。先让根节点入队; 每次先访问队头节点(调用函数visit())并出队，然后先后让队头节点的左右孩子入队。 \\
+
+\subparagraph{InOrderTraverse}
+\noindent
+中序遍历整颗树。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status InOrderTraverse(BiTree T, void (*visit)(BiTree));
+\end{lstlisting}
+实现(非递归): \\
+设置一个栈。先让根节点入栈; 不断让左孩子入栈，当没有可以入栈的节点时，访问栈顶节点(调用函数visit())并出栈，再将原栈顶节点的右节点入栈。 \\
+
+\subsubsection{文件操作}
+
+\subparagraph{SaveBiTree}
+\noindent
+将二叉树保存到文件。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status SaveBiTree(BiTree T, char FileName[]);
+\end{lstlisting}
+实现: \\
+前序遍历整颗树(包括空节点)，但visit操作换成向文件写入当前节点的信息。如果碰到空节点，则写入"0 null". \\
+(本来应该在最后写入节点"-1 null", 但其实无此必要) \\
+
+\subparagraph{LoadBiTree}
+\noindent
+从文件加载二叉树。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status LoadBiTree(BiTree T, char FileName[]);
+\end{lstlisting}
+实现: \\
+将文件的数据(带空节点的前序遍历)读入数组elem\_buf中，并调用函数create\_binary\_tree\_by\_preorder，从elem\_buf中创建二叉树。 \\
+
+\subsubsection{算法}
+
+\subparagraph{InvertBiTree}
+\noindent
+反转整颗二叉树。(笑死，据说做对这道题就能超越Max Howell拿到谷歌offer) \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status InvertTree(BiTree &T);
+\end{lstlisting}
+实现: \\
+交换当前节点的左右节点，然后递归左右节点进行反转。 \\
+
+\subparagraph{MaxPathSum}
+\noindent
+求出各节点到根节点路径上所有节点关键字的最大和。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+status MaxPathSum(BiTree T);
+\end{lstlisting}
+实现: \\
+递归遍历整颗树。如果遍历到空节点就返回0，否则返回左右孩子的路径上关键字最大和加上当前节点的关键字值。 \\
+
+\subparagraph{LowestCommonAncestor}
+\noindent
+求出两节点的最近公共祖先。 \\
+函数签名如下:
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *LowestCommonAncestor(BiTree T, BiTNode *e1, BiTNode *e2);
+\end{lstlisting}
+实现: \\
+朴素算法是每次找深度更大的节点向上跳，或者先把较深节点向上调整至两节点齐平，再一起向上跳。预处理时需dfs整颗树，时间复杂度为$O(n)$; 单次查询时间复杂度为$\Theta(n)$. \\
+一个经典的优化是倍增算法。通过预先处理出某节点的第$2^i$个祖先，可以大幅减少节点的跳转次数。预处理$O(n \log n)$, 单次查询时间复杂度为$O(log n)$. \\
+先声明以下变量:
+\begin{lstlisting}[language=C++, frame=single]
+std::unordered_map<BiTNode *, std::array<BiTNode *, 32>> father;
+std::unordered_map<BiTNode *, int> depth;
+\end{lstlisting}
+\newpage
+\noindent
+预处理:
+\begin{lstlisting}[language=C++, frame=single]
+void init(BiTree root) {
+	father.clear();
+	depth.clear();
+
+	father.insert(std::pair<BiTNode *, std::array<BiTNode *, 32>>{
+		NULL, std::array<BiTNode *, 32>()});
+	father.insert(std::pair<BiTNode *, std::array<BiTNode *, 32>>{
+		root, std::array<BiTNode *, 32>()});
+	for (auto &[k, arr] : father) {
+		arr.fill(NULL);
+	}
+	depth.insert(std::pair<BiTNode *, int>{NULL, 0});
+}
+
+void dfs(BiTNode *node, BiTNode *fa_node) {
+	if (!node) {
+		return;
+	}
+	father[node][0] = fa_node;
+	depth[node] = depth[father[node][0]] + 1;
+	for (int i = 1; i < 31; ++i) {
+		father[node][i] = father[father[node][i - 1]][i - 1];
+	}
+	dfs(node->lchild, node);
+	dfs(node->rchild, node);
+	return;
+}
+\end{lstlisting}
+lca:
+\begin{lstlisting}[language=C++, frame=single]
+BiTNode *lca(BiTree T, BiTNode *n1, BiTNode *n2) {
+	init(T);
+	dfs(T, NULL);
+	if (depth[n1] > depth[n2]) {
+		std::swap(n1, n2);
+	}
+	int delta = depth[n2] - depth[n1];
+	for (int j = 0; delta; ++j, delta >>= 1) {
+		if (delta & 1) {
+			n2 = father[n2][j];
+		}
+	}
+	if (n2 == n1) return n2;
+	for (int j = 30; j >= 0 && n2 != n1; --j) {
+		if (father[n2][j] != father[n1][j]) {
+			n2 = father[n2][j];
+			n1 = father[n1][j];
+		}
+	}
+	n2 = father[n2][0];
+	n1 = father[n1][0];
+	return n2;
+}
+\end{lstlisting}
+
+\subsubsection{多树管理}
+\noindent
+多树管理与多线性表管理大同小异，这里不再重复说明具体实现。有一点不同的是树的初始化与否通过根节点的指针是否为NULL来判定，并且只有CreateBiTree和ClearBiTree需要作此区分。其他操作中，就算根节点是NULL，也把它作空树看待。 \\
+多树管理表:
+\begin{lstlisting}[language=C++, frame=single]
+typedef struct {  
+    struct TreeInfo {
+        char name[30];
+        BiTree L;
+    } elem[10];
+    int length;
+    int listsize;
+} MultiTreeTable;
+\end{lstlisting}
+操作:
+\begin{lstlisting}[language=C++, frame=single]
+status AddTree(MultiTreeTable &Trees, const char *TreeName);
+status RemoveTree(MultiTreeTable &Trees, const char *TreeName);
+int LocateTree(MultiTreeTable Trees, const char *TreeName);
+\end{lstlisting}
 
 \subsection{系统测试}
 
-主要说明针对各个函数正常和异常的测试用例及测试结果画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\begin{figure}[htb] % here top bottom
-	\begin{center}
-		\includegraphics[scale=0.80]{images/1-1.pdf}
-		\caption{网页整体框架举例}
-		\label{fig3-1}
-	\end{center}
+\noindent
+主菜单如下:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/menu.png}
+	\caption{主菜单}
+	\label{fig5-1}
 \end{figure}
 
-\subsection{实验小结}
+\subsubsection{基本操作}
 
-如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。
+\subparagraph{CreateBiTree}
+\noindent
+在主菜单中输入1，执行CreateBiTree操作，提示输入前序遍历(带空节点)。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/CreateBiTree/prelude.png}
+	}
+	\centering
+	\caption{CreateBiTree成功\_1}
+	\label{fig5-2}
+\end{figure}
 
-\begin{shaded*}\begin{alg}{一个复杂算法}
-		\label{alg:1}
-		\begin{algorithmic}
-			\Input Two numbers $a$ and $b$
-			\Output The sum of $a$ and $b$
-			\Procedure{A-Plus-B}{$a, b$}
-			\If $a = 0$
-			\State \Return $b$
-			\EndIf
-			\State $res \gets 0$
-			\While{$b \neq 0$}
-			\State Increase $res$ by $1$
-			\State $b \gets b - 1$
-			\EndWhile
-			\State \Return $res$
-			\EndProcedure
-		\end{algorithmic}
-\end{alg}\end{shaded*}
+\noindent
+成功后如图\ref{fig5-3}所示:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{binary_tree/basic/CreateBiTree/ok.png}
+	}
+	\centering
+	\caption{CreateBiTree成功\_2}
+	\label{fig5-3}
+\end{figure}
 
-如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。如果实验报告中要用到算法伪代码，请参考算法\ref{alg:1}，也可以参考算法\ref{alg:2}。
+\noindent
+若关键字节点有重复，则如图\ref{fig5-4}提示错误。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{binary_tree/basic/CreateBiTree/error.png}
+	}
+	\centering
+	\caption{CreateBiTree失败}
+	\label{fig5-4}
+\end{figure}
 
-\begin{algorithm}[h] 
-	\caption{一个更复杂算法}
-	\begin{algorithmic}[1]
-		\State Initialization: $I_{xy}$, $z_{f}=Zeros(128, 128)$; 
-		\For{$0\leq n \textless N$}
-		\State $i=\lfloor x_n \rfloor+64$, $j=\lfloor y_n \rfloor + 64$
-		\If{$z_n<0$ and $|z_n|>|z_{f}(i,j)|$};
-		\State $z_{f}(i,j)=z_n$;
-		\EndIf
-		\State $I_{xy}(i,j)=z_{f}(i,j)$;
-		\EndFor 
-	\end{algorithmic}\label{alg:2}
-\end{algorithm}
+\noindent
+若二叉树已初始化，则如图\ref{fig5-5}提示INFEASIBLE。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{binary_tree/basic/CreateBiTree/infeasible.png}
+	}
+	\centering
+	\caption{INFEASIBLE}
+	\label{fig5-5}
+\end{figure}
+
+\clearpage
+\subparagraph{ClearBiTree}
+\noindent
+在树初始化过后，在主菜单中输入2，执行ClearBiTree操作。成功时如图\ref{fig5-6}所示。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/ClearBiTree/ok.png}
+	}
+	\centering
+	\caption{ClearBiTree成功}
+	\label{fig5-6}
+\end{figure}
+
+\noindent
+对未初始化的树执行ClearBiTree操作，会提示INFEASIBLE。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=2.5in]{binary_tree/basic/ClearBiTree/infeasible.png}
+	}
+	\centering
+	\caption{INFEASIBLE}
+	\label{fig5-7}
+\end{figure}
+
+\clearpage
+\subparagraph{TreeDepth}
+\noindent
+先创建一个树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/TreeDepth/prelude1.png}
+	}
+	\centering
+	\caption{TreeDepth成功\_1}
+	\label{fig5-8}
+\end{figure}
+
+这棵树长这样:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-9}
+\end{figure}
+
+\clearpage
+\noindent
+然后在主菜单输入3，程序输出树高。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/TreeDepth/ok1_1.png}
+	}
+	\centering
+	\caption{TreeDepth成功\_2}
+	\label{fig5-10}
+\end{figure}
+
+\noindent
+另外创建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/TreeDepth/prelude2.png}
+	}
+	\centering
+	\caption{TreeDepth成功\_3}
+	\label{fig5-11}
+\end{figure}
+
+\clearpage
+这棵树长这样:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/tree2.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-12}
+\end{figure}
+
+\noindent
+然后在主菜单输入3，程序输出树高。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/TreeDepth/ok2_2.png}
+	}
+	\centering
+	\caption{TreeDepth成功\_4}
+	\label{fig5-13}
+\end{figure}
+
+\clearpage
+\noindent
+对于一棵空树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/TreeDepth/ok_empty.png}
+	}
+	\centering
+	\caption{TreeDepth成功\_5}
+	\label{fig5-14}
+\end{figure}
+
+\subparagraph{Assign}
+\noindent
+首先创建一棵树。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/Assign/prelude.png}
+	}
+	\centering
+	\caption{准备Assign}
+	\label{fig5-15}
+\end{figure}
+
+\clearpage
+\noindent
+树的形状如下:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-16}
+\end{figure}
+
+\noindent
+下面输入要赋的值和目标节点的关键字，程序进行赋值操作，提示成功。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/Assign/ok1_1.png}
+	}
+	\centering
+	\caption{Assign成功1\_1}
+	\label{fig5-17}
+\end{figure}
+
+\noindent
+对赋值后的树进行先序遍历:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/basic/Assign/ok1_2.png}
+	}
+	\centering
+	\caption{Assign成功1\_2}
+	\label{fig5-18}
+\end{figure}
+
+\noindent
+换一组数据，程序进行赋值操作，提示成功。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/Assign/ok2_1.png}
+	}
+	\centering
+	\caption{Assign成功2\_1}
+	\label{fig5-19}
+\end{figure}
+
+\noindent
+对赋值后的树进行先序遍历:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/basic/Assign/ok2_2.png}
+	}
+	\centering
+	\caption{Assign成功2\_2}
+	\label{fig5-20}
+\end{figure}
+
+\clearpage
+\noindent
+给一个不存在于树中的目标节点，程序进行赋值操作，提示失败。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/Assign/error1.png}
+	}
+	\centering
+	\caption{Assign失败\_1}
+	\label{fig5-21}
+\end{figure}
+
+\noindent
+给一个已经存在于树中的关键字，程序进行赋值操作，提示失败。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/Assign/error2.png}
+	}
+	\centering
+	\caption{Assign失败\_2}
+	\label{fig5-22}
+\end{figure}
+
+\clearpage
+\subparagraph{GetSibling}
+\noindent
+首先创建一棵树。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/GetSibling/prelude.png}
+	}
+	\centering
+	\caption{准备GetSibling}
+	\label{fig5-23}
+\end{figure}
+
+\noindent
+树的形状如下:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-24}
+\end{figure}
+
+\clearpage
+\noindent
+输入目标节点的关键字，程序给出它兄弟节点的关键字和others.
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/GetSibling/ok1.png}
+	}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/GetSibling/ok2.png}
+	}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/GetSibling/ok3.png}
+	}
+	\centering
+	\caption{GetSibling成功}
+	\label{fig5-25}
+\end{figure}
+
+\noindent
+对于没有兄弟节点或不存在于树中的节点，程序提示错误。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/basic/GetSibling/error1.png}
+	}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/basic/GetSibling/error2.png}
+	}
+	\centering
+	\caption{GetSibling失败}
+	\label{fig5-26}
+\end{figure}
+
+\clearpage
+\noindent
+对于空树，程序同样提示错误。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/basic/GetSibling/error_empty.png}
+	}
+	\centering
+	\caption{GetSibling失败}
+	\label{fig5-27}
+\end{figure}
+
+\subparagraph{InsertNode}
+\noindent
+首先创建一棵树。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/basic/InsertNode/prelude.png}
+	}
+	\centering
+	\caption{准备InsertNode}
+	\label{fig5-28}
+\end{figure}
+
+\clearpage
+\noindent
+树的形状如下:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-29}
+\end{figure}
+
+\noindent
+插入一个节点。输入数据符合要求时，程序提示成功。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.5in]{binary_tree/basic/InsertNode/ok1_1.png}
+	}
+	\centering
+	\caption{InsertNode成功1\_1}
+	\label{fig5-30}
+\end{figure}
+
+\clearpage
+\noindent
+分别进行前序遍历和中序遍历:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=1.6in]{binary_tree/basic/InsertNode/ok1_2.png}
+	}\vspace{1pt}
+	\subfloat{
+		\centering
+		\includegraphics[height=1.6in]{binary_tree/basic/InsertNode/ok1_3.png}
+	}\vspace{1pt}
+	\centering
+	\caption{InsertNode成功1\_2}
+	\label{fig5-31}
+\end{figure}
+
+\noindent
+换一些位置插入:
+\begin{figure}[H]
+	\centering
+	\subfloat[插入操作]{
+		\includegraphics[height=3.5in]{binary_tree/basic/InsertNode/ok2_1.png}
+	}\hspace{4pt}
+	\subfloat[前序和中序遍历]{
+		\begin{minipage}[b]{0.40\linewidth}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok2_2.png}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok2_3.png}	
+		\end{minipage}
+	}
+	\centering
+	\caption{InsertNode成功2}
+	\label{fig5-32}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\subfloat[插入操作]{
+		\includegraphics[height=3.5in]{binary_tree/basic/InsertNode/ok3_1.png}
+	}\hspace{4pt}
+	\subfloat[前序和中序遍历]{
+		\begin{minipage}[b]{0.40\linewidth}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok3_2.png}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok3_3.png}	
+		\end{minipage}
+	}
+	\centering
+	\caption{InsertNode成功3}
+	\label{fig5-33}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\subfloat[插入操作]{
+		\includegraphics[height=3.5in]{binary_tree/basic/InsertNode/ok4_1.png}
+	}\hspace{4pt}
+	\subfloat[前序和中序遍历]{
+		\begin{minipage}[b]{0.40\linewidth}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok4_2.png}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok4_3.png}	
+		\end{minipage}
+	}
+	\centering
+	\caption{InsertNode成功4}
+	\label{fig5-34}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\subfloat[插入操作]{
+		\includegraphics[height=3.5in]{binary_tree/basic/InsertNode/ok5_1.png}
+	}\hspace{4pt}
+	\subfloat[前序和中序遍历]{
+		\begin{minipage}[b]{0.40\linewidth}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok5_2.png}
+			\includegraphics[height=1.4in]{binary_tree/basic/InsertNode/ok5_3.png}	
+		\end{minipage}
+	}
+	\centering
+	\caption{InsertNode成功5}
+	\label{fig5-35}
+\end{figure}
+
+\noindent
+输入数据不符合要求时，程序提示插入失败。
+\begin{figure}[htbp]
+	\centering
+	\subfloat[节点不存在]{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/InsertNode/error_not_exist.png}
+	}
+	\centering
+	\subfloat[关键字重复]{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/InsertNode/error_repeated.png}
+	}
+	\centering
+	\subfloat[空树]{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/basic/InsertNode/error_empty.png}
+	}
+	\centering
+	\caption{InsertNode失败}
+	\label{fig5-36}
+\end{figure}
+
+\clearpage
+\subparagraph{DeleteNode}
+\noindent
+首先创建一棵树。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/basic/DeleteNode/prelude.png}
+	}
+	\centering
+	\caption{准备DeleteNode}
+	\label{fig5-37}
+\end{figure}
+
+\noindent
+树的形状如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-38}
+\end{figure}
+
+\clearpage
+\noindent
+现在删除一个节点，并对树进行前序、中序遍历，结果如图\ref{fig5-39}:
+\begin{figure}[htbp]
+	\centering
+	\subfloat[删除操作]{
+		\includegraphics[height=3.0in]{binary_tree/basic/DeleteNode/ok1_1.png}
+	}\hspace{4pt}
+	\subfloat[前序和中序遍历]{
+		\begin{minipage}[b]{0.40\linewidth}
+			\includegraphics[height=1.4in]{binary_tree/basic/DeleteNode/ok1_2.png}
+			\includegraphics[height=1.4in]{binary_tree/basic/DeleteNode/ok1_3.png}	
+		\end{minipage}
+	}
+	\centering
+	\caption{DeleteNode成功1}
+	\label{fig5-39}
+\end{figure}
+
+\noindent
+换一个节点:
+\begin{figure}[H]
+	\centering
+	\subfloat[删除操作]{
+		\includegraphics[height=3.0in]{binary_tree/basic/DeleteNode/ok2_1.png}
+	}\hspace{4pt}
+	\subfloat[前序和中序遍历]{
+		\begin{minipage}[b]{0.50\linewidth}
+			\includegraphics[height=1.4in]{binary_tree/basic/DeleteNode/ok2_2.png}
+			\includegraphics[height=1.4in]{binary_tree/basic/DeleteNode/ok2_3.png}	
+		\end{minipage}
+	}
+	\centering
+	\caption{DeleteNode成功2}
+	\label{fig5-40}
+\end{figure}
+
+\noindent
+换一个不存在的节点:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\includegraphics[height=3.0in]{binary_tree/basic/DeleteNode/error.png}
+	}
+	\centering
+	\caption{DeleteNode失败1}
+	\label{fig5-41}
+\end{figure}
+
+\noindent
+对于一个空树:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\includegraphics[height=3.0in]{binary_tree/basic/DeleteNode/error_empty.png}
+	}
+	\centering
+	\caption{DeleteNode失败2}
+	\label{fig5-42}
+\end{figure}
+
+\clearpage
+\subparagraph{LocateNode}
+\noindent
+首先创建一棵树。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/basic/LocateNode/prelude1.png}
+	}
+	\centering
+	\caption{准备LocateNode1}
+	\label{fig5-43}
+\end{figure}
+
+\noindent
+树的形状如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-44}
+\end{figure}
+
+\clearpage
+\noindent
+现在查找一个节点，成功后程序输出节点的数据域:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/basic/LocateNode/ok1_1.png}
+	}
+	\centering
+	\caption{LocateNode成功1\_1}
+	\label{fig5-45}
+\end{figure}
+
+\noindent
+再找一个:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/basic/LocateNode/ok1_2.png}
+	}
+	\centering
+	\caption{LocateNode成功1\_2}
+	\label{fig5-46}
+\end{figure}
+
+
+\clearpage
+\noindent
+找一个不存在的节点，程序提示找不到:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/basic/LocateNode/error1_1.png}
+	}
+	\centering
+	\caption{LocateNode失败1\_1}
+	\label{fig5-47}
+\end{figure}
+
+\noindent
+换一棵树:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/basic/LocateNode/prelude2.png}
+	}
+	\centering
+	\caption{准备LocateNode2}
+	\label{fig5-48}
+\end{figure}
+
+\clearpage
+\noindent
+树的形状如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/tree2.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-49}
+\end{figure}
+
+\noindent
+下列是一些节点关键字的查找结果:
+\begin{figure}[H]
+	\centering
+	\subfloat[成功2\_1]{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/LocateNode/ok2_1.png}
+	}
+	\centering
+	\subfloat[成功2\_2]{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/LocateNode/ok2_2.png}
+	}
+	\centering
+	\subfloat[找不到]{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/LocateNode/error2_1.png}
+	}
+	\centering
+	\caption{LocateNode结果}
+	\label{fig5-50}
+\end{figure}
+
+\clearpage
+\noindent
+对于空树:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/LocateNode/error_empty.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-51}
+\end{figure}
+
+\subparagraph{各种遍历}
+\noindent
+遍历菜单:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/basic/traverse/menu.png}
+	}
+	\centering
+	\caption{遍历菜单}
+	\label{fig5-52}
+\end{figure}
+
+\clearpage
+\noindent
+首先创建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/basic/traverse/prelude1.png}
+	}
+	\centering
+	\caption{建树}
+	\label{fig5-53}
+\end{figure}
+
+\noindent
+树的形状如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.8in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-54}
+\end{figure}
+
+\clearpage
+\noindent
+对树的各种遍历如下:
+\begin{figure}[H]
+	\centering
+	\subfloat[前序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok1_1.png}
+	}\vspace{2pt}
+	\subfloat[中序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok1_2.png}
+	}\vspace{2pt}
+	\subfloat[后序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok1_3.png}
+	}\vspace{2pt}
+	\subfloat[层序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok1_4.png}
+	}
+	\caption{各种遍历}
+	\label{fig5-55}
+\end{figure}
+
+\clearpage
+\noindent
+再建一棵树(头歌练习1上的数据):
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.9in]{binary_tree/basic/traverse/prelude2.png}
+	}
+	\centering
+	\caption{建树}
+	\label{fig5-56}
+\end{figure}
+
+\noindent
+对树的各种遍历如下:
+\begin{figure}[H]
+	\centering
+	\subfloat[前序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok2_1.png}
+	}\vspace{2pt}
+	\subfloat[中序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok2_2.png}
+	}\vspace{2pt}
+	\subfloat[后序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok2_3.png}
+	}\vspace{2pt}
+	\subfloat[层序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok2_4.png}
+	}
+	\caption{各种遍历}
+	\label{fig5-57}
+\end{figure}
+
+\clearpage
+\noindent
+对于一棵空树，它的各种遍历如下:
+\begin{figure}[H]
+	\centering
+	\subfloat[前序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok_empty_1.png}
+	}\vspace{2pt}
+	\subfloat[中序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok_empty_2.png}
+	}\vspace{2pt}
+	\subfloat[后序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok_empty_3.png}
+	}\vspace{2pt}
+	\subfloat[层序遍历]{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/basic/traverse/ok_empty_4.png}
+	}
+	\caption{各种遍历}
+	\label{fig5-58}
+\end{figure}
+
+\subsubsection{文件操作}
+\noindent
+文件操作菜单如下:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/menu.png}
+	\caption{文件操作菜单}
+	\label{fig5-59}
+\end{figure}
+
+\clearpage
+\noindent
+首先建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/prelude.png}
+	\caption{建树}
+	\label{fig5-60}
+\end{figure}
+
+\noindent
+然后将它保存到下图中的文件(程序运行于build目录下):
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/save1_1.png}
+	\caption{保存}
+	\label{fig5-61}
+\end{figure}
+
+\noindent
+可以看到test目录下已经出现了这个文件:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/file_tree.png}
+	\caption{文件树}
+	\label{fig5-62}
+\end{figure}
+
+\clearpage
+\noindent
+现在给出riemann.dat的二进制编码:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/riemann_dat.png}
+	\caption{riemann.dat}
+	\label{fig5-63}
+\end{figure}
+
+\noindent
+现在回到主菜单把树清空:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/save1_2.png}
+	\caption{清空}
+	\label{fig5-64}
+\end{figure}
+
+\noindent
+回到文件菜单，从刚刚创建的文件创建二叉树，可以看到加载成功。
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/load1_3.png}
+	\caption{加载1}
+	\label{fig5-65}
+\end{figure}
+
+\clearpage
+\noindent
+从别的文件加载二叉树，文件名存在，加载成功:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/load1_4.png}
+	\caption{加载2}
+	\label{fig5-66}
+\end{figure}
+
+\noindent
+这里是这个文件的二进制编码:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/abel_dat.png}
+	\caption{abel.dat}
+	\label{fig5-67}
+\end{figure}
+
+\noindent
+输入一个不存在的文件名，加载失败:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/file/error.png}
+	\caption{失败}
+	\label{fig5-68}
+\end{figure}
+
+\clearpage
+\subsubsection{算法}
+\noindent
+算法操作菜单如下:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=2.5in]{binary_tree/algo/menu.png}
+	\caption{算法菜单}
+	\label{fig5-69}
+\end{figure}
+
+\subparagraph{InvertTree}
+\noindent
+首先创建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/algo/InvertTree/prelude1.png}
+	}
+	\centering
+	\caption{准备}
+	\label{fig5-70}
+\end{figure}
+
+\noindent
+然后来到算法菜单，翻转它。程序会给出翻转后二叉树的前序和中序遍历:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/algo/InvertTree/ok1.png}
+	}
+	\centering
+	\caption{翻转二叉树}
+	\label{fig5-71}
+\end{figure}
+
+\clearpage
+\noindent
+对于一棵空树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/algo/InvertTree/prelude_empty.png}
+	}
+	\centering
+	\caption{空树}
+	\label{fig5-72}
+\end{figure}
+
+\noindent
+将空树翻转，什么也不会输出。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/algo/InvertTree/ok_empty.png}
+	}
+	\centering
+	\caption{空树}
+	\label{fig5-73}
+\end{figure}
+
+\clearpage
+\subparagraph{MaxPathSum}
+\noindent
+首先创建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/algo/MaxPathSum/prelude1.png}
+	}
+	\centering
+	\caption{准备1}
+	\label{fig5-74}
+\end{figure}
+
+\noindent
+然后来到算法菜单，求它的最大路径和，程序会给出结果:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/algo/MaxPathSum/ok1_1.png}
+	}
+	\centering
+	\caption{最大路径和1}
+	\label{fig5-75}
+\end{figure}
+
+\clearpage
+\noindent
+另外创建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/algo/MaxPathSum/prelude2.png}
+	}
+	\centering
+	\caption{准备2}
+	\label{fig5-76}
+\end{figure}
+
+\noindent
+再求一遍最大路径和:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/algo/MaxPathSum/ok2_1.png}
+	}
+	\centering
+	\caption{最大路径和2}
+	\label{fig5-77}
+\end{figure}
+
+\clearpage
+\noindent
+对于一棵空树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/algo/MaxPathSum/prelude_empty.png}
+	}
+	\centering
+	\caption{准备3}
+	\label{fig5-78}
+\end{figure}
+
+\noindent
+它的最大路径和为0:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/algo/MaxPathSum/ok_empty.png}
+	}
+	\centering
+	\caption{最大路径和3}
+	\label{fig5-79}
+\end{figure}
+
+\clearpage
+\subparagraph{LowestCommonAncestor}
+\noindent
+首先创建一棵树:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/algo/LCA/prelude1.png}
+	}
+	\centering
+	\caption{准备1}
+	\label{fig5-80}
+\end{figure}
+
+\noindent
+树的形状如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.4in]{binary_tree/tree1.png}
+	}
+	\centering
+	\caption{树的形状}
+	\label{fig5-81}
+\end{figure}
+
+\clearpage
+\noindent
+然后进入算法菜单，输入要求的两节点关键字，程序输出它们的最近公共祖先。这里给出几组数据，包括合法与非法的数据。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/algo/LCA/ok1_1.png}
+	}\vspace{2pt}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/algo/LCA/ok1_2.png}
+	}\vspace{2pt}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/algo/LCA/ok1_3.png}
+	}\vspace{2pt}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/algo/LCA/error1_1.png}
+	}\vspace{2pt}
+	\centering
+	\caption{LCA}
+	\label{fig5-82}
+\end{figure}
+
+\noindent
+对于空树，总是输出“找不到节点”:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.0in]{binary_tree/algo/LCA/prelude_empty.png}
+	}\vspace{2pt}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=1.4in]{binary_tree/algo/LCA/error_empty.png}
+	}\vspace{2pt}
+	\centering
+	\caption{LCA\_empty}
+	\label{fig5-83}
+\end{figure}
+
+\clearpage
+\subsubsection{多树管理}
+\noindent
+多树管理菜单:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/multi_tree/menu.png}
+	}
+	\centering
+	\caption{多树管理菜单}
+	\label{fig5-84}
+\end{figure}
+
+\noindent
+首先，主菜单显示有一颗空树default\_tree.
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/prelude.png}
+	}
+	\centering
+	\caption{default\_tree}
+	\label{fig5-85}
+\end{figure}
+
+\clearpage
+\noindent
+现在切换到多树管理菜单，向多树管理表添加一棵空树king\_crimson。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/1_append.png}
+	}
+	\centering
+	\caption{添加king\_crimson}
+	\label{fig5-86}
+\end{figure}
+
+\noindent
+将目前操作的树切换至king\_crimson。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/2_switch.png}
+	}
+	\centering
+	\caption{切换}
+	\label{fig5-87}
+\end{figure}
+
+\noindent
+切换过后:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/2_switch_after.png}
+	}
+	\centering
+	\caption{切换}
+	\label{fig5-88}
+\end{figure}
+
+\clearpage
+\noindent
+回到主菜单，将树king\_crimson初始化。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=3.2in]{binary_tree/multi_tree/3_init.png}
+	}
+	\centering
+	\caption{初始化king\_crimson}
+	\label{fig5-89}
+\end{figure}
+
+\noindent
+切换回default\_tree:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/multi_tree/4_switch.png}
+	}
+	\subfloat{
+		\centering
+		\includegraphics[height=2.5in]{binary_tree/multi_tree/4_switch_after.png}
+	}
+	\centering
+	\caption{切换}
+	\label{fig5-90}
+\end{figure}
+
+\clearpage
+\noindent
+前序遍历一遍default\_tree, 发现为空，这说明对king\_crimson的修改并不影响default\_tree.
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/5_traverse.png}
+	}
+	\centering
+	\caption{遍历default\_tree}
+	\label{fig5-91}
+\end{figure}
+
+\noindent
+回到多树管理菜单，输入3查找树king\_crimson.
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/6_locate.png}
+	}
+	\centering
+	\caption{查找king\_crimson}
+	\label{fig5-92}
+\end{figure}
+
+\noindent
+现在删除default\_tree:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/7_remove.png}
+	}
+	\centering
+	\caption{删除default\_tree}
+	\label{fig5-93}
+\end{figure}
+
+\clearpage
+\noindent
+删除后:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/7_remove_after_1.png}
+	}
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/7_remove_after_1.png}
+	}
+	\centering
+	\caption{删除default\_tree后}
+	\label{fig5-94}
+\end{figure}
+
+\noindent
+现在删除一棵不存在的树，程序提示树不存在。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/8_remove_fail.png}
+	}
+	\centering
+	\caption{删除失败}
+	\label{fig5-95}
+\end{figure}
+
+\clearpage
+\noindent
+现在查找一棵不存在的树，程序提示树不存在。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=2.7in]{binary_tree/multi_tree/9_locate_fail.png}
+	}
+	\centering
+	\caption{查找失败}
+	\label{fig5-96}
+\end{figure}
+
+\noindent
+现在试图切换到一棵不存在的树，程序提示树不存在。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=2.7in]{binary_tree/multi_tree/10_switch_fail.png}
+	}
+	\centering
+	\caption{切换失败}
+	\label{fig5-97}
+\end{figure}
+
+\noindent
+现在试图切换到已经被删除的default\_tree，程序提示树不存在。
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=2.7in]{binary_tree/multi_tree/11_switch_fail.png}
+	}
+	\centering
+	\caption{切换失败}
+	\label{fig5-98}
+\end{figure}
+
+\clearpage
+\noindent
+现在把多树管理表仅存的一棵树king\_crimson删除，使得多树管理表为空，程序提示删除成功。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/12_remove.png}
+	}
+	\centering
+	\caption{删除king\_crimson}
+	\label{fig5-99}
+\end{figure}
+
+\noindent
+回到主菜单，可以看到菜单开头提示多树管理表为空。
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/12_remove_after_2.png}
+	}
+	\centering
+	\caption{提示为空}
+	\label{fig5-100}
+\end{figure}
+
+\clearpage
+\noindent
+分别进行求树深和前序遍历，程序输出如下:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/12_remove_after_3.png}
+	}\vspace{2pt}
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{binary_tree/multi_tree/12_remove_after_4.png}
+	}
+	\centering
+	\caption{操作}
+	\label{fig5-101}
+\end{figure}
 
 \newpage
 
-\section{基于邻接表的图实现}
-
-\subsection{问题描述}
-
-说明此实验要解决的基本问题。大力出奇迹！！！参考文献无法显示怎么办？陈老师正在想办法解决\cite{STR2021Neurocom, AVS2021Neurocom}！我是参考文献。我是第二小节\cite{Mehrabian1974An}。我是第二小节\cite{Rezaei2014CVPR}。我是第二小节\cite{Ramnath2008IJCV}。
-
-\subsection{系统设计}
-
-包括整体系统结构设计和数据结构设计等。先在文件夹里的bib文件里添加新的参考文献，给每篇参考文献取一个索引的名字，然后再引用比如\cite{STR2021Neurocom}\cite{AVS2021Neurocom, Rezaei2014CVPR}。请注意书籍、期刊论文、专利等bib条目的格式是不一样的。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\subsection{系统实现}
-
-主要说明各个主要函数的实现思想，复杂函数可辅助流程图进行说明，函数和系统实现的源代码放在附录中。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\subsection{系统测试}
-
-主要说明针对各个函数正常和异常的测试用例及测试结果画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。画图说明网页的整体框架，进行简要的文字描述等。
-
-\begin{figure}[htb] % here top bottom
-	\begin{center}
-		\includegraphics[scale=0.80]{images/1-1.pdf}
-		\caption{网页整体框架举例}
-		\label{fig5-1}
-	\end{center}
-\end{figure}
-
 \subsection{实验小结}
+
+本实验的难点在于指针操作。基于二叉链表的二叉树涉及较为复杂的指针操作，尤其需要非常注意空指针的情况。如果忘了处理空指针，很有可能发生段错误，调试也会比较困难。
+
+同时，二叉树的一些操作语义较为复杂，对一些小功能进行一定程度的封装很有必要。(但是说实话，我对自己这次的封装并不是太满意，感觉有点过头了，实现上也不是很优雅)
+
+二叉树的许多操作都是递归实现的。递归代码好想，但是需要保证正确性。另外，递归代码的调试难度也比较大。
+
+文件操作其实并不是非常复杂，只要能保证各种操作的数据格式一致，就会好写很多。带空节点的先序遍历省去了很多麻烦。(图: 啊对对对)
+
+算法部分其实还好，LCA需要一定的拓展知识。
 
 \newpage
 
