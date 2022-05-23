@@ -23,7 +23,3 @@ target_include_directories(main
 target_compile_features(main PRIVATE cxx_std_20)
 set_target_properties(main PROPERTIES CXX_EXTENSIONS OFF)
 
-target_compile_options(main PRIVATE "-fsanitize=address")
-
-target_link_options(main PRIVATE "-fsanitize=address")
-

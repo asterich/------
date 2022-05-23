@@ -1,6 +1,7 @@
 #ifndef __ALGORITHMS_IMPL_H__
 #define __ALGORITHMS_IMPL_H__
 
+#include <cstdint>
 #include <queue>
 #include <stack>
 #include <unordered_map>
