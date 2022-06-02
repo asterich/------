@@ -1,5 +1,5 @@
-#ifndef __LINK_ALGORITHMS_HPP_
-#define __LINK_ALGORITHMS_HPP_
+#ifndef __LINK_ALGORITHMS_H_
+#define __LINK_ALGORITHMS_H_
 
 #include "link_list.h"
 
