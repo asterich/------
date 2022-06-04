@@ -113,8 +113,10 @@
 本实验采用数组实现。
 
 \subsection{系统设计}
-
+\noindent
 本项目采用CMake构建。\\
+编译环境: gcc-12 (Homebrew GCC 12.1.0) 12.1.0 on macOS 12.3.1 21E258 x86\_64  \\
+编译选项:  -std=c++11\\
 
 \noindent
 文件结构：
@@ -384,7 +386,19 @@ status RemoveList(LISTS &Lists, const char *ListName);
 找到对应线性表以后，对其调用 DestroyList; \\
 然后从对应线性表位置后一位遍历到 Lists 末尾，把每一个遍历到的线性表前移一位; \\
 最后将 Lists 末尾的线性表置 0，Lists.length 自减 1，返回OK。\\
+流程图:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{flowchart/sq_list/flowchart/RemoveList.png}
+	}
+	\centering
+	\caption{流程图}
+	\label{fig6-6}
+\end{figure}
 
+\clearpage
 \subsubsection{文件操作}
 
 \subparagraph{SaveList}
@@ -448,55 +462,34 @@ int gen_rand(int l, int r) {
 }
 \end{lstlisting}
 
+\clearpage
 \noindent
-以下是partition函数。难点在于边界条件的判定.
-\begin{lstlisting}[language=C++, frame=single]
-template <typename T, typename Func>
-int partition(T arr[], int l, int r, Func cmp) {
-	if (l >= r) return -1;
-	int pivot = gen_rand(l, r);
-	std::swap(arr[pivot], arr[r]);
-	int i = l, j = r - 1;
-	while (i < j) {
-		while (cmp(arr[i], arr[r]) && i < j) i++;
-		while (!cmp(arr[j], arr[r]) && i < j) j--;
-		std::swap(arr[i], arr[j]);
+以下是partition函数的流程图。难点在于边界条件的判定。
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{flowchart/sq_list/flowchart/partition.png}
 	}
-	int p2 = r;
-	for (int k = l; k < r; k++) {
-		if (!cmp(arr[k], arr[r])) {
-			p2 = k;
-			break;
-		}
-	}
-	std::swap(arr[p2], arr[r]);
-	return p2;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-1}
+\end{figure}
+
 
 \newpage
 \noindent
-以下是快速排序函数的主体以及对外提供的接口:
-\begin{lstlisting}[language=C++, frame=single]
-template <typename T, typename Func>
-void quicksort(T arr[], int l, int r, Func cmp) {
-	if (l >= r) return;
-	int p = partition(arr, l, r, cmp);
-	quicksort(arr, l, p - 1, cmp);
-	quicksort(arr, p + 1, r, cmp);
-	return;
-}
-
-status sort_list(SqList &L) {
-    if (L.elem == NULL) {
-        return INFEASIBLE;
-    }
-    quicksort(
-        L.elem, 0, L.length - 1,
-        [](const ElemType &a, const ElemType &b) -> int { return a < b; });
-    return OK;
-}
-\end{lstlisting}
+以下是快速排序函数的主体的流程图:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{flowchart/sq_list/flowchart/quicksort.png}
+	}
+	\centering
+	\caption{流程图}
+	\label{fig6-2}
+\end{figure}
 
 \subparagraph{max\_partial\_sum}
 \noindent
@@ -509,21 +502,18 @@ ElemType max_partial_sum(SqList L);
 实现: \\
 使用动态规划，以数组sum[i]表示以i为结尾的最大子数组和，则有如下递推式: $$sum[i] = max(sum[i - 1] + nums[i], nums[i])$$
 求出sum[i]后，再找出最大的sum[i]即可。时间复杂度为$O(n)$.\\
-代码:
-\begin{lstlisting}[language=C++, frame=single]
-ElemType max_partial_sum(SqList L) {
-	if (L.elem == NULL) {
-		return 0x7fffffff;
+\clearpage
+流程图:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{flowchart/sq_list/flowchart/max_partial_sum.png}
 	}
-	ElemType res = 0, sum = 0;
-	for (int i = 0; i < L.length; i++) {
-		sum = std::max(sum + L.elem[i], L.elem[i]);
-		res = std::max(res, sum);
-	}
-	printf("\n");
-	return res;
-}
-\end{lstlisting}
+	\centering
+	\caption{初始}
+	\label{fig6-3}
+\end{figure}
 
 \subparagraph{k\_subarray}
 \noindent
@@ -538,24 +528,19 @@ int k_subarray(SqList &L, ElemType k);
 即: $$sum[i] - k == sum[j - 1]$$
 故只需考虑对于sum[i]，有多少个满足该条件的sum[j - 1]。\\
 为了能够快速找到sum[j - 1]，我们可以使用哈希表存储这个信息.具体而言，我们声明一个哈希表sum\_map，以sum[j - 1]为键，sum[j - 1]出现的次数为值，从左到右更新sum\_map并计算答案。显然，每一次迭代中，sum[j - 1]对应的出现次数能够在$O(1)$内找到。同时，由于是从左往右更新答案，且sum[i]的计算只与前一项有关，故sum[i]可简化成current\_sum，表示该次迭代中的前缀和。\\
+\clearpage
 \noindent
-代码:
-\begin{lstlisting}[language=C++, frame=single]
-template <typename T>
-int k_subarray(T arr[], int n, T k) {
-	std::unordered_map<T, int> sum_map;
-	int res = 0;
-	T current_sum = 0;
-	for (int i = 0; i < n; i++) {
-		current_sum += arr[i];
-		if (current_sum == k) ++res;
-		if (sum_map.find(current_sum - k) != sum_map.end())
-			res += sum_map[current_sum - k];
-		++sum_map[current_sum];
+流程图:
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.5in]{flowchart/sq_list/flowchart/k_subarray.png}
 	}
-	return res;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-4}
+\end{figure}
 
 \newpage
 
@@ -1900,7 +1885,13 @@ void clean_terminal() {
 
 \subsection{系统设计}
 
-与线性表一样，本项目采用CMake构建。文件树如下：
+本项目采用CMake构建。 \\
+
+编译环境: gcc-12 (Homebrew GCC 12.1.0) 12.1.0 on macOS 12.3.1 21E258 x86\_64  \\
+
+编译选项: -std=c++20 \\
+
+文件树如下：
 \dirtree{%
  .1 {.} .
   .2 {CMakeLists.txt} .
@@ -2192,61 +2183,17 @@ BiTNode *get_rightest_node(BiTree T) {
 }
 \end{lstlisting}
 即优先遍历右子树。\\
-真正的删除操作需要判断左、右子树是否为空，具体实现比较复杂，就直接放代码罢:
-\begin{lstlisting}[language=C++, frame=single]
-status delete_node(BiTree &root, KeyType e) {
-	if (root->data.key == e) {
-		BiTNode *target = root;
-		if (!target->lchild && !target->rchild) {
-			free(target);
-			root = NULL;
-		} else if ((!target->lchild && target->rchild) ||
-					(target->lchild && !target->rchild)) {
-			BiTNode *target_child =
-				target->lchild ? target->lchild : target->rchild;
-			root = target_child;
-			free(target);
-		} else {
-			BiTNode *target_child = target->lchild;
-			BiTNode *rightest_node = get_rightest_node(target_child);
-			rightest_node->rchild = target->rchild;
-			free(target);
-			root = target_child;
-		}
-	} else {
-		BiTNode *father = get_father(root, e);
-		BiTNode **p_target = &((father->lchild && e == father->lchild->data.key)
-									? father->lchild
-									: father->rchild);
-		if (!(*p_target)->lchild && !(*p_target)->rchild) {
-			free(*p_target);
-			*p_target = NULL;
-		} else if ((!(*p_target)->lchild && (*p_target)->rchild) ||
-					((*p_target)->lchild && !(*p_target)->rchild)) {
-			BiTNode *target_child =
-				(*p_target)->lchild ? (*p_target)->lchild : (*p_target)->rchild;
-			free(*p_target);
-			*p_target = target_child;
-		} else {
-			BiTNode *target_child = (*p_target)->lchild;
-			BiTNode *rightest_node = get_rightest_node(target_child);
-			rightest_node->rchild = (*p_target)->rchild;
-			free(*p_target);
-			*p_target = target_child;
-		}
+真正的删除操作需要判断左、右子树是否为空，具体实现比较复杂，以下是流程图(\ref{fig6-9}):
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=7.0in]{flowchart/binary_tree/flowchart/delete_node.png}
 	}
-	return OK;
-}
-
-status DeleteNode(BiTree &T, KeyType e) {
-    BiTNode *target = locate_node(T, e);
-    if (!target) {
-        return ERROR;
-    }
-    delete_node(T, e);
-    return OK;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-9}
+\end{figure}
 
 \subparagraph{PreOrderTraverse}
 \noindent
@@ -2350,62 +2297,29 @@ std::unordered_map<BiTNode *, int> depth;
 \end{lstlisting}
 \newpage
 \noindent
-预处理:
-\begin{lstlisting}[language=C++, frame=single]
-void init(BiTree root) {
-	father.clear();
-	depth.clear();
-
-	father.insert(std::pair<BiTNode *, std::array<BiTNode *, 32>>{
-		NULL, std::array<BiTNode *, 32>()});
-	father.insert(std::pair<BiTNode *, std::array<BiTNode *, 32>>{
-		root, std::array<BiTNode *, 32>()});
-	for (auto &[k, arr] : father) {
-		arr.fill(NULL);
+预处理(dfs)流程图:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{flowchart/binary_tree/flowchart/dfs.png}
 	}
-	depth.insert(std::pair<BiTNode *, int>{NULL, 0});
-}
-
-void dfs(BiTNode *node, BiTNode *fa_node) {
-	if (!node) {
-		return;
+	\centering
+	\caption{流程图}
+	\label{fig6-7}
+\end{figure}
+\clearpage
+lca流程图:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=4.0in]{flowchart/binary_tree/flowchart/lca.png}
 	}
-	father[node][0] = fa_node;
-	depth[node] = depth[father[node][0]] + 1;
-	for (int i = 1; i < 31; ++i) {
-		father[node][i] = father[father[node][i - 1]][i - 1];
-	}
-	dfs(node->lchild, node);
-	dfs(node->rchild, node);
-	return;
-}
-\end{lstlisting}
-lca:
-\begin{lstlisting}[language=C++, frame=single]
-BiTNode *lca(BiTree T, BiTNode *n1, BiTNode *n2) {
-	init(T);
-	dfs(T, NULL);
-	if (depth[n1] > depth[n2]) {
-		std::swap(n1, n2);
-	}
-	int delta = depth[n2] - depth[n1];
-	for (int j = 0; delta; ++j, delta >>= 1) {
-		if (delta & 1) {
-			n2 = father[n2][j];
-		}
-	}
-	if (n2 == n1) return n2;
-	for (int j = 30; j >= 0 && n2 != n1; --j) {
-		if (father[n2][j] != father[n1][j]) {
-			n2 = father[n2][j];
-			n1 = father[n1][j];
-		}
-	}
-	n2 = father[n2][0];
-	n1 = father[n1][0];
-	return n2;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-8}
+\end{figure}
 
 \subsubsection{多树管理}
 \noindent
@@ -2439,6 +2353,7 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 	\label{fig5-1}
 \end{figure}
 
+\clearpage
 \subsubsection{基本操作}
 
 \subparagraph{CreateBiTree}
@@ -2810,7 +2725,7 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 \subparagraph{InsertNode}
 \noindent
 首先创建一棵树。
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
 	\subfloat{
 		\centering
@@ -3675,20 +3590,20 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 	\label{fig5-87}
 \end{figure}
 
+\clearpage
 \noindent
 切换过后:
 \begin{figure}[htbp]
 	\centering
 	\subfloat{
 		\centering
-		\includegraphics[width=3.0in]{binary_tree/multi_tree/2_switch_after.png}
+		\includegraphics[width=2.5in]{binary_tree/multi_tree/2_switch_after.png}
 	}
 	\centering
 	\caption{切换}
 	\label{fig5-88}
 \end{figure}
 
-\clearpage
 \noindent
 回到主菜单，将树king\_crimson初始化。
 \begin{figure}[htbp]
@@ -3708,11 +3623,11 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 	\centering
 	\subfloat{
 		\centering
-		\includegraphics[height=2.5in]{binary_tree/multi_tree/4_switch.png}
+		\includegraphics[height=2.0in]{binary_tree/multi_tree/4_switch.png}
 	}
 	\subfloat{
 		\centering
-		\includegraphics[height=2.5in]{binary_tree/multi_tree/4_switch_after.png}
+		\includegraphics[height=2.0in]{binary_tree/multi_tree/4_switch_after.png}
 	}
 	\centering
 	\caption{切换}
@@ -3894,24 +3809,15 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 
 \section{课程的收获和建议}
 
-描述通过学习该专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习该专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习该专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习该专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。
+通过本次课程，我对各种常用的数据结构有了更加深刻的认识，同时我也学会了CMake、LaTeX等工具，我的代码编写能力、报告撰写能力也得到了提高。
 
 \subsection{基于顺序存储结构的线性表实现}
 
 描述通过学习计算机基础知识专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。
 
-\subsection{基于链式存储结构的线性表实现}
-
-描述通过学习文档撰写工具LaTeX专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习文档撰写工具LaTeX专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。
-
 \subsection{基于二叉链表的二叉树实现}
 
 描述通过学习编程工具Python专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习编程工具Python专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。
-
-\subsection{基于二叉链表的二叉树实现}
-
-描述通过学习计算机基础知识专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习计算机基础知识专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。
-
 
 %% \nocite{*} %% 作用是不对文献进行引用，但可以生成文献列表
 
@@ -3979,7 +3885,6 @@ status LoadList(SqList &L, char FileName[]);
 #endif
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[caption={$sq\_list.cpp$}, language=C++, frame=single]
 /*-----------------sq_list.cpp-------------------*/
 #include "sq_list.h"
@@ -4232,7 +4137,6 @@ status ListDelete(SqList &L, int i, ElemType &e) {
 }
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[caption={$memory\_operation.cpp$}, language=C++, frame=single]
 #include "sq_list.h"
 
@@ -4254,7 +4158,6 @@ status ReallocList(SqList &L, size_t new_size) {
 }
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[caption={$file\_operation.cpp$}, language=C++, frame=single]
 /*------------file_operation.cpp---------------*/
 #include "sq_list.h"
@@ -4322,7 +4225,6 @@ status LoadList(SqList &L, char FileName[]) {
 }
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[caption={$multi\_list\_management.h$}, language=C++, frame=single]
 /*----------multi_list_management.h------------*/
 #ifndef __MULTI_LIST_MANAGEMENT_H_
@@ -4440,7 +4342,6 @@ int LocateList(LISTS Lists, const char *ListName) {
 }
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[caption={$utils.h$}, language=C++, frame=single]
 #include <stdlib.h>
 
@@ -4464,7 +4365,6 @@ void clean_terminal() {
 }
 \end{lstlisting}
 
-\newpage
 \begin{lstlisting}[caption={$main.cpp$}, language=C++, frame=single]
 /* Linear Table On Sequence Structure */
 #include <stdio.h>
@@ -4988,6 +4888,35 @@ int main(void) {
 }  // end of main()
 \end{lstlisting}
 
+\begin{lstlisting}[caption={$CMakeLists.txt$}, language=C++, frame=single]
+cmake_minimum_required(VERSION 3.0.0)
+project(顺序线性表 VERSION 0.1.0)
+
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++20" COMPILER_SUPPORTS_CXX20)
+
+
+set(SOURCES
+	src/file_operation.cpp 
+	src/memory_operation.cpp 
+	src/multi_list_management.cpp 
+	src/utils.cpp
+	src/sq_list.cpp
+	src/main.cpp
+)#创建一个变量，名字叫SOURCE。它包含了所有的cpp文件。
+
+add_executable(main ${SOURCES})
+
+target_compile_features(main PUBLIC cxx_std_11)
+set_target_properties(main PROPERTIES CXX_EXTENSIONS OFF)
+
+target_include_directories(main
+	PRIVATE 
+		${PROJECT_SOURCE_DIR}/include
+)#设置这个可执行文件hello_headers需要包含的库的路径
+	
+\end{lstlisting}
+
 \section{附录B 基于链表的线性表实现的源程序}
 \begin{lstlisting}[caption={$link\_list.h$}, language=C++, frame=single]
 #ifndef __LINK_LIST_H_
@@ -5037,5 +4966,4313 @@ status LoadList(LinkList &L, char FileName[]);
 #endif
 \end{lstlisting}
 
+\begin{lstlisting}[caption={$link\_list.cpp$}, language=C++, frame=single]
+#include "link_list.h"
+
+/**
+	* @brief Initialize a link list.
+	*
+	* @param L Link list
+	* @return status
+	*/
+status InitList(LinkList &L) {
+	if (L != NULL) {
+		return INFEASIBLE;
+	}
+
+	LNode *head = (LNode *)malloc(sizeof(LNode));
+	if (head == NULL) {
+		return ERROR;
+	}
+
+	head->data = 0;
+	head->next = NULL;
+	L = head;
+	return OK;
+}
+
+/**
+	* @brief Destroy a link list.
+	*
+	* @param L List
+	* @return status
+	*/
+status DestroyList(LinkList &L) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+	LNode *p = L;
+	while (p != NULL) {
+		LNode *current = p;
+		p = p->next;
+		free(current);
+	}
+	L = NULL;
+	return OK;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Clear a link list.
+	*
+	* @param L
+	* @return status
+	*/
+status ClearList(LinkList &L) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	LNode *p = L;
+	if (p->next == NULL) {
+		return OK;
+	}
+	p = p->next;
+	while (p != NULL) {
+		LNode *current = p;
+		p = p->next;
+		free(current);
+	}
+	L->next = NULL;
+	return OK;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Check if a link list is empty.
+	*
+	* @param L
+	* @return status
+	*/
+status ListEmpty(LinkList L) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+	if (L->next == NULL) {
+		return TRUE;
+	}
+	return FALSE;
+	/********** End **********/
+}
+
+/**
+	* @brief Return the length of a link list.
+	*
+	* @param L
+	* @return int
+	*/
+int ListLength(LinkList L)
+// 如果链表L存在，返回链表L的长度，否则返回INFEASIBLE。
+{
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	int len = 0;
+	LNode *p = L->next;
+	while (p != NULL) {
+		++len;
+		p = p->next;
+	}
+
+	return len;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Get the Elem object at position %i from the given link list and assign
+	* to %e.
+	*
+	* @param L
+	* @param i
+	* @param e
+	* @return status
+	*/
+status GetElem(LinkList L, int i, ElemType &e) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	int len = 0;
+	LNode *p = L->next;
+	while (p != NULL) {
+		++len;
+		if (len == i) {
+			e = p->data;
+			return OK;
+		}
+		p = p->next;
+	}
+
+	if (i < 1 || i > len) {
+		return ERROR;
+	}
+
+	return ERROR;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Return the position of the given element %e in link list %L, if
+	* exists.
+	*
+	* @param L
+	* @param e
+	* @return status
+	*/
+status LocateElem(LinkList L, ElemType e)
+// 如果链表L存在，查找元素e在链表L中的位置序号；如果e不存在，返回ERROR；当链表L不存在时，返回INFEASIBLE。
+{
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	int len = 0;
+	LNode *p = L->next;
+	while (p != NULL) {
+		++len;
+		if (p->data == e) {
+			return len;
+		}
+		p = p->next;
+	}
+
+	return ERROR;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Return the previous element of the given element %e in link list %L
+	* if exists, and assign to %pre.
+	*
+	* @param L
+	* @param e
+	* @param pre
+	* @return status
+	*/
+status PriorElem(LinkList L, ElemType e, ElemType &pre) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	if (L->next == NULL) {
+		return ERROR;
+	}
+
+	LNode *p = L->next;
+	while (p->next != NULL) {
+		if (p->next != NULL) {
+			if (p->next->data == e) {
+				pre = p->data;
+				return OK;
+			}
+		}
+		p = p->next;
+	}
+	return ERROR;
+	/********** End **********/
+}
+
+/**
+	* @brief Return the next element of the given element %e in link list %L
+	* if exists, and assign to %next.
+	*
+	* @param L
+	* @param e
+	* @param next
+	* @return status
+	*/
+status NextElem(LinkList L, ElemType e, ElemType &next) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	if (L->next == NULL) {
+		return ERROR;
+	}
+
+	LNode *p = L->next;
+	while (p->next != NULL) {
+		if (p->next != NULL) {
+			if (p->data == e) {
+				next = p->next->data;
+				return OK;
+			}
+		}
+		p = p->next;
+	}
+	return ERROR;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Insert an element to a link list at the given position %i.
+	*
+	* @param L
+	* @param i
+	* @param e
+	* @return status
+	*/
+status ListInsert(LinkList &L, int i, ElemType e) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	if (i < 1 || i > ListLength(L) + 1) {
+		return ERROR;
+	}
+
+	int pos = 0;
+	LNode *p = L->next, *prev = L;
+	while (p != NULL) {
+		++pos;
+		if (pos == i) {
+			break;
+		}
+		prev = p;
+		p = p->next;
+	}
+
+	LNode *new_node = (LNode *)malloc(sizeof(ElemType));
+	new_node->data = e;
+	if (new_node == NULL) {
+		return ERROR;
+	}
+	prev->next = new_node;
+	new_node->next = p;
+	return OK;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Delete the element at the position %i in a link list.
+	*
+	* @param L
+	* @param i
+	* @param e
+	* @return status
+	*/
+status ListDelete(LinkList &L, int i, ElemType &e) {
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	if (i < 1 || i > ListLength(L)) {
+		return ERROR;
+	}
+
+	int pos = 0;
+	LNode *p = L->next, *prev = L;
+	while (p != NULL) {
+		++pos;
+		if (pos == i) {
+			break;
+		}
+		prev = p;
+		p = p->next;
+	}
+
+	e = p->data;
+	prev->next = p->next;
+	free(p);
+	return OK;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Traverse a list.
+	*
+	* @param L
+	* @return status
+	*/
+status ListTraverse(LinkList L)
+// 如果链表L存在，依次显示链表中的元素，每个元素间空一格，返回OK；如果链表L不存在，返回INFEASIBLE。
+{
+	// 请在这里补充代码，完成本关任务
+	/********** Begin *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	LNode *p = L->next;
+	while (p != NULL) {
+		printf("%d ", p->data);
+		p = p->next;
+	}
+
+	return OK;
+
+	/********** End **********/
+}
+
+/**
+	* @brief Save a list to the file with name %FileName.
+	*
+	* @param L
+	* @param FileName
+	* @return status
+	*/
+status SaveList(LinkList L, char FileName[])
+// 如果链表L存在，将链表L的的元素写到FileName文件中，返回OK，否则返回INFEASIBLE。
+{
+	// 请在这里补充代码，完成本关任务
+	/********** Begin 1 *********/
+	if (L == NULL) {
+		return INFEASIBLE;
+	}
+
+	FILE *fp = fopen(FileName, "wa+");
+	if (fp == NULL) {
+		return ERROR;
+	}
+
+	LNode *p = L->next;
+	while (p != NULL) {
+		fwrite(&p->data, sizeof(ElemType), 1, fp);
+		p = p->next;
+	}
+
+	fclose(fp);
+	return OK;
+	/********** End 1 **********/
+}
+
+/**
+	* @brief Load data from the file with name %FileName to an uninitalized list.
+	*
+	* @param L
+	* @param FileName
+	* @return status
+	*/
+status LoadList(LinkList &L, char FileName[])
+// 如果链表L不存在，将FileName文件中的数据读入到链表L中，返回OK，否则返回INFEASIBLE。
+{
+	// 请在这里补充代码，完成本关任务
+	/********** Begin 2 *********/
+	if (L != NULL) {
+		return INFEASIBLE;
+	}
+
+	FILE *fp = fopen(FileName, "ra+");
+	if (fp == NULL) {
+		return ERROR;
+	}
+
+	LinkList p = (LNode *)malloc(sizeof(LNode));
+	if (p == NULL) {
+		return ERROR;
+	}
+	p->data = 0;
+	p->next = NULL;
+	L = p;
+	while (!feof(fp)) {
+		ElemType current_value = 0;
+		fread(&current_value, sizeof(ElemType), 1, fp);
+		if (!current_value) {
+			break;
+		}
+		LNode *current_node = (LNode *)malloc(sizeof(LNode));
+		if (current_node == NULL) {
+			return ERROR;
+		}
+		current_node->data = current_value;
+		current_node->next = NULL;
+		p->next = current_node;
+		p = p->next;
+	}
+
+	fclose(fp);
+	return OK;
+	/********** End 2 **********/
+}
+	
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_list\_management.h$}, language=C++, frame=single]
+#ifndef __MULTI_LIST_MANAGEMENT_H_
+#define __MULTI_LIST_MANAGEMENT_H_
+
+#include "link_list.h"
+
+typedef struct {  //链表的管理表定义
+	struct ListInfo {
+		char name[30];
+		LinkList L;
+	} elem[10];
+	int length;
+	int listsize;
+} LISTS;
+
+// multi-list management
+status AddList(LISTS &Lists, const char *ListName);
+status RemoveList(LISTS &Lists, const char *ListName);
+int LocateList(LISTS Lists, const char *ListName);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_list\_management.cpp$}, language=C++, frame=single]
+#include "multi_list_management.h"
+
+/**
+	* @brief Append an initialized list to %Lists.
+	*
+	* @param Lists Sequence list table
+	* @param ListName Sequence list name
+	* @return status
+	*/
+status AddList(LISTS &Lists, const char *ListName) {
+	if (Lists.length > Lists.listsize || Lists.length < 0) {
+		return ERROR;
+	}
+
+	LinkList L = NULL;
+	status s = InitList(L);
+	if (s != OK) {
+		return s;
+	}
+
+	strcpy(Lists.elem[Lists.length].name, ListName);
+	Lists.elem[Lists.length++].L = L;
+	return OK;
+}
+
+/**
+	* @brief Remove the list with %ListName in %Lists.
+	*
+	* @param Lists Sequence list table
+	* @param ListName Sequence list name
+	* @return status
+	*/
+status RemoveList(LISTS &Lists, const char *ListName) {
+	if (Lists.length <= 0) {
+		return ERROR;
+	}
+
+	int pos = -1;
+	for (int i = 1; i <= Lists.length; i++) {
+		if (strcmp(ListName, Lists.elem[i - 1].name) == 0) {
+			pos = i;
+			break;
+		}
+	}
+
+	if (pos == -1) {
+		return ERROR;
+	}
+
+	DestroyList(Lists.elem[pos - 1].L);
+
+	for (int i = pos; i <= Lists.length; i++) {
+		Lists.elem[i - 1] = Lists.elem[i];
+	}
+
+	Lists.elem[Lists.length - 1].L = NULL;
+	strcpy(Lists.elem[Lists.length - 1].name, "");
+	--Lists.length;
+
+	return OK;
+}
+
+/**
+	* @brief Find list with %ListName in %Lists.
+	*
+	* @param Lists Sequence list table
+	* @param ListName Sequence list name
+	* @return status
+	*/
+int LocateList(LISTS Lists, const char *ListName) {
+	if (Lists.length <= 0) {
+		return ERROR;
+	}
+
+	int pos = -1;
+	for (int i = 1; i <= Lists.length; i++) {
+		if (strcmp(ListName, Lists.elem[i - 1].name) == 0) {
+			pos = i;
+			break;
+		}
+	}
+
+	return pos;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$link\_algorithms.h$}, language=C++, frame=single]
+#ifndef __LINK_ALGORITHMS_H_
+#define __LINK_ALGORITHMS_H_
+
+#include "link_list.h"
+
+status reverseList(LinkList& list);
+void listSort(LinkList& head);
+status RemoveNthFromEnd(LinkList& L, int n);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$link\_algorithms.cpp$}, language=C++, frame=single]
+#include "link_algorithms.h"
+
+void reverse_list(const LinkList& head) {
+	if (!head->next) {
+		return;
+	}
+
+	LNode* tail = head;
+	while (tail->next) {
+		tail = tail->next;
+	}
+	if (tail == head->next) {
+		return;
+	}
+
+	LNode *prev = NULL, *current = head->next, *next = current->next;
+	while (next != NULL) {  // TODO: end condition
+		current->next = prev;
+		prev = current;
+		current = next;
+		next = current->next;
+	}
+	current->next = prev;
+
+	head->next = tail;
+
+	return;
+}
+
+status reverseList(LinkList& list) {
+	if (!list) {
+		return INFEASIBLE;
+	}
+	reverse_list(list);
+	return OK;
+}
+
+LNode* merge(LNode*& head1, LNode*& head2) {
+	LNode* newHead;
+	// Base case: return the other half if  one of them is NULL
+	if (head1 == NULL)
+		return head2;
+	else if (head2 == NULL)
+		return head1;
+
+	// compare the value
+	if (head1->data < head2->data) {
+		newHead = head1;  // assign the newHead to the Node has smaller value
+		newHead->next = merge(
+			head1->next, head2);  // recall the functionto find the next Node
+	} else {
+		newHead = head2;
+		newHead->next = merge(head1, head2->next);
+	}
+
+	return newHead;
+}
+
+/**
+	* @brief Sort a link with mergesort
+	*
+	* @param head Link to sort
+	*/
+void mergesort(LNode*& head) {
+	if (head->next != NULL) {
+		LNode* head1 = head;
+		LNode* head2 = head;  // assign head to head 2. Head 2 will point to
+								// second half of the linked list
+		int len = ListLength(head);
+		for (int i = 0; i <= len / 2;
+				i++)  // use for loop to increment the pointer 2 to the mid poin in
+					// linked list
+		{
+			head1 = head2;        // assign head1 to any node head2 point to,
+			head2 = head2->next;  // in order to put NULL terminate for the
+									// first half of the linked list
+		}
+		if (head1) {
+			head1->next = NULL;  // terminate first half of the linked list
+			head1 = head;  // reposition head1 to the beginning of linked list,
+							// also the first node of the first half
+		}
+		mergesort(head1);
+		mergesort(head2);
+		head = merge(head1, head2);
+	}
+}
+
+/**
+	* @brief Sort a link.
+	*
+	* @param head
+	*/
+void listSort(LNode*& head) {
+	if (head) {
+		mergesort(head->next);
+	}
+	return;
+}
+
+/**
+	* @brief Remove the nth element counted backwards from link list %L.
+	*
+	* @param L
+	* @param n
+	* @return status
+	*/
+status RemoveNthFromEnd(LinkList& L, int n) {
+	if (!L) {
+		return INFEASIBLE;
+	}
+	ElemType _;
+	status s = ListDelete(L, ListLength(L) - n + 1, _);
+	return s;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$utils.h$}, language=C++, frame=single]
+#include <stdlib.h>
+
+void clean_terminal();
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$utils.cpp$}, language=C++, frame=single]
+#include "utils.h"
+
+/**
+ * @brief Multi-platform function to clean terminal.
+ *
+ */
+void clean_terminal() {
+#if defined(__APPLE__) || defined(__linux__) || defined(__FreeBSD__)
+    system("export TERM=xterm && reset");  // *nix
+#elif defined(_WIN32)
+    system("cls");  // windows
+#endif
+    return;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$main.cpp$}, language=C++, frame=single]
+/* Linear Table On Sequence Structure */
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "link_algorithms.h"
+#include "link_list.h"
+#include "multi_list_management.h"
+#include "utils.h"
+
+int main(void) {
+	static LISTS lists = (LISTS){.listsize = 10};
+	AddList(lists, "default_list");
+	DestroyList(lists.elem[0].L);
+	static LISTS::ListInfo *current_list = &lists.elem[0];
+	strcpy(current_list->name, "default_list");
+	int op = 1;
+	while (op) {
+		clean_terminal();
+		if (lists.length == 0) {
+			printf(
+				"\n"
+				"检测到多链表里的链表个数为 0 , 建议进入选项 14 "
+				"添加链表\n"
+				"\n");
+			getchar();
+		}
+		printf("\n现在的链表是: %s, 状态为: %s\n", current_list->name,
+				current_list->L ? "已初始化" : "未初始化");
+		printf("\n\n");
+		printf("      Menu for Linear Table On Sequence Structure \n");
+		printf("-------------------------------------------------\n");
+		printf("    	  1. InitList       7. LocateElem\n");
+		printf("    	  2. DestroyList    8. PriorElem\n");
+		printf("    	  3. ClearList      9. NextElem \n");
+		printf("    	  4. ListEmpty      10. ListInsert\n");
+		printf("    	  5. ListLength     11. ListDelete\n");
+		printf("    	  6. GetElem        12. ListTraverse\n");
+		printf("\n");
+		printf("    	  13. 批量插入\n");
+		printf("    	  14. 多链表管理\n");
+		printf("    	  15. 文件读写\n");
+		printf("    	  16. 算法\n");
+		printf("    	  0. Exit\n");
+		printf("-------------------------------------------------\n");
+		printf("    请选择你的操作[0~16]:");
+		scanf("%d", &op);
+		switch (op) {
+			case 1: {
+				if (lists.length > 0 && InitList(current_list->L) == OK)
+					printf("\n链表创建成功！\n");
+				else
+					printf("\n链表创建失败！\n");
+			}
+				getchar();
+				getchar();
+				break;
+			case 2: {
+				status s = DestroyList(current_list->L);
+				if (s == OK && current_list->L == NULL) {
+					printf("\nDestroyList成功！\n");
+				} else {
+					printf("\nDestroyList失败！\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 3: {
+				status s = ClearList(current_list->L);
+				if (s == OK && current_list->L && !current_list->L->next) {
+					printf("\nClearList成功！\n");
+				} else {
+					printf("\nClearList失败！\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 4: {
+				status s = ListEmpty(current_list->L);
+				if (s == TRUE) {
+					printf("\n链表L事一个一个空表！\n");
+				} else if (s == FALSE) {
+					printf("\n链表L不事一个一个空表（悲\n");
+				} else {
+					printf("\nINFEASIBLE\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 5: {
+				int len = ListLength(current_list->L);
+				if (len == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else {
+					printf("\n链表的长度L为: %d\n", len);
+				}
+				getchar();
+				getchar();
+			} break;
+			case 6: {
+				int i = 0;
+				printf("\n请输入要访问的位置 i (从 1 开始):\n");
+				scanf("%d", &i);
+				ElemType e = 0;
+				status s = GetElem(current_list->L, i, e);
+				if (s == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else if (s == ERROR) {
+					printf("\nERROR!\n");
+					printf("\n(有没有一种可能, i 超出了范围)\n");
+					printf("\n表L的长度是: %d\n", ListLength(current_list->L));
+				} else {
+					printf("\n第 i 位的数据为: %d\n", e);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 7: {
+				printf("\n请输入待查找数据 e :\n");
+				ElemType e = 0;
+				scanf("%d", &e);
+				int i = LocateElem(current_list->L, e);
+				if (i == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else if (i == ERROR) {
+					printf("\n没有找到 e 捏\n");
+				} else {
+					printf("\ne 的位置(从 1 开始)是: %d\n", i);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 8: {
+				printf("\n请输入待查找数据 e :\n");
+				ElemType e = 0, pre = 0;
+				scanf("%d", &e);
+				status s = PriorElem(current_list->L, e, pre);
+				if (s == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else if (s == ERROR) {
+					printf("\n没有捏\n");
+				} else {
+					printf("\ne 的前驱是: %d\n", pre);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 9: {
+				printf("\n请输入待查找数据 e :\n");
+				ElemType e = 0, next = 0;
+				scanf("%d", &e);
+				status s = NextElem(current_list->L, e, next);
+				if (s == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else if (s == ERROR) {
+					printf("\n没有捏\n");
+				} else {
+					printf("\ne 的后继是: %d\n", next);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 10: {
+				ElemType e = 0;
+				int i = 0;
+				printf(
+					"\n请输入要插入的元素 e 和插入位置 i (从 1 开始), "
+					"以空白符分隔: \n");
+				scanf("%d%d", &e, &i);
+				status s = ListInsert(current_list->L, i, e);
+				if (s == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else if (s == ERROR) {
+					printf("\nERROR!\n");
+					printf("\n(有没有一种可能, i 超出了范围)\n");
+					printf("\n表L的长度是: %d\n", ListLength(current_list->L));
+				} else {
+					printf("\n插入成功！\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 11: {
+				ElemType e = 0;
+				int i = 0;
+				printf("\n请输入要删除的元素位置 i (从 1 开始): \n");
+				scanf("%d", &i);
+				status s = ListDelete(current_list->L, i, e);
+				if (s == INFEASIBLE) {
+					printf("\nINFEASIBLE!\n");
+				} else if (s == ERROR) {
+					printf("\nERROR!\n");
+					printf("\n(有没有一种可能, i 超出了范围)\n");
+				} else {
+					printf("\n删除成功！删除的元素是: %d\n", e);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 12: {
+				if (!ListTraverse(current_list->L)) printf("链表是空表！\n");
+			}
+				getchar();
+				getchar();
+				break;
+			case 13: {
+				if (current_list->L == NULL) {
+					printf("\nINFEASIBLE!\n");
+					getchar();
+					getchar();
+					break;
+				}
+				printf(
+					"\n现在可以对链表L从尾部批量插入元素。请输入待插入元素个"
+					"数 n:\n");
+				int n = 0;
+				scanf("%d", &n);
+				printf("\n请输入元素: \n");
+				status s = OK;
+				for (int i = 1; i <= n; i++) {
+					ElemType e = 0;
+					scanf("%d", &e);
+					s = ListInsert(current_list->L,
+									ListLength(current_list->L) + 1, e);
+					if (s != OK) {
+						printf("\n插入失败, 元素为: %d\n", e);
+					}
+				}
+				if (s == OK) {
+					printf("\n插入成功！现在列表为:\n");
+					ListTraverse(current_list->L);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 14: {
+				int op_multilist = 1;
+				while (op_multilist) {
+					clean_terminal();
+					printf("\n链表管理\n");
+					printf(
+						"\n"
+						"现在你可以对多个链表进行管理, "
+						"并切换主程序所访问的链表\n"
+						"要注意, 你在\"链表管理\"以外的地方进行的所有操作, "
+						"都会影响多链表本身的数据\n"
+						"请谨慎操作\n"
+						"!!!!!!!!注意!!!!!!!!!\n"
+						"!!!!链表不能重名!!!!!\n"
+						"\n");
+					printf(
+						"\n"
+						"现在的链表有: "
+						"\n");
+					for (int i = 0; i < lists.length; i++) {
+						printf("%s", lists.elem[i].name);
+						if (&current_list->L == &lists.elem[i].L) {
+							printf("  *");
+						}
+						printf("\n");
+					}
+					printf("\n");
+
+					printf(
+						"                  <多链表操作菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 添加链表\n");
+					printf("    	  2. 删除链表\n");
+					printf("    	  3. 查找链表\n");
+					printf("    	  4. 切换链表\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~4]:");
+					scanf("%d", &op_multilist);
+					switch (op_multilist) {
+						case 1: {
+							printf("\n请输入待添加链表的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							status s = AddList(lists, name);
+							if (s == ERROR) {
+								printf("\n添加失败!\n");
+								printf("\n多链表长度: %d\n", lists.length);
+							} else {
+								printf("\n添加成功!\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("\n请输入待删除链表的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							if (!strcmp(name, current_list->name)) {
+								current_list = &lists.elem[0];
+								strcpy(current_list->name, lists.elem[0].name);
+							}
+							status s = RemoveList(lists, name);
+							if (s == ERROR) {
+								printf(
+									"\n删除失败!多链表长度为 0 "
+									"或链表未找到\n");
+								printf("\n多链表长度: %d\n", lists.length);
+							} else {
+								printf("\n删除成功!\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n请输入链表的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							int s = LocateList(lists, name);
+							if (s == ERROR) {
+								printf("\n查找失败!多链表长度为 0\n");
+								printf("\n多链表长度: %d\n", lists.length);
+							} else if (s == -1) {
+								printf("\n未找到!\n");
+							} else {
+								printf("\n链表的位置为: %d\n", s);
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 4: {
+							printf("\n请输入链表的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							int s = LocateList(lists, name);
+							if (s == ERROR) {
+								printf("\n切换失败!多链表长度为 0\n");
+								printf("\n多链表长度: %d\n", lists.length);
+							} else if (s == -1) {
+								printf("\n链表不存在!\n");
+							} else {
+								printf("\n链表的位置为: %d\n", s);
+								current_list = &lists.elem[s - 1];
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+						default:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 15: {
+				int op_file_io = 1;
+				while (op_file_io) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <链表文件操作菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 从文件将表初始化\n");
+					printf("    	  2. 从文件读入并覆盖原表\n");
+					printf("    	  3. 保存到文件\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~3]:");
+					scanf("%d", &op_file_io);
+					switch (op_file_io) {
+						case 1: {
+							printf("\n请输入完整文件名(二进制文件): \n");
+							char filename[30] = "";
+							scanf("%s", filename);
+							status s = LoadList(current_list->L, filename);
+							if (s == INFEASIBLE) {
+								printf("\n链表已存在, 无法读入\n");
+							} else if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else if (s == OK) {
+								printf("\n链表读入成功\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							LinkList temp = NULL;
+							printf("\n请输入完整文件名(二进制文件): \n");
+							char filename[30] = "";
+							scanf("%s", filename);
+							status s = LoadList(temp, filename);
+							if (s == ERROR) {
+								printf("\n发生错误\n");
+								DestroyList(temp);
+
+							} else if (s == OK) {
+								DestroyList(current_list->L);
+								current_list->L = temp;
+								printf("\n链表读入成功\n");
+								ListTraverse(current_list->L);
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n请输入完整文件名(二进制文件): \n");
+							char filename[30] = "";
+							scanf("%s", filename);
+							status s = SaveList(current_list->L, filename);
+							if (s == INFEASIBLE) {
+								printf("\n链表为空, 无法保存\n");
+							} else if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else {
+								printf("\n链表保存成功\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 16: {
+				int op_algo = 1;
+				while (op_algo) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <链表算法菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 翻转链表\n");
+					printf("    	  2. 排序\n");
+					printf("    	  3. 删除倒数第n个元素\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~3]:");
+					scanf("%d", &op_algo);
+					switch (op_algo) {
+						case 1: {
+							status s = reverseList(current_list->L);
+							if (s == INFEASIBLE) {
+								printf("\n表未初始化!\n");
+							} else {
+								printf("\n链表翻转成功!\n");
+								ListTraverse(current_list->L);
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							listSort(current_list->L);
+							ListTraverse(current_list->L);
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n请输入n:\n");
+							int n = 0;
+							scanf("%d", &n);
+							status s = RemoveNthFromEnd(current_list->L, n);
+							if (s == INFEASIBLE) {
+								printf("\n线性表是空表\n");
+							} else if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else {
+								printf("\n删除成功\n");
+								ListTraverse(current_list->L);
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 0: {
+				for (int i = 0; i < lists.length; i++) {
+					DestroyList(lists.elem[i].L);
+				}
+			} break;
+		}  // end of switch
+	}      // end of while
+	printf("欢迎下次再使用本系统！\n");
+}  // end of main()
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$CMakeLists.txt$}, frame=single]
+cmake_minimum_required(VERSION 3.0.0)
+project(链表 VERSION 0.1.0)
+
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++20" COMPILER_SUPPORTS_CXX20)
+
+
+set(SOURCES
+	src/link_list.cpp
+	src/multi_list_management.cpp 
+	src/utils.cpp 
+	src/main.cpp
+	src/link_algorithms.cpp
+)#创建一个变量，名字叫SOURCE。它包含了所有的cpp文件。
+
+add_executable(main ${SOURCES})
+
+target_include_directories(main
+	PRIVATE 
+		${PROJECT_SOURCE_DIR}/include
+)#设置这个可执行文件hello_headers需要包含的库的路径
+
+target_compile_features(main PRIVATE cxx_std_20)
+set_target_properties(main PROPERTIES CXX_EXTENSIONS OFF)	
+\end{lstlisting}
+
+\newpage
+\section{附录C 二叉树}
+\begin{lstlisting}[caption={$binary\_tree.h$}, language=C++, frame=single]
+#ifndef __BINARY_TREE_H_
+#define __BINARY_TREE_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define TRUE 1
+#define FALSE 0
+#define OK 1
+#define ERROR 0
+#define INFEASIBLE -1
+// #define OVERFLOW -2
+
+typedef int status;
+typedef int KeyType;
+typedef struct {
+	KeyType key;
+	char others[20];
+} TElemType;  //二叉树结点类型定义
+
+typedef struct BiTNode {  //二叉链表结点的定义
+	TElemType data;
+	struct BiTNode *lchild, *rchild;
+} BiTNode, *BiTree;
+
+status CreateBiTree(BiTree &T, TElemType definition[]);
+status ClearBiTree(BiTree &T);
+
+int BiTreeDepth(BiTree T);
+BiTNode *LocateNode(BiTree T, KeyType e);
+status Assign(BiTree &T, KeyType e, TElemType value);
+BiTNode *GetSibling(BiTree T, KeyType e);
+
+status InsertNode(BiTree &T, KeyType e, int LR, TElemType c);
+status DeleteNode(BiTree &T, KeyType e);
+
+status PreOrderTraverse(BiTree T, void (*visit)(BiTree));
+status InOrderTraverse(BiTree T, void (*visit)(BiTree));
+status PostOrderTraverse(BiTree T, void (*visit)(BiTree));
+status LevelOrderTraverse(BiTree T, void (*visit)(BiTree));
+
+status SaveBiTree(BiTree T, char FileName[]);
+status LoadBiTree(BiTree &T, char FileName[]);
+
+status InvertTree(BiTree &T);
+status MaxPathSum(BiTree T);
+BiTNode *LowestCommonAncestor(BiTree T, BiTNode *e1, BiTNode *e2);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$binary\_tree.cpp$}, language=C++, frame=single]
+#include <algorithm>
+#include <unordered_set>
+
+#include "binary_tree.h"
+#include "binary_tree_impl.h"
+
+/**
+	* @brief Create a binary tree.
+	*
+	* @param T Tree to be created
+	* @param definition Elements to be added into the tree
+	* @return status
+	*/
+status CreateBiTree(BiTree &T, TElemType definition[]) {
+	if (T != NULL) {
+		return INFEASIBLE;
+	}
+	if (check_if_repeated_in_elems(definition) != OK) {
+		return ERROR;
+	}
+	create_binary_tree_by_preorder(T, definition);
+	return OK;
+}
+
+/**
+	* @brief Clean the binary tree %T.
+	*
+	* @param T
+	* @return status
+	*/
+status ClearBiTree(BiTree &T) {
+	if (T == NULL) {
+		return INFEASIBLE;
+	}
+	clear_binary_tree(T);
+	T = NULL;
+	return OK;
+}
+
+/**
+	* @brief Return the depth of a tree.
+	*
+	* @param T
+	* @return int
+	*/
+int BiTreeDepth(BiTree T) { return tree_depth(T); }
+
+/**
+	* @brief Locate a node.
+	*
+	* @param T
+	* @param e
+	* @return BiTNode*
+	*/
+BiTNode *LocateNode(BiTree T, KeyType e) { return locate_node(T, e); }
+
+/**
+	* @brief Assign a value to a node.
+	*
+	* @param T
+	* @param e
+	* @param value
+	* @return status
+	*/
+status Assign(BiTree &T, KeyType e, TElemType value) {
+	BiTNode *target = locate_node_if_changeable(T, e, value);
+	if (!target) {
+		return ERROR;
+	}
+	target->data = value;
+	return OK;
+}
+
+/**
+	* @brief Get the sibling of a node.
+	*
+	* @param T
+	* @param e
+	* @return BiTNode*
+	*/
+BiTNode *GetSibling(BiTree T, KeyType e) { return get_sibling(T, e); }
+
+/**
+	* @brief Insert a node to the node with key %e. If LR == 0, insert as
+	* left child; if LR == 1, insert as right child; if LR == -1, insert as
+	* the root of the whole tree. The original node is set as the right
+	* subtree of the new node.
+	*
+	* @param T
+	* @param e
+	* @param LR
+	* @param c
+	* @return status
+	*/
+status InsertNode(BiTree &T, KeyType e, int LR, TElemType c) {
+	status s = OK;
+	BiTNode *target = LR == -1 ? T : locate_node_if_insertable(T, e, c);
+	if (!target) {
+		return ERROR;
+	}
+	s = insert_node(target, LR, c);
+	if (s == ERROR) {
+		return s;
+	}
+	if (LR == -1) {
+		T = target;
+	}
+	return OK;
+}
+
+/**
+	* @brief Delete a node.
+	* If the outward degree of the node is 0, just delete it;
+	* if the degree is 1, replace the node with its child;
+	* if the degree is 2, replace the node with its left child,
+	* and set its right child as the right child of the rightest node
+	* in its left subtree.
+	*
+	* @param T
+	* @param e
+	* @return status
+	*/
+status DeleteNode(BiTree &T, KeyType e) {
+	BiTNode *target = locate_node(T, e);
+	if (!target) {
+		return ERROR;
+	}
+	delete_node(T, e);
+	return OK;
+}
+
+/**
+	* @brief Traverse a tree in preorder. Each time a node is visited,
+	* adapt the function %visit to it.
+	*
+	* @param T
+	* @param visit
+	* @return status
+	*/
+status PreOrderTraverse(BiTree T, void (*visit)(BiTree)) {
+	if (!T) {
+		return ERROR;
+	}
+	traverse_in_preorder(T, visit);
+	return OK;
+}
+
+/**
+	* @brief Traverse a tree in inorder. Each time a node is visited,
+	* adapt the function %visit to it.
+	*
+	* @param T
+	* @param visit
+	* @return status
+	*/
+status InOrderTraverse(BiTree T, void (*visit)(BiTree)) {
+	if (!T) {
+		return ERROR;
+	}
+	traverse_in_inorder(T, visit);
+	return OK;
+}
+/**
+	* @brief Traverse a tree in postorder. Each time a node is visited,
+	* adapt the function %visit to it.
+	*
+	* @param T
+	* @param visit
+	* @return status
+	*/
+status PostOrderTraverse(BiTree T, void (*visit)(BiTree)) {
+	if (!T) {
+		return ERROR;
+	}
+	traverse_in_postorder(T, visit);
+	return OK;
+}
+
+/**
+	* @brief Traverse a tree in level order. Each time a node is visited,
+	* adapt the function %visit to it.
+	*
+	* @param T
+	* @param visit
+	* @return status
+	*/
+status LevelOrderTraverse(BiTree T, void (*visit)(BiTree)) {
+	if (!T) {
+		return ERROR;
+	}
+	traverse_in_levelorder(T, visit);
+	return OK;
+}
+
+/**
+	* @brief Save a tree to a file.
+	*
+	* @param T
+	* @param FileName
+	* @return status
+	*/
+status SaveBiTree(BiTree T, char FileName[]) {
+	return save_to_file(T, FileName);
+}
+
+/**
+	* @brief Load a tree from a file.
+	*
+	* @param T
+	* @param FileName
+	* @return status
+	*/
+status LoadBiTree(BiTree &T, char FileName[]) {
+	return load_from_file(T, FileName);
+}
+
+/**
+	* @brief Invert a tree. That means swap the left child
+	* and the right child of each node.
+	*
+	* @param T
+	* @return status
+	*/
+status InvertTree(BiTree &T) { return invert(T); }
+
+/**
+	* @brief Make max path sum of a tree from its root node.
+	*
+	* @param T
+	* @return status
+	*/
+status MaxPathSum(BiTree T) { return max_path_sum(T); }
+
+/**
+	* @brief Return the lca of two nodes.
+	*
+	* @param T
+	* @param e1
+	* @param e2
+	* @return BiTNode*
+	*/
+BiTNode *LowestCommonAncestor(BiTree T, BiTNode *e1, BiTNode *e2) {
+	return lca(T, e1, e2);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$binary\_tree\_impl.h$}, language=C++, frame=single]
+#ifndef __BINARY_TREE_IMPL_H_
+#define __BINARY_TREE_IMPL_H_
+
+#include <algorithm>
+#include <array>
+#include <cstdio>
+#include <deque>
+#include <fstream>
+#include <stack>
+#include <unordered_map>
+#include <unordered_set>
+
+#include "binary_tree.h"
+
+TElemType *create_binary_tree_by_preorder(BiTree &node, TElemType *elem);
+status check_if_repeated_in_elems(const TElemType elems[]);
+void clear_binary_tree(BiTree &T);
+
+int tree_depth(BiTree T);
+BiTNode *locate_node(BiTree T, KeyType e);
+BiTNode *locate_node_if_changeable(BiTree T, KeyType target_key,
+									TElemType elem_to_change);
+BiTNode *locate_node_if_insertable(BiTree T, KeyType target_key,
+									TElemType elem_to_insert);
+BiTNode *get_sibling(BiTree T, KeyType e);
+BiTNode *get_father(BiTree T, KeyType e);
+BiTNode *get_rightest_node(BiTree T);
+BiTNode *get_leftest_node(BiTree T);
+
+status insert_node(BiTree &node, int LR, TElemType c);
+status delete_node(BiTree &root, KeyType e);
+
+status traverse_in_preorder(BiTree root, void (*visit)(BiTree));
+status traverse_in_inorder(BiTree root, void (*visit)(BiTree));
+status traverse_in_postorder(BiTree root, void (*visit)(BiTree));
+status traverse_in_levelorder(BiTree root, void (*visit)(BiTree));
+
+status save_to_file(BiTree root, char filename[]);
+status load_from_file(BiTree &root, char filename[]);
+
+status invert(BiTree &T);
+KeyType max_path_sum(BiTree T);
+BiTNode *lca(BiTree T, BiTNode *n1, BiTNode *n2);
+
+#endif
+	
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$binary\_tree\_impl.cpp$}, language=C++, frame=single]
+#include "binary_tree_impl.h"
+
+/**
+	* @brief Create a binary tree recursively by elements sequenced by preorder.
+	* Just returns the element corresponding to rightest node in left subtree
+	* so we can make use of that essence information.
+	*
+	* @param node The root of the tree/subtree
+	* @param elem The pointer to the element corresponding to current node
+	* @return TElemType*
+	*/
+TElemType *create_binary_tree_by_preorder(BiTree &node, TElemType *elem) {
+	if (elem == NULL) {
+		return NULL;
+	}
+	if (elem->key == 0 || elem->key == -1) {
+		node = NULL;
+		return elem;
+	} else {
+		node = (BiTNode *)malloc(sizeof(BiTNode));
+		if (node == NULL) {
+			perror("memory allocation failed");
+			return NULL;
+		}
+		node->data = *elem;
+		TElemType *rightest =
+			create_binary_tree_by_preorder(node->lchild, elem + 1);
+		return create_binary_tree_by_preorder(node->rchild, rightest + 1);
+	}
+}
+
+/**
+	* @brief Check if there is any repeated key in %elems.
+	*
+	* @param elems
+	* @return status
+	*/
+status check_if_repeated_in_elems(const TElemType elems[]) {
+	std::unordered_set<KeyType> keys;
+	const TElemType *p_elem = elems;
+	while (p_elem->key != -1) {
+		if (keys.find(p_elem->key) != keys.end()) {
+			return ERROR;
+		}
+		if (p_elem->key != 0) {
+			keys.insert(p_elem->key);
+		}
+		++p_elem;
+	}
+	return OK;
+}
+
+/**
+	* @brief Helper function to clean the binary tree.
+	*
+	* @param T
+	*/
+void clear_binary_tree(BiTree &T) {
+	if (T == NULL) {
+		return;
+	}
+	clear_binary_tree(T->lchild);
+	clear_binary_tree(T->rchild);
+	free(T);
+	T = NULL;
+	return;
+}
+
+int tree_depth(BiTree T) {
+	if (!T) {
+		return 0;
+	}
+	return std::max(tree_depth(T->lchild), tree_depth(T->rchild)) + 1;
+}
+
+BiTNode *locate_node(BiTree T, KeyType e) {
+	if (!T) {
+		return NULL;
+	}
+	if (T->data.key == e) {
+		return T;
+	}
+	BiTNode *res_in_l = locate_node(T->lchild, e);
+	BiTNode *res_in_r = locate_node(T->rchild, e);
+	if (res_in_l) {
+		return res_in_l;
+	}
+	if (res_in_r) {
+		return res_in_r;
+	}
+	return NULL;
+}
+
+BiTNode *locate_node_if_changeable(BiTree T, KeyType target_key,
+									TElemType elem_to_change) {
+	BiTNode *target = locate_node(T, target_key);
+	if (!target) {
+		return NULL;
+	}
+	BiTNode *node_to_change = locate_node(T, elem_to_change.key);
+	if (node_to_change && node_to_change != target) {
+		return NULL;
+	}
+	return target;
+}
+
+BiTNode *locate_node_if_insertable(BiTree T, KeyType target_key,
+									TElemType elem_to_insert) {
+	BiTNode *target = locate_node(T, target_key);
+	if (!target) {
+		return NULL;
+	}
+	BiTNode *node_to_insert = locate_node(T, elem_to_insert.key);
+	if (node_to_insert) {
+		return NULL;
+	}
+	return target;
+}
+
+BiTNode *get_sibling(BiTree T, KeyType e) {
+	if (!T) {
+		return NULL;
+	}
+	if (T->lchild && T->lchild->data.key == e) {
+		return T->rchild;
+	} else if (T->rchild && T->rchild->data.key == e) {
+		return T->lchild;
+	}
+	BiTNode *res_in_l = get_sibling(T->lchild, e);
+	BiTNode *res_in_r = get_sibling(T->rchild, e);
+	if (res_in_l) {
+		return res_in_l;
+	} else if (res_in_r) {
+		return res_in_r;
+	}
+	return NULL;
+}
+
+BiTNode *get_father(BiTree T, KeyType e) {
+	if (!T) {
+		return NULL;
+	}
+	if (T->lchild && T->lchild->data.key == e) {
+		return T;
+	} else if (T->rchild && T->rchild->data.key == e) {
+		return T;
+	}
+	BiTNode *res_in_l = get_father(T->lchild, e);
+	BiTNode *res_in_r = get_father(T->rchild, e);
+	if (res_in_l) {
+		return res_in_l;
+	} else if (res_in_r) {
+		return res_in_r;
+	}
+	return NULL;
+}
+
+BiTNode *get_rightest_node(BiTree T) {
+	if (T->rchild) {
+		return get_rightest_node(T->rchild);
+	} else if (T->lchild) {
+		return get_rightest_node(T->lchild);
+	} else {
+		return T;
+	}
+}
+
+BiTNode *get_leftest_node(BiTree T) {
+	if (T->lchild) {
+		return get_leftest_node(T->lchild);
+	} else if (T->rchild) {
+		return get_leftest_node(T->rchild);
+	} else {
+		return T;
+	}
+}
+
+status insert_node(BiTree &node, int LR, TElemType c) {
+	BiTNode *new_node = (BiTNode *)malloc(sizeof(BiTNode));
+	if (!new_node) {
+		return ERROR;
+	}
+	new_node->lchild = NULL;
+	switch (LR) {
+		case 0: {
+			new_node->rchild = node->lchild;
+			node->lchild = new_node;
+		} break;
+		case 1: {
+			new_node->rchild = node->rchild;
+			node->rchild = new_node;
+		} break;
+		case -1: {  // insert as root; ignoring %node's parent node
+			new_node->rchild = node;
+			node = new_node;
+		} break;
+	}
+	new_node->data = c;
+	return OK;
+}
+
+status delete_node(BiTree &root, KeyType e) {
+	if (root->data.key == e) {
+		BiTNode *target = root;
+		if (!target->lchild && !target->rchild) {
+			free(target);
+			root = NULL;
+		} else if ((!target->lchild && target->rchild) ||
+					(target->lchild && !target->rchild)) {
+			BiTNode *target_child =
+				target->lchild ? target->lchild : target->rchild;
+			root = target_child;
+			free(target);
+		} else {
+			BiTNode *target_child = target->lchild;
+			BiTNode *rightest_node = get_rightest_node(target_child);
+			rightest_node->rchild = target->rchild;
+			free(target);
+			root = target_child;
+		}
+	} else {
+		BiTNode *father = get_father(root, e);
+		BiTNode **p_target = &((father->lchild && e == father->lchild->data.key)
+									? father->lchild
+									: father->rchild);
+		if (!(*p_target)->lchild && !(*p_target)->rchild) {
+			free(*p_target);
+			*p_target = NULL;
+		} else if ((!(*p_target)->lchild && (*p_target)->rchild) ||
+					((*p_target)->lchild && !(*p_target)->rchild)) {
+			BiTNode *target_child =
+				(*p_target)->lchild ? (*p_target)->lchild : (*p_target)->rchild;
+			free(*p_target);
+			*p_target = target_child;
+		} else {
+			BiTNode *target_child = (*p_target)->lchild;
+			BiTNode *rightest_node = get_rightest_node(target_child);
+			rightest_node->rchild = (*p_target)->rchild;
+			free(*p_target);
+			*p_target = target_child;
+		}
+	}
+	return OK;
+}
+
+status traverse_in_preorder(BiTree root, void (*visit)(BiTree)) {
+	std::stack<BiTNode *> node_stack;
+	node_stack.push(root);
+	while (!node_stack.empty()) {
+		BiTNode *current_node = node_stack.top();
+		node_stack.pop();
+		visit(current_node);
+		if (current_node->rchild) {
+			node_stack.push(current_node->rchild);
+		}
+		if (current_node->lchild) {
+			node_stack.push(current_node->lchild);
+		}
+	}
+	return OK;
+}
+
+status traverse_in_inorder(BiTree root, void (*visit)(BiTree)) {
+	std::stack<BiTNode *> node_stack;
+	std::unordered_set<BiTNode *> visited;
+	node_stack.push(root);
+	while (!node_stack.empty()) {
+		BiTNode *current_node = node_stack.top();
+		if (current_node->lchild &&
+			visited.find(current_node->lchild) == visited.end()) {
+			node_stack.push(current_node->lchild);
+		} else {
+			visit(current_node);
+			visited.insert(current_node);
+			node_stack.pop();
+			if (current_node->rchild) {
+				node_stack.push(current_node->rchild);
+			}
+		}
+	}
+	return OK;
+}
+
+status traverse_in_postorder(BiTree root, void (*visit)(BiTree)) {
+	std::stack<BiTNode *> node_stack1, node_stack2;
+	node_stack1.push(root);
+	while (!node_stack1.empty()) {
+		BiTNode *current_node = node_stack1.top();
+		node_stack1.pop();
+		node_stack2.push(current_node);
+		if (current_node->lchild) {
+			node_stack1.push(current_node->lchild);
+		}
+		if (current_node->rchild) {
+			node_stack1.push(current_node->rchild);
+		}
+	}
+	while (!node_stack2.empty()) {
+		BiTNode *current_node = node_stack2.top();
+		node_stack2.pop();
+		visit(current_node);
+	}
+	return OK;
+}
+
+status traverse_in_levelorder(BiTree root, void (*visit)(BiTree)) {
+	std::deque<BiTNode *> node_queue;
+	node_queue.push_back(root);
+	while (!node_queue.empty()) {
+		BiTNode *current_node = node_queue.front();
+		node_queue.pop_front();
+		visit(current_node);
+		if (current_node->lchild) {
+			node_queue.push_back(current_node->lchild);
+		}
+		if (current_node->rchild) {
+			node_queue.push_back(current_node->rchild);
+		}
+	}
+	return OK;
+}
+
+status save_to_file(BiTree root, char filename[]) {
+	std::fstream s(filename, std::fstream::binary | std::fstream::trunc |
+									std::fstream::in | std::fstream::out);
+	if (!s.is_open()) {
+		return ERROR;
+	}
+	std::stack<BiTNode *> node_stack;
+	node_stack.push(root);
+	while (!node_stack.empty()) {
+		BiTNode *current_node = node_stack.top();
+		node_stack.pop();
+		if (current_node) {
+			s.write(reinterpret_cast<char *>(&current_node->data),
+					sizeof current_node->data);
+			node_stack.push(current_node->rchild);
+			node_stack.push(current_node->lchild);
+		} else {
+			TElemType tmp;
+			tmp.key = 0;
+			strcpy(tmp.others, "null");
+			s.write(reinterpret_cast<char *>(&tmp), sizeof tmp);
+		}
+	}
+	TElemType end;
+	end.key = -1;
+	strcpy(end.others, "null");
+	s.write(reinterpret_cast<char *>(&end), sizeof end);
+	s.close();
+	return OK;
+}
+
+status load_from_file(BiTree &root, char filename[]) {
+	FILE *fp = fopen(filename, "ra+");
+	if (!fp) {
+		return ERROR;
+	}
+	TElemType *elem_buf = (TElemType *)malloc(1000 * sizeof(TElemType));
+	if (!elem_buf) {
+		return ERROR;
+	}
+	fread(elem_buf, sizeof(TElemType), 1000, fp);
+	create_binary_tree_by_preorder(root, elem_buf);
+	free(elem_buf);
+	return OK;
+}
+
+status invert(BiTree &T) {
+	if (!T) {
+		return OK;
+	}
+	BiTNode *tmp = T->lchild;
+	T->lchild = T->rchild;
+	T->rchild = tmp;
+	invert(T->lchild);
+	invert(T->rchild);
+	return OK;
+}
+
+KeyType max_path_sum(BiTree T) {
+	if (!T) {
+		return 0;
+	}
+	return T->data.key +
+			std::max(max_path_sum(T->lchild), max_path_sum(T->rchild));
+}
+
+std::unordered_map<BiTNode *, std::array<BiTNode *, 32>> father;
+std::unordered_map<BiTNode *, int> depth;
+
+void init(BiTree root) {
+	father.clear();
+	depth.clear();
+
+	father.insert(std::pair<BiTNode *, std::array<BiTNode *, 32>>{
+		NULL, std::array<BiTNode *, 32>()});
+	father.insert(std::pair<BiTNode *, std::array<BiTNode *, 32>>{
+		root, std::array<BiTNode *, 32>()});
+	for (auto &[k, arr] : father) {
+		arr.fill(NULL);
+	}
+	depth.insert(std::pair<BiTNode *, int>{NULL, 0});
+}
+
+void dfs(BiTNode *node, BiTNode *fa_node) {
+	if (!node) {
+		return;
+	}
+	father[node][0] = fa_node;
+	depth[node] = depth[father[node][0]] + 1;
+	for (int i = 1; i < 31; ++i) {
+		father[node][i] = father[father[node][i - 1]][i - 1];
+	}
+	dfs(node->lchild, node);
+	dfs(node->rchild, node);
+	return;
+}
+
+BiTNode *lca(BiTree T, BiTNode *n1, BiTNode *n2) {
+	init(T);
+	dfs(T, NULL);
+	if (depth[n1] > depth[n2]) {
+		std::swap(n1, n2);
+	}
+	int delta = depth[n2] - depth[n1];
+	for (int j = 0; delta; ++j, delta >>= 1) {
+		if (delta & 1) {
+			n2 = father[n2][j];
+		}
+	}
+	if (n2 == n1) return n2;
+	for (int j = 30; j >= 0 && n2 != n1; --j) {
+		if (father[n2][j] != father[n1][j]) {
+			n2 = father[n2][j];
+			n1 = father[n1][j];
+		}
+	}
+	n2 = father[n2][0];
+	n1 = father[n1][0];
+	return n2;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_tree\_management.h$}, language=C++, frame=single]
+#ifndef __MULTI_TREE_MANAGEMENT_H_
+#define __MULTI_TREE_MANAGEMENT_H_
+
+#include "binary_tree.h"
+
+typedef struct {  //线性表的管理表定义
+	struct TreeInfo {
+		char name[30];
+		BiTree L;
+	} elem[10];
+	int length;
+	int listsize;
+} MultiTreeTable;
+
+status AddTree(MultiTreeTable &Trees, const char *TreeName);
+status RemoveTree(MultiTreeTable &Trees, const char *TreeName);
+int LocateTree(MultiTreeTable Trees, const char *TreeName);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_tree\_management.cpp$}, language=C++, frame=single]
+#include "multi_tree_management.h"
+#include "multi_tree_management_impl.h"
+
+/**
+* @brief Add an uninitialized tree to a multi-tree table. The appended tree
+* needs to be "created" from a preorder sequence later.
+*
+* @param Trees
+* @param TreeName
+* @return status
+*/
+status AddTree(MultiTreeTable &Trees, const char *TreeName) {
+	return append(Trees, TreeName);
+}
+
+/**
+* @brief Remove a tree from a multi-tree table.
+*
+* @param Trees
+* @param TreeName
+* @return status
+*/
+status RemoveTree(MultiTreeTable &Trees, const char *TreeName) {
+	return remove(Trees, TreeName);
+}
+
+/**
+* @brief Locate the position of the tree with given name %TreeName.
+*
+* @param Trees
+* @param TreeName
+* @return int
+*/
+int LocateTree(MultiTreeTable Trees, const char *TreeName) {
+	return locate(Trees, TreeName);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_tree\_management\_impl.h$}, language=C++, frame=single]
+#ifndef __MULTI_TREE_MANAGEMENT_IMPL_H_
+#define __MULTI_TREE_MANAGEMENT_IMPL_H_
+
+#include "binary_tree_impl.h"
+#include "multi_tree_management.h"
+
+status append(MultiTreeTable &trees, const char *tree_name);
+status remove(MultiTreeTable &trees, const char *tree_name);
+status locate(MultiTreeTable &trees, const char *tree_name);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_tree\_management\_impl.cpp$}, language=C++, frame=single]
+#include "multi_tree_management_impl.h"
+
+status append(MultiTreeTable &trees, const char *tree_name) {
+	if (trees.length > trees.listsize || trees.length < 0) {
+		return ERROR;
+	}
+	trees.elem[trees.length].L = NULL;
+	strcpy(trees.elem[trees.length++].name, tree_name);
+	return OK;
+}
+
+status remove(MultiTreeTable &trees, const char *tree_name) {
+	if (trees.length <= 0) {
+		return ERROR;
+	}
+
+	int pos = -1;
+	for (int i = 1; i <= trees.length; i++) {
+		if (strcmp(tree_name, trees.elem[i - 1].name) == 0) {
+			pos = i;
+			break;
+		}
+	}
+
+	if (pos == -1) {
+		return ERROR;
+	}
+
+	ClearBiTree(trees.elem[pos - 1].L);
+	for (int i = pos; i <= trees.length; i++) {
+		trees.elem[i - 1] = trees.elem[i];
+	}
+
+	trees.elem[trees.length - 1].L = NULL;
+	memset(trees.elem[trees.length - 1].name, 0, sizeof(char));
+	--trees.length;
+
+	return OK;
+}
+
+status locate(MultiTreeTable &trees, const char *tree_name) {
+	if (trees.length <= 0) {
+		return ERROR;
+	}
+
+	int pos = -1;
+	for (int i = 1; i <= trees.length; i++) {
+		if (strcmp(tree_name, trees.elem[i - 1].name) == 0) {
+			pos = i;
+			break;
+		}
+	}
+
+	if (pos == -1) {
+		return ERROR;
+	}
+
+	return pos;
+}
+	
+\end{lstlisting}
+	
+\begin{lstlisting}[caption={$utils.h$}, language=C++, frame=single]
+#include <stdlib.h>
+
+void clean_terminal();
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$utils.cpp$}, language=C++, frame=single]
+#include "utils.h"
+
+/**
+ * @brief Multi-platform function to clean terminal.
+ *
+ */
+void clean_terminal() {
+#if defined(__APPLE__) || defined(__linux__) || defined(__FreeBSD__)
+    system("export TERM=xterm && reset");  // *nix
+#elif defined(_WIN32)
+    system("cls");  // windows
+#endif
+    return;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$main.cpp$}, language=C++, frame=single]
+/* Linear Table On Sequence Structure */
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "binary_tree.h"
+#include "multi_tree_management.h"
+#include "utils.h"
+
+#define MAX_ELEMENT_BUF_SIZE 1024
+
+int main(void) {
+	static MultiTreeTable tree_table = (MultiTreeTable){.listsize = 10};
+	AddTree(tree_table, "default_tree");
+	static MultiTreeTable::TreeInfo *current_tree = &tree_table.elem[0];
+	int op = 1;
+	while (op) {
+		clean_terminal();
+		if (tree_table.length == 0) {
+			printf(
+				"\n"
+				"检测到二叉树表里的二叉树个数为 0 , 建议进入选项 14 "
+				"添加二叉树\n"
+				"\n");
+			getchar();
+			getchar();
+		}
+		printf("\n现在的二叉树是: %s, 状态为: %s\n", current_tree->name,
+				current_tree->L ? "已初始化" : "未初始化");
+		printf("\n\n");
+		printf(R"(
+-----------------二叉树------------------
+
+1. 创建二叉树(从带 NULL 节点的先序遍历)
+2. 清空二叉树
+
+3. 求树高
+4. 查找树中节点
+5. 查找树中节点并赋值
+6. 获取节点的兄弟
+
+7. 插入节点
+8. 删除节点
+
+9. 遍历...
+
+10. 文件操作...
+
+11. 算法...
+
+12. 多树管理...
+
+0. 退出
+----------------------------------------
+请输入操作[0~12]:
+)");
+		scanf("%d", &op);
+		switch (op) {
+			case 1: {
+				printf("\n请输入树的先序遍历(含NULL节点, 以-1结束):\n");
+				TElemType *buf = (TElemType *)malloc(
+					(MAX_ELEMENT_BUF_SIZE + 1) * sizeof(TElemType));
+				int t = 0;
+				while (t < MAX_ELEMENT_BUF_SIZE) {
+					TElemType elem;
+					scanf("%d %s", &elem.key, elem.others);
+					memcpy(&buf[t++], &elem, sizeof(TElemType));
+					if (elem.key == -1) {
+						break;
+					}
+				}
+				if (t >= MAX_ELEMENT_BUF_SIZE) {
+					printf("\n元素太多力\n");
+				} else {
+					status s = CreateBiTree(current_tree->L, buf);
+					if (s == ERROR) {
+						printf("\n有重复的key\n");
+					} else if (s == INFEASIBLE) {
+						printf("INFEASIBLE");
+					} else {
+						printf("\n创建成功\n");
+						printf("\n树的先序遍历为:\n");
+						PreOrderTraverse(current_tree->L, [](BiTree T) -> void {
+							printf("%d %s ", T->data.key, T->data.others);
+						});
+						printf("\n树的中序遍历为:\n");
+						InOrderTraverse(current_tree->L, [](BiTree T) -> void {
+							printf("%d %s ", T->data.key, T->data.others);
+						});
+					}
+				}
+				free(buf);
+			}
+				getchar();
+				getchar();
+				break;
+			case 2: {
+				status s = ClearBiTree(current_tree->L);
+				if (s == OK) {
+					printf("\n清除二叉树成功\n");
+				} else if (s == INFEASIBLE) {
+					printf("\nINFEASIBLE\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 3: {
+				printf("\n树的深度是: %d\n", BiTreeDepth(current_tree->L));
+			}
+				getchar();
+				getchar();
+				break;
+			case 4: {
+				printf("\n请输入待查找节点的key:\n");
+				KeyType k;
+				scanf("%d", &k);
+				const BiTNode *node = LocateNode(current_tree->L, k);
+				if (!node) {
+					printf("\n没找到捏\n");
+				} else {
+					printf("\n找到力! key事: %d, others事: %s\n",
+							node->data.key, node->data.others);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 5: {
+				printf("\n请输入待赋值节点的key:\n");
+				KeyType k;
+				scanf("%d", &k);
+				printf("\n请输入要赋的值(key, others):\n");
+				TElemType elem;
+				scanf("%d %s", &elem.key, elem.others);
+				status s = Assign(current_tree->L, k, elem);
+				if (s == ERROR) {
+					printf("\n没找到节点, 或者key发生重复\n");
+				} else {
+					printf("\n赋值成功\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 6: {
+				printf("\n请输入待查找节点的key:\n");
+				KeyType k;
+				scanf("%d", &k);
+				const BiTNode *node = GetSibling(current_tree->L, k);
+				if (!node) {
+					printf("\n节点不存在, 或者兄弟节点事NULL\n");
+				} else {
+					printf("\n找到力! 兄弟节点的key事: %d, others事: %s\n",
+							node->data.key, node->data.others);
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 7: {
+				printf("\n请输入待插入节点的值(key, others):\n");
+				TElemType elem;
+				scanf("%d %s", &elem.key, elem.others);
+				printf("\n请输入插入位置的key:\n");
+				KeyType k;
+				scanf("%d", &k);
+				printf(
+					"\n事左节点, 右节点还是根节点?\n"
+					"左节点扣0, 右节点扣1, 根节点扣-1:\n");
+				int lr_flg;
+				scanf("%d", &lr_flg);
+				while (lr_flg < -1 || lr_flg > 1) {
+					printf(
+						"\n输错力\n"
+						"请再输一遍\n");
+					scanf("%d", &lr_flg);
+				}
+				status s = InsertNode(current_tree->L, k, lr_flg, elem);
+				if (s == ERROR) {
+					printf("\n插入位置不存在, 或key有重复\n");
+				} else {
+					printf("\n插入成功\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 8: {
+				printf("\n请输入待删除节点的key:\n");
+				KeyType k;
+				scanf("%d", &k);
+				status s = DeleteNode(current_tree->L, k);
+				if (s == ERROR) {
+					printf("\n没找到捏\n");
+				} else {
+					printf("\n删除成功\n");
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 9: {
+				int op_trav = 1;
+				while (op_trav) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <二叉树遍历菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 先序遍历\n");
+					printf("    	  2. 中序遍历\n");
+					printf("    	  3. 后序遍历\n");
+					printf("    	  4. 按层遍历\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~4]:");
+					scanf("%d", &op_trav);
+					switch (op_trav) {
+						case 1: {
+							printf("\n树的先序遍历为:\n");
+							PreOrderTraverse(current_tree->L,
+												[](BiTree T) -> void {
+													printf("%d %s ", T->data.key,
+														T->data.others);
+												});
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("\n树的中序遍历为:\n");
+							InOrderTraverse(current_tree->L,
+											[](BiTree T) -> void {
+												printf("%d %s ", T->data.key,
+														T->data.others);
+											});
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n树的后序遍历为:\n");
+							PostOrderTraverse(current_tree->L,
+												[](BiTree T) -> void {
+													printf("%d %s ", T->data.key,
+															T->data.others);
+												});
+						}
+							getchar();
+							getchar();
+							break;
+						case 4: {
+							printf("\n树的按层遍历为:\n");
+							LevelOrderTraverse(current_tree->L,
+												[](BiTree T) -> void {
+													printf("%d %s ", T->data.key,
+															T->data.others);
+												});
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 10: {
+				int op_file = 1;
+				while (op_file) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <二叉树文件菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 保存到文件\n");
+					printf("    	  2. 从文件加载\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~2]:\n");
+					scanf("%d", &op_file);
+					switch (op_file) {
+						case 1: {
+							printf("\n请输入要保存的文件名:\n");
+							char filename[100];
+							scanf("%s", filename);
+							status s = SaveBiTree(current_tree->L, filename);
+							if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else {
+								printf("\n保存成功\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("\n请输入要加载的文件名:\n");
+							char filename[100];
+							scanf("%s", filename);
+							status s = LoadBiTree(current_tree->L, filename);
+							if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else {
+								printf("\n加载成功\n");
+								printf("\n树的先序遍历为:\n");
+								PreOrderTraverse(
+									current_tree->L, [](BiTree T) -> void {
+										printf("%d %s ", T->data.key,
+												T->data.others);
+									});
+								printf("\n树的中序遍历为:\n");
+								InOrderTraverse(
+									current_tree->L, [](BiTree T) -> void {
+										printf("%d %s ", T->data.key,
+												T->data.others);
+									});
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 0: {
+						}
+							getchar();
+							getchar();
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 11: {
+				int op_algo = 1;
+				while (op_algo) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <二叉树算法菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 二叉树翻转\n");
+					printf("    	  2. 根节点到叶子节点的最大路径和\n");
+					printf("    	  3. 最近公共祖先\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~3]:");
+					scanf("%d", &op_algo);
+					switch (op_algo) {
+						case 1: {
+							status s = InvertTree(current_tree->L);
+							if (s == ERROR) {
+							} else {
+								printf("\n翻转成功\n");
+								printf("\n树的先序遍历为:\n");
+								PreOrderTraverse(
+									current_tree->L, [](BiTree T) -> void {
+										printf("%d %s ", T->data.key,
+												T->data.others);
+									});
+								printf("\n树的中序遍历为:\n");
+								InOrderTraverse(
+									current_tree->L, [](BiTree T) -> void {
+										printf("%d %s ", T->data.key,
+												T->data.others);
+									});
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							int s = MaxPathSum(current_tree->L);
+							printf("\n最大路径和: %d\n", s);
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n请输入两个节点的key:\n");
+							int k[2];
+							BiTNode *nodes[2] = {NULL, NULL};
+							scanf("%d%d", k, k + 1);
+							for (int i = 0; i < 2; i++) {
+								nodes[i] = LocateNode(current_tree->L, k[i]);
+								if (!nodes[i]) {
+									printf("找不到节点: %d\n", k[i]);
+									goto end_11_3;
+								}
+							}
+							BiTNode *res = LowestCommonAncestor(
+								current_tree->L, nodes[0], nodes[1]);
+							if (res) {
+								printf(
+									"\n最近公共祖先的key事: %d, others事: %s\n",
+									res->data.key, res->data.others);
+							}
+						}
+						end_11_3:
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 12: {
+				int op_multi = 1;
+				while (op_multi) {
+					clean_terminal();
+					printf(
+						"\n"
+						"现在的二叉树有: "
+						"\n");
+					for (int i = 0; i < tree_table.length; i++) {
+						printf("%s", tree_table.elem[i].name);
+						if (current_tree == &tree_table.elem[i]) {
+							printf("  *");
+						}
+						printf("\n");
+					}
+					printf("\n");
+					printf("\n");
+					printf(
+						"                  <多二叉树菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 添加二叉树\n");
+					printf("    	  2. 删除二叉树\n");
+					printf("    	  3. 查找二叉树\n");
+					printf("    	  4. 切换二叉树\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~4]:");
+					scanf("%d", &op_multi);
+					switch (op_multi) {
+						case 1: {
+							printf("\n请输入待添加二叉树的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							status s = AddTree(tree_table, name);
+							if (s == ERROR) {
+								printf("\n添加失败!\n");
+								printf("\n多线性表长度: %d\n",
+										tree_table.length);
+							} else {
+								printf("\n添加成功!\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("\n请输入待删除二叉树的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							if (!strcmp(name, current_tree->name)) {
+								current_tree = &tree_table.elem[0];
+								// strcpy(current_tree->name,
+								// lists.elem[0].name);
+							}
+							status s = RemoveTree(tree_table, name);
+							if (s == ERROR) {
+								printf(
+									"\n删除失败!二叉树表长度为 0 "
+									"或线性表未找到\n");
+								printf("\n二叉树表长度: %d\n",
+										tree_table.length);
+							} else {
+								printf("\n删除成功!\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n请输入线性表的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							int s = LocateTree(tree_table, name);
+							if (s == ERROR) {
+								printf("\n查找失败!二叉树表长度为 0\n");
+								printf("\n二叉树表长度: %d\n",
+										tree_table.length);
+							} else if (s == -1) {
+								printf("\n未找到!\n");
+							} else {
+								printf("\n二叉树的位置为: %d\n", s);
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 4: {
+							printf("\n请输入二叉树的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							int s = LocateTree(tree_table, name);
+							if (s == ERROR) {
+								printf("\n切换失败!二叉树表长度为 0\n");
+								printf("\n二叉树表长度: %d\n",
+										tree_table.length);
+							} else if (s == -1) {
+								printf("\n二叉树不存在!\n");
+							} else {
+								printf("\n二叉树的位置为: %d\n", s);
+								current_tree = &tree_table.elem[s - 1];
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 0: {
+				for (int i = 0; i < tree_table.length; i++) {
+					ClearBiTree(tree_table.elem[i].L);
+				}
+			} break;
+		}  // end of switch
+	}      // end of while
+	printf("本系统润了\n");
+	return 0;
+}  // end of main()
+	
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$CMakeLists.txt$}, frame=single]
+cmake_minimum_required(VERSION 3.0.0)
+project(顺序线性表 VERSION 0.1.0)
+
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++20" COMPILER_SUPPORTS_CXX20)
+
+set( CMAKE_BUILD_TYPE "Debug" )#调试模式
+
+set(SOURCES
+	src/binary_tree.cpp
+	src/binary_tree_impl.cpp
+	src/multi_tree_management.cpp
+	src/multi_tree_management_impl.cpp
+	src/utils.cpp
+	src/main.cpp
+)#创建一个变量，名字叫SOURCE。它包含了所有的cpp文件。
+
+add_executable(main ${SOURCES})
+
+target_include_directories(main
+	PRIVATE 
+		${PROJECT_SOURCE_DIR}/include
+)#设置这个可执行文件hello_headers需要包含的库的路径
+
+target_compile_features(main PUBLIC cxx_std_20)
+set_target_properties(main PROPERTIES CXX_EXTENSIONS OFF)	
+\end{lstlisting}
+
+\newpage
+\section{附录D 图}
+\begin{lstlisting}[caption={$graph.h$}, language=C++, frame=single]
+#ifndef __GRAPH_H__
+#define __GRAPH_H__
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define TRUE 1
+#define FALSE 0
+#define OK 1
+#define ERROR 0
+#define INFEASIBLE -1
+#define MAX_VERTEX_NUM 20
+typedef int status;
+typedef int KeyType;
+typedef enum { DG, DN, UDG, UDN } GraphKind;
+typedef struct {
+	KeyType key;
+	char others[20];
+} VertexType;  //顶点类型定义
+
+typedef struct ArcNode {      //表结点类型定义
+	int adjvex;               //顶点位置编号
+	int w;                    //边权
+	struct ArcNode *nextarc;  //下一个表结点指针
+} ArcNode;
+
+typedef struct VNode {  //头结点及其数组类型定义
+	VertexType data;    //顶点信息
+	ArcNode *firstarc;  //指向第一条弧
+} VNode, AdjList[MAX_VERTEX_NUM];
+
+typedef struct {         //邻接表的类型定义
+	AdjList vertices;    //头结点数组
+	int vexnum, arcnum;  //顶点数、弧数
+	GraphKind kind;      //图的类型
+} ALGraph;
+
+status CreateGraph(ALGraph &G, VertexType V[], KeyType VR[][3]);
+status DestroyGraph(ALGraph &G);
+
+int LocateVex(ALGraph G, KeyType u);
+status PutVex(ALGraph &G, KeyType u, VertexType value);
+status InsertVex(ALGraph &G, VertexType v);
+status DeleteVex(ALGraph &G, KeyType v);
+
+int FirstAdjVex(ALGraph G, KeyType u);
+int NextAdjVex(ALGraph G, KeyType v, KeyType w);
+
+status InsertArc(ALGraph &G, KeyType v, KeyType w, int weight);
+status DeleteArc(ALGraph &G, KeyType v, KeyType w);
+
+status DFSTraverse(ALGraph &G, void (*visit)(VertexType));
+status BFSTraverse(ALGraph &G, void (*visit)(VertexType));
+
+status SaveGraph(ALGraph G, char FileName[]);
+status LoadGraph(ALGraph &G, char FileName[]);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$graph.cpp$}, language=C++, frame=single]
+#include "graph.h"
+#include "graph_impl.h"
+
+status CreateGraph(ALGraph &G, VertexType V[], KeyType VR[][3]) {
+	return create_graph(G, V, VR);
+}
+
+status DestroyGraph(ALGraph &G) { return destroy_graph(G); }
+
+int LocateVex(ALGraph G, KeyType u) { return locate_vertex(G, u); }
+
+status PutVex(ALGraph &G, KeyType u, VertexType value) {
+	return assign_to_vertex(G, u, value);
+}
+
+status InsertVex(ALGraph &G, VertexType v) { return append_vertex(G, v); }
+
+status DeleteVex(ALGraph &G, KeyType v) { return remove_vertex(G, v); }
+
+int FirstAdjVex(ALGraph G, KeyType u) {
+	int pos_u = locate_vertex(G, u);
+	if (pos_u == -1) {
+		return pos_u;
+	}
+	if (!G.vertices[pos_u].firstarc) {
+		return -1;
+	}
+	return G.vertices[pos_u].firstarc->adjvex;
+}
+
+int NextAdjVex(ALGraph G, KeyType v, KeyType w) {
+	int pos_v = locate_vertex(G, v), pos_w = locate_vertex(G, w);
+	if (pos_v == -1 || pos_w == -1) {
+		return -1;
+	}
+	ArcNode *p = G.vertices[pos_v].firstarc;
+	int res = -1;
+	while (p) {
+		if (p->adjvex == pos_w) {
+			if (!p->nextarc) {
+				return -1;
+			}
+			res = p->nextarc->adjvex;
+		}
+		p = p->nextarc;
+	}
+	return res;
+}
+
+status InsertArc(ALGraph &G, KeyType v, KeyType w, int weight) {
+	status s = is_one_way_edge_exist(G, v, w);
+	if (s == OK) {
+		return ERROR;
+	}
+	s = append_one_way_edge(G, v, w, weight);
+	if (s == ERROR) {
+		return ERROR;
+	}
+	s = append_one_way_edge(G, w, v, weight);
+	if (s == ERROR) {
+		return ERROR;
+	}
+	++G.arcnum;
+	return OK;
+}
+
+status DeleteArc(ALGraph &G, KeyType v, KeyType w) {
+	status s = is_one_way_edge_exist(G, v, w);
+	if (s == ERROR) {
+		return ERROR;
+	}
+	s = remove_one_way_edge(G, v, w);
+	if (s == ERROR) {
+		return ERROR;
+	}
+	s = remove_one_way_edge(G, w, v);
+	if (s == ERROR) {
+		return ERROR;
+	}
+	--G.arcnum;
+	return OK;
+}
+
+status DFSTraverse(ALGraph &G, void (*visit)(VertexType)) {
+	return dfs(G, visit);
+}
+
+status BFSTraverse(ALGraph &G, void (*visit)(VertexType)) {
+	return bfs(G, visit);
+}
+
+status SaveGraph(ALGraph G, char FileName[]) { return save(G, FileName); }
+
+status LoadGraph(ALGraph &G, char FileName[]) { return load(G, FileName); }
+	
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$graph\_impl.h$}, language=C++, frame=single]
+#ifndef __GRAPH_IMPL_H__
+#define __GRAPH_IMPL_H__
+
+#include <queue>
+#include <stack>
+#include <unordered_set>
+
+#include "graph.h"
+
+status create_graph(ALGraph &graph, VertexType vertices_info[],
+					KeyType edges[][3]);
+status destroy_graph(ALGraph &graph);
+
+int locate_vertex(ALGraph &graph, KeyType u);
+status assign_to_vertex(ALGraph &graph, KeyType u, VertexType value);
+status append_vertex(ALGraph &graph, VertexType value);
+status remove_vertex(ALGraph &graph, KeyType u);
+
+status is_one_way_edge_exist(ALGraph graph, KeyType u, KeyType v);
+status append_one_way_edge(ALGraph &graph, KeyType u, KeyType v, int w);
+status remove_one_way_edge(ALGraph &graph, KeyType u, KeyType v);
+
+status dfs(ALGraph &graph, void (*visit)(VertexType));
+status bfs(ALGraph &graph, void (*visit)(VertexType));
+
+status save(ALGraph graph, char filename[]);
+status load(ALGraph &graph, char filename[]);
+
+#endif	
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$graph\_impl.cpp$}, language=C++, frame=single]
+#include "graph_impl.h"
+
+status chk_if_vertices_repeated(VertexType vertices_info[]) {
+	std::unordered_set<KeyType> k;
+	VertexType *p_v = vertices_info;
+	while (p_v->key != -1) {
+		if (k.find(p_v->key) != k.end()) {
+			return ERROR;
+		}
+		k.insert(p_v->key);
+		++p_v;
+	}
+	return OK;
+}
+
+status create_graph(ALGraph &graph, VertexType vertices_info[],
+					KeyType edges[][3]) {
+	graph.vexnum = 0;
+	graph.arcnum = 0;
+
+	if (!vertices_info || vertices_info[0].key == -1) {
+		return ERROR;
+	}
+
+	status s = chk_if_vertices_repeated(vertices_info);
+	if (s == ERROR) {
+		return ERROR;
+	}
+
+	VertexType *p_v = vertices_info;
+	VNode *p_g = graph.vertices;
+	while (p_v->key != -1 && graph.vexnum <= MAX_VERTEX_NUM) {
+		memcpy(&p_g->data, p_v, sizeof(VertexType));
+		p_g->firstarc = NULL;
+		++p_v;
+		++p_g;
+		++graph.vexnum;
+	}
+	if (graph.vexnum > MAX_VERTEX_NUM) {
+		return ERROR;
+	}
+
+	KeyType(*p_e)[3] = edges;
+	while ((*p_e)[0] != -1) {
+		int u = (*p_e)[0], v = (*p_e)[1], w = (*p_e)[2];
+		s = append_one_way_edge(graph, u, v, w);
+		if (s == ERROR) {
+			return ERROR;
+		}
+		s = append_one_way_edge(graph, v, u, w);
+		if (s == ERROR && u != v) {  // `u != v` judges if the vertex is a loop
+			return ERROR;
+		}
+		++p_e;
+		++graph.arcnum;
+	}
+
+	return OK;
+}
+
+status destroy_graph(ALGraph &graph) {
+	for (int i = 0; i < graph.vexnum; ++i) {
+		ArcNode *p = graph.vertices[i].firstarc;
+		while (p) {
+			ArcNode *tmp = p;
+			p = p->nextarc;
+			free(tmp);
+		}
+	}
+	memset(graph.vertices, 0, graph.vexnum * sizeof(VNode));
+	graph.vexnum = graph.arcnum = 0;
+	return OK;
+}
+
+int locate_vertex(ALGraph &graph, KeyType u) {
+	VNode *p_g = graph.vertices;
+	int index = 0;
+	while (p_g->data.key != u && index < graph.vexnum) {
+		++p_g;
+		++index;
+	}
+	if (index >= graph.vexnum) {  // 没找到
+		return -1;
+	}
+	return index;
+}
+
+status assign_to_vertex(ALGraph &graph, KeyType u, VertexType value) {
+	int pos_u = locate_vertex(graph, u);
+	if (pos_u == -1) {
+		return ERROR;
+	}
+
+	int pos_new = locate_vertex(graph, value.key);
+	if (pos_new != -1 && pos_new != pos_u) {
+		return ERROR;
+	}
+
+	memcpy(&graph.vertices[pos_u].data, &value, sizeof(value));
+	return OK;
+}
+
+status append_vertex(ALGraph &graph, VertexType value) {
+	if (graph.vexnum >= MAX_VERTEX_NUM) {
+		return ERROR;
+	}
+	memcpy(&graph.vertices[graph.vexnum++].data, &value, sizeof(value));
+	return OK;
+}
+
+status remove_vertex(ALGraph &graph, KeyType u) {
+	if (graph.vexnum <= 1) {
+		return ERROR;
+	}
+
+	int pos_u = locate_vertex(graph, u);
+	if (pos_u == -1) {
+		return ERROR;
+	}
+
+	ArcNode *p = graph.vertices[pos_u].firstarc;
+	while (p) {
+		if (graph.vertices[p->adjvex].data.key != u) {
+			status s = remove_one_way_edge(
+				graph, graph.vertices[p->adjvex].data.key, u);
+			if (s == ERROR) {
+				return ERROR;
+			}
+		}
+		ArcNode *tmp = p;
+		p = p->nextarc;
+		free(tmp);
+		--graph.arcnum;
+	}
+
+	graph.vertices[pos_u].firstarc = NULL;
+
+	for (int i = 0; i < graph.vexnum; i++) {
+		ArcNode *p1 = graph.vertices[i].firstarc;
+		while (p1) {
+			if (p1->adjvex > pos_u) {
+				--p1->adjvex;
+			}
+			p1 = p1->nextarc;
+		}
+	}
+
+	for (int i = pos_u; i < graph.vexnum; i++) {
+		memcpy(&graph.vertices[i], &graph.vertices[i + 1], sizeof(VNode));
+	}
+
+	memset(&graph.vertices[graph.vexnum - 1], 0, sizeof(VNode));
+
+	--graph.vexnum;
+
+	return OK;
+}
+
+status is_one_way_edge_exist(ALGraph graph, KeyType u, KeyType v) {
+	int pos_u = locate_vertex(graph, u), pos_v = locate_vertex(graph, v);
+	if (pos_u == -1 || pos_v == -1) {
+		return ERROR;
+	}
+	ArcNode *p = graph.vertices[pos_u].firstarc;
+	while (p) {
+		if (p->adjvex == pos_v) {
+			return OK;
+		}
+		p = p->nextarc;
+	}
+	return ERROR;
+}
+
+status append_one_way_edge(ALGraph &graph, KeyType u, KeyType v, int w) {
+	int pos_u = locate_vertex(graph, u), pos_v = locate_vertex(graph, v);
+	if (pos_u == -1 || pos_v == -1) {
+		return ERROR;
+	}
+
+	if (!graph.vertices[pos_u].firstarc) {
+		graph.vertices[pos_u].firstarc = (ArcNode *)malloc(sizeof(ArcNode));
+		if (!graph.vertices[pos_u].firstarc) {
+			return ERROR;
+		}
+		graph.vertices[pos_u].firstarc->adjvex = pos_v;
+		graph.vertices[pos_u].firstarc->w = w;
+		graph.vertices[pos_u].firstarc->nextarc = NULL;
+		return OK;
+	}
+
+	ArcNode *next = graph.vertices[pos_u].firstarc;
+	ArcNode *new_node = (ArcNode *)malloc(sizeof(ArcNode));
+	if (!new_node) {
+		return ERROR;
+	}
+	graph.vertices[pos_u].firstarc = new_node;
+	new_node->nextarc = next;
+	new_node->w = w;
+	new_node->adjvex = pos_v;
+	return OK;
+}
+
+status remove_one_way_edge(ALGraph &graph, KeyType u, KeyType v) {
+	int pos_u = locate_vertex(graph, u), pos_v = locate_vertex(graph, v);
+	if (pos_u == -1 || pos_v == -1) {
+		return ERROR;
+	}
+
+	ArcNode *p = graph.vertices[pos_u].firstarc, *prev = NULL;
+
+	if (p->adjvex == pos_v) {
+		graph.vertices[pos_u].firstarc = p->nextarc;
+		free(p);
+		return OK;
+	}
+
+	while (p) {
+		if (p->adjvex == pos_v) {
+			break;
+		}
+		prev = p;
+		p = p->nextarc;
+	}
+
+	if (!p) {
+		return OK;
+	}
+
+	prev->nextarc = p->nextarc;
+	free(p);
+
+	return OK;
+}
+
+status dfs(ALGraph &graph, void (*visit)(VertexType)) {
+	int visited_node[MAX_VERTEX_NUM + 1] = {};
+	std::stack<KeyType> node_stack;
+	int visited_node_cnt = 0;
+
+	while (visited_node_cnt < graph.vexnum) {
+		while (!node_stack.empty()) {
+			KeyType current_node = node_stack.top();
+			node_stack.pop();
+			if (visited_node[current_node]) {
+				continue;
+			}
+			visit(graph.vertices[current_node].data);
+			visited_node[current_node] = 1;
+			++visited_node_cnt;
+			KeyType buf[MAX_VERTEX_NUM + 1] = {};
+			int node_num = 0;
+			const ArcNode *p = graph.vertices[current_node].firstarc;
+			while (p) {
+				if (!visited_node[p->adjvex]) {
+					buf[node_num++] = p->adjvex;
+				}
+				p = p->nextarc;
+			}
+			for (int i = node_num - 1; i >= 0; --i) {
+				node_stack.push(buf[i]);
+			}
+		}
+		for (int i = 0; i < graph.vexnum; ++i) {
+			if (!visited_node[i]) {
+				node_stack.push(i);
+				break;
+			}
+		}
+	}
+	return OK;
+}
+
+status bfs(ALGraph &graph, void (*visit)(VertexType)) {
+	int visited_node[MAX_VERTEX_NUM + 1] = {};
+	std::queue<KeyType> node_queue;
+	int visited_node_cnt = 0;
+
+	while (visited_node_cnt < graph.vexnum) {
+		while (!node_queue.empty()) {
+			KeyType current_node = node_queue.front();
+			node_queue.pop();
+			if (visited_node[current_node]) {
+				continue;
+			}
+			visit(graph.vertices[current_node].data);
+			visited_node[current_node] = 1;
+			++visited_node_cnt;
+			const ArcNode *p = graph.vertices[current_node].firstarc;
+			while (p) {
+				if (!visited_node[p->adjvex]) {
+					node_queue.push(p->adjvex);
+				}
+				p = p->nextarc;
+			}
+		}
+		for (int i = 0; i < graph.vexnum; ++i) {
+			if (!visited_node[i]) {
+				node_queue.push(i);
+				break;
+			}
+		}
+	}
+	return OK;
+}
+
+status save(ALGraph graph, char filename[]) {
+	FILE *fp = fopen(filename, "wb+");
+	if (!fp) {
+		return ERROR;
+	}
+	fwrite(&graph.vexnum, sizeof(int), 1, fp);
+	for (int i = 0; i < graph.vexnum; i++) {
+		fwrite(&graph.vertices[i].data, sizeof(VertexType), 1, fp);
+		ArcNode *p = graph.vertices[i].firstarc;
+		while (p) {
+			fwrite(&p->adjvex, sizeof(int), 1, fp);
+			fwrite(&p->w, sizeof(int), 1, fp);
+			p = p->nextarc;
+		}
+		int end_of_list = -1;
+		fwrite(&end_of_list, sizeof(int), 1, fp);
+	}
+	fclose(fp);
+	return OK;
+}
+
+status load(ALGraph &graph, char filename[]) {
+	FILE *fp = fopen(filename, "rb+");
+	if (!fp) {
+		return ERROR;
+	}
+	fread(&graph.vexnum, sizeof(int), 1, fp);
+	for (int i = 0; i < graph.vexnum; i++) {
+		fread(&graph.vertices[i].data, sizeof(VertexType), 1, fp);
+		int current_arcnum = 0, w = 0;
+		fread(&current_arcnum, sizeof(int), 1, fp);
+		fread(&w, sizeof(int), 1, fp);
+		if (current_arcnum == -1) {
+			graph.vertices[i].firstarc = NULL;
+			continue;
+		}
+		graph.vertices[i].firstarc = (ArcNode *)malloc(sizeof(ArcNode));
+		if (!graph.vertices[i].firstarc) {
+			return ERROR;
+		}
+		graph.vertices[i].firstarc->adjvex = current_arcnum;
+		graph.vertices[i].firstarc->w = w;
+		graph.vertices[i].firstarc->nextarc = NULL;
+		ArcNode *p = graph.vertices[i].firstarc, *next = NULL;
+		for (fread(&current_arcnum, sizeof(int), 1, fp); current_arcnum != -1;
+				fread(&current_arcnum, sizeof(int), 1, fp)) {
+			fread(&w, sizeof(int), 1, fp);
+			next = (ArcNode *)malloc(sizeof(ArcNode));
+			next->adjvex = current_arcnum;
+			next->w = w;
+			next->nextarc = NULL;
+			p->nextarc = next;
+			p = next;
+			next = NULL;
+		}
+	}
+	fclose(fp);
+	return OK;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_graph\_management.h$}, language=C++, frame=single]
+#ifndef __MULTI_GRAPH_MANAGEMENT_H__
+#define __MULTI_GRAPH_MANAGEMENT_H__
+
+#include "graph.h"
+
+enum GraphStatus { NOT_CREATED, CREATED };
+
+typedef struct {  //线性表的管理表定义
+	struct GraphInfo {
+		char name[30];
+		ALGraph G;
+		GraphStatus g_status;
+	} elem[10];
+	int length;
+	int listsize;
+} MultiGraphTable;
+
+status AddGraph(MultiGraphTable &Graphs, const char *GraphName);
+status RemoveGraph(MultiGraphTable &Graphs, const char *GraphName);
+int LocateGraph(MultiGraphTable Graphs, const char *GraphName);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_graph\_management.cpp$}, language=C++, frame=single]
+#include "multi_graph_management.h"
+#include "multi_graph_management_impl.h"
+
+/**
+	* @brief Add a blank graph to a multi-graph table. The appended graph
+	* needs to be "created" from a preorder sequence later.
+	*
+	* @param Graphs
+	* @param GraphName
+	* @return status
+	*/
+status AddGraph(MultiGraphTable &Graphs, const char *GraphName) {
+	return append(Graphs, GraphName);
+}
+
+/**
+	* @brief Remove a graph from a multi-graph table.
+	*
+	* @param Graphs
+	* @param GraphName
+	* @return status
+	*/
+status RemoveGraph(MultiGraphTable &Graphs, const char *GraphName) {
+	return remove(Graphs, GraphName);
+}
+
+/**
+	* @brief Locate the position of the graph with given name %GraphName.
+	*
+	* @param Graphs
+	* @param GraphName
+	* @return int
+	*/
+int LocateGraph(MultiGraphTable Graphs, const char *GraphName) {
+	return locate(Graphs, GraphName);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_graph\_management\_impl.h$}, language=C++, frame=single]
+#ifndef __MULTI_GRAPH_MANAGEMENT_IMPL_H__
+#define __MULTI_GRAPH_MANAGEMENT_IMPL_H__
+
+#include "multi_graph_management.h"
+
+status append(MultiGraphTable &graph, const char *graph_name);
+status remove(MultiGraphTable &graph, const char *graph_name);
+int locate(MultiGraphTable &graph, const char *graph_name);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$multi\_graph\_management\_impl.cpp$}, language=C++, frame=single]
+#include "multi_graph_management_impl.h"
+
+status append(MultiGraphTable &graphs, const char *graph_name) {
+	if (graphs.length > graphs.listsize || graphs.length < 0) {
+		return ERROR;
+	}
+
+	graphs.elem[graphs.length].g_status = GraphStatus::NOT_CREATED;
+
+	strcpy(graphs.elem[graphs.length++].name, graph_name);
+	return OK;
+}
+
+status remove(MultiGraphTable &graphs, const char *graph_name) {
+	if (graphs.length <= 0) {
+		return ERROR;
+	}
+
+	int pos = -1;
+	for (int i = 1; i <= graphs.length; i++) {
+		if (strcmp(graph_name, graphs.elem[i - 1].name) == 0) {
+			pos = i;
+			break;
+		}
+	}
+
+	if (pos == -1) {
+		return ERROR;
+	}
+
+	DestroyGraph(graphs.elem[pos - 1].G);
+	graphs.elem[pos - 1].g_status = GraphStatus::NOT_CREATED;
+	for (int i = pos; i <= graphs.length; i++) {
+		graphs.elem[i - 1] = graphs.elem[i];
+	}
+
+	memset(&graphs.elem[graphs.length - 1], 0, sizeof(char));
+	--graphs.length;
+
+	return OK;
+}
+
+int locate(MultiGraphTable &graphs, const char *graph_name) {
+	if (graphs.length <= 0) {
+		return ERROR;
+	}
+
+	int pos = -1;
+	for (int i = 1; i <= graphs.length; i++) {
+		if (strcmp(graph_name, graphs.elem[i - 1].name) == 0) {
+			pos = i;
+			break;
+		}
+	}
+
+	if (pos == -1) {
+		return ERROR;
+	}
+
+	return pos;
+}	
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$algorithms.h$}, language=C++, frame=single]
+#ifndef __ALGORITHMS_H__
+#define __ALGORITHMS_H__
+
+#include <ranges>
+#include <vector>
+
+#include "algorithms_impl.h"
+#include "graph.h"
+
+std::vector<int> VerticesSetLessThanK(ALGraph G, KeyType v, int k);
+
+int ShortestPathLength(ALGraph G, KeyType v, KeyType w);
+
+int ConnectedComponentsNums(ALGraph G);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$algorithms.cpp$}, language=C++, frame=single]
+#include "algorithms.h"
+
+std::vector<int> VerticesSetLessThanK(ALGraph G, KeyType v, int k) {
+	int _v = LocateVex(G, v);
+	if (_v == -1) {
+		return std::vector<int>{};
+	}
+	auto dis = dijkstra(G, _v);
+	auto res_view =
+		std::views::iota(0, G.vexnum) |
+		std::views::filter([dis, k](int u) -> bool { return dis[u] < k; }) |
+		std::views::transform([G](int u) { return G.vertices[u].data.key; });
+	std::vector<int> res(res_view.begin(), res_view.end());
+	return res;
+}
+
+int ShortestPathLength(ALGraph G, KeyType v, KeyType w) {
+	int _v = LocateVex(G, v);
+	if (_v == -1) {
+		return -1;  // can't find
+	}
+	int _w = LocateVex(G, w);
+	if (_w == -1) {
+		return -1;  // can't find
+	}
+	auto dis = dijkstra(G, _v);
+	return dis[_w];
+}
+
+int ConnectedComponentsNums(ALGraph G) { return connected_components_cnt(G); }
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$algorithms\_impl.h$}, language=C++, frame=single]
+#ifndef __ALGORITHMS_IMPL_H__
+#define __ALGORITHMS_IMPL_H__
+
+#include <cstdint>
+#include <queue>
+#include <stack>
+#include <unordered_map>
+#include <vector>
+
+#include "graph.h"
+
+std::vector<KeyType> dijkstra(ALGraph G, KeyType u);
+
+int tarjan(ALGraph G);
+
+int connected_components_cnt(ALGraph G);
+
+#endif
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$algorithms\_impl.cpp$}, language=C++, frame=single]
+#include "algorithms_impl.h"
+
+struct dis_vex_pair {
+	int dis;
+	int u;
+	bool operator>(const dis_vex_pair& rhs) const {
+		return this->dis > rhs.dis;
+	}
+};
+
+/**
+	* @brief Dijkstra algorithm. Returns the distance vector of %u.
+	*
+	* @param G
+	* @param u The node number in the array
+	* @return std::vector<int> The distance vector of %u
+	*/
+std::vector<int> dijkstra(ALGraph G, int u) {
+	std::vector<int> dis(505, INT32_MAX);
+	std::deque<bool> visited(505, false);
+	std::priority_queue<dis_vex_pair, std::vector<dis_vex_pair>,
+						std::greater<dis_vex_pair>>
+		dis_pq;
+	dis[u] = 0;
+	dis_pq.push(dis_vex_pair{0, u});
+	while (!dis_pq.empty()) {
+		auto uw_pair = dis_pq.top();
+		dis_pq.pop();
+		if (visited[uw_pair.u]) {
+			continue;
+		}
+		visited[uw_pair.u] = true;
+		auto& current_node = G.vertices[uw_pair.u];
+		auto p = current_node.firstarc;
+		while (p) {
+			int curr_u = uw_pair.u, v = p->adjvex, w = p->w;
+			if (dis[v] > dis[curr_u] + w) {
+				dis[v] = dis[curr_u] + w;
+				dis_pq.push(dis_vex_pair{dis[v], v});
+			}
+			p = p->nextarc;
+		}
+	}
+	return dis;
+}
+
+/**
+	* @brief Returns the number of strongly-connected components in a directed
+	* graph.
+	* TODO
+	*
+	* @param G
+	* @return int
+	*/
+int tarjan(ALGraph G) {
+	// TODO
+	return -1;
+}
+
+/**
+	* @brief Returns the number of connected components in a undirected graph.
+	*
+	* @param G
+	* @return int
+	*/
+int connected_components_cnt(ALGraph G) {
+	int res = 0;
+	int visited_node[MAX_VERTEX_NUM + 1] = {};
+	std::stack<KeyType> node_stack;
+	int visited_node_cnt = 0;
+
+	if (G.vexnum <= 0) {
+		return 0;
+	}
+
+	while (visited_node_cnt < G.vexnum) {
+		while (!node_stack.empty()) {
+			KeyType current_node = node_stack.top();
+			node_stack.pop();
+			if (visited_node[current_node]) {
+				continue;
+			}
+			visited_node[current_node] = 1;
+			++visited_node_cnt;
+			const ArcNode* p = G.vertices[current_node].firstarc;
+			while (p) {
+				if (!visited_node[p->adjvex]) {
+					node_stack.push(p->adjvex);
+				}
+				p = p->nextarc;
+			}
+		}
+		for (int i = 0; i < G.vexnum; ++i) {
+			if (!visited_node[i]) {
+				node_stack.push(i);
+				++res;
+				break;
+			}
+		}
+	}
+	return res;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$utils.h$}, language=C++, frame=single]
+#include <stdlib.h>
+
+void clean_terminal();
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$utils.cpp$}, language=C++, frame=single]
+#include "utils.h"
+
+/**
+ * @brief Multi-platform function to clean terminal.
+ *
+ */
+void clean_terminal() {
+#if defined(__APPLE__) || defined(__linux__) || defined(__FreeBSD__)
+    system("export TERM=xterm && reset");  // *nix
+#elif defined(_WIN32)
+    system("cls");  // windows
+#endif
+    return;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={$main.cpp$}, language=C++, frame=single]
+#include <iostream>
+#include <vector>
+
+#include "algorithms.h"
+#include "graph.h"
+#include "multi_graph_management.h"
+#include "utils.h"
+
+using namespace std;
+
+#define MAX_VERTEX_BUF_NUM 100
+#define MAX_EDGE_BUF_NUM 4950
+
+int main() {
+	static MultiGraphTable graph_table = (MultiGraphTable){.listsize = 10};
+	AddGraph(graph_table, "default_graph");
+	static MultiGraphTable::GraphInfo *current_graph = &graph_table.elem[0];
+	int op = 1;
+	while (op) {
+		clean_terminal();
+		if (graph_table.length == 0) {
+			printf(
+				"\n"
+				"检测到多图管理表里的图个数为 0 , 建议进入选项 14 "
+				"添加图\n"
+				"\n");
+			getchar();
+			getchar();
+		}
+		printf("\n现在的图是: %s, 状态为: %s\n", current_graph->name,
+				current_graph->g_status == GraphStatus::CREATED ? "已创建"
+																: "未创建");
+		printf("\n\n");
+		printf(R"(
+-----------------图------------------
+
+1. 创建图
+2. 销毁图
+
+3. 查找顶点
+4. 给顶点赋值
+5. 添加顶点
+6. 删除顶点
+
+7. 查找某顶点邻接表的第一个顶点(FirstAdjVex)
+8. 查找某顶点邻接表某节点的下一个(NextAdjVex)
+
+9. 插入边
+10. 删除边
+
+11. 遍历...
+
+12. 文件操作...
+
+13. 多图管理...
+
+14. 算法...
+
+0. 退出
+----------------------------------------
+请选择你的操作[0~14]:)");
+		scanf("%d", &op);
+		switch (op) {
+			case 1: {
+				if (current_graph->g_status == GraphStatus::CREATED) {
+					printf("\n图已经创建");
+					goto err_1;
+				}
+				printf("\n请输入顶点数 n 和边数 e:\n");
+				int n, e;
+				scanf("%d%d", &n, &e);
+				printf("\n请输入所有顶点(key, others):\n");
+				VertexType *vertices = (VertexType *)malloc(MAX_VERTEX_BUF_NUM *
+															sizeof(VertexType));
+				for (int i = 0; i < n; i++) {
+					scanf("%d %s", &vertices[i].key, vertices[i].others);
+				}
+				vertices[n] = VertexType{.key = -1};
+				printf("\n请输入所有边(u, v, w):\n");
+				KeyType(*edges)[3] = (KeyType(*)[3])malloc(MAX_EDGE_BUF_NUM *
+															sizeof(KeyType[3]));
+				for (int i = 0; i < e; i++) {
+					scanf("%d%d%d", &edges[i][0], &edges[i][1], &edges[i][2]);
+				}
+				edges[e][0] = edges[e][1] = edges[e][2] = -1;
+				status s = CreateGraph(current_graph->G, vertices, edges);
+				if (s == ERROR) {
+					printf("\n创建图错误\n");
+				} else {
+					current_graph->g_status = GraphStatus::CREATED;
+				}
+				free(vertices);
+				free(edges);
+			}
+			err_1:
+				getchar();
+				getchar();
+				break;
+			case 2: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_2;
+				}
+				status s = DestroyGraph(current_graph->G);
+				if (s == ERROR) {
+					printf("\n销毁图错误\n");
+				} else {
+					current_graph->g_status = GraphStatus::NOT_CREATED;
+				}
+			}
+			err_2:
+				getchar();
+				getchar();
+				break;
+			case 3: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_3;
+				}
+				printf("\n请输入待查找顶点 u:\n");
+				int u;
+				scanf("%d", &u);
+				int s = LocateVex(current_graph->G, u);
+				if (s == -1) {
+					printf("\n没找到\n");
+				} else {
+					printf("\n顶点位置是: %d\n", s);
+				}
+			}
+			err_3:
+				getchar();
+				getchar();
+				break;
+			case 4: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_4;
+				}
+				printf("\n请输入要赋值的顶点 u:\n");
+				int u;
+				scanf("%d", &u);
+				printf("\n请输入要给顶点赋的值(key, others):\n");
+				VertexType val;
+				scanf("%d %s", &val.key, val.others);
+				status s = PutVex(current_graph->G, u, val);
+				if (s == ERROR) {
+					printf("\n赋值失败, 说不定是没找到顶点\n");
+				} else {
+					printf("\n赋值成功\n");
+				}
+			}
+			err_4:
+				getchar();
+				getchar();
+				break;
+			case 5: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_5;
+				}
+				printf("\n请输入新顶点的值(key, others):\n");
+				VertexType val;
+				scanf("%d %s", &val.key, val.others);
+				status s = InsertVex(current_graph->G, val);
+				if (s == ERROR) {
+					printf("\n插入失败\n");
+				} else {
+					printf("\n插入成功\n");
+				}
+			}
+			err_5:
+				getchar();
+				getchar();
+				break;
+			case 6: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_6;
+				}
+				printf("\n请输入待删除顶点的 key:\n");
+				KeyType u;
+				scanf("%d", &u);
+				status s = DeleteVex(current_graph->G, u);
+				if (s == ERROR) {
+					printf("\n删除失败\n");
+				} else {
+					printf("\n删除成功\n");
+				}
+			}
+			err_6:
+				getchar();
+				getchar();
+				break;
+			case 7: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_7;
+				}
+				printf("\n请输入顶点 u:\n");
+				int u;
+				scanf("%d", &u);
+				auto s = FirstAdjVex(current_graph->G, u);
+				if (s == -1) {
+					printf("\n没找到捏\n");
+				} else {
+					printf("\n要找的顶点是: %d\n", s);
+				}
+			}
+			err_7:
+				getchar();
+				getchar();
+				break;
+			case 8: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_8;
+				}
+				printf("\n请输入顶点 u, v:\n");
+				int u, v;
+				scanf("%d%d", &u, &v);
+				auto s = NextAdjVex(current_graph->G, u, v);
+				if (s == -1) {
+					printf("\n没找到捏\n");
+				} else {
+					printf("\n要找的顶点是: %d\n", s);
+				}
+			}
+			err_8:
+				getchar();
+				getchar();
+				break;
+			case 9: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_9;
+				}
+				printf("\n请输入顶点 u, v:\n");
+				int u, v;
+				scanf("%d%d", &u, &v);
+				printf("\n请输入边的权重 w:\n");
+				int w;
+				scanf("%d", &w);
+				status s = InsertArc(current_graph->G, u, v, w);
+				if (s != OK) {
+					printf("\n似乎出了点问题, 有可能是已经有了一条边\n");
+				} else {
+					printf("\n插入成功\n");
+				}
+			}
+			err_9:
+				getchar();
+				getchar();
+				break;
+			case 10: {
+				if (current_graph->g_status == GraphStatus::NOT_CREATED) {
+					printf("\n图还没创建");
+					goto err_10;
+				}
+				printf("\n请输入顶点 u, v:\n");
+				int u, v;
+				scanf("%d%d", &u, &v);
+				status s = DeleteArc(current_graph->G, u, v);
+				if (s != OK) {
+					printf("\n似乎出了点问题, 可能是没有这条边\n");
+				} else {
+					printf("\n删除成功\n");
+				}
+			}
+			err_10:
+				getchar();
+				getchar();
+				break;
+			case 11: {
+				int op_trav = 1;
+				while (op_trav) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <图遍历菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. DFS\n");
+					printf("    	  2. BFS\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~2]:");
+					scanf("%d", &op_trav);
+					switch (op_trav) {
+						case 1: {
+							printf("\nDFS遍历为:\n");
+							DFSTraverse(current_graph->G,
+										[](VertexType u) -> void {
+											printf("%d %s ", u.key, u.others);
+										});
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("\nBFS遍历为:\n");
+							BFSTraverse(current_graph->G,
+										[](VertexType u) -> void {
+											printf("%d %s ", u.key, u.others);
+										});
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 12: {
+				int op_file = 1;
+				while (op_file) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <图文件菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 保存到文件\n");
+					printf("    	  2. 从文件加载\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~2]:\n");
+					scanf("%d", &op_file);
+					switch (op_file) {
+						case 1: {
+							if (current_graph->g_status ==
+								GraphStatus::NOT_CREATED) {
+								printf("\n图还没有创建捏\n");
+								goto err_file_1;
+							}
+							printf("\n请输入要保存的文件名:\n");
+							char filename[100];
+							scanf("%s", filename);
+							status s = SaveGraph(current_graph->G, filename);
+							if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else {
+								printf("\n保存成功\n");
+							}
+						}
+						err_file_1:
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							if (current_graph->g_status ==
+								GraphStatus::CREATED) {
+								printf("\n已经有图了捏\n");
+								goto err_file_2;
+							}
+							printf("\n请输入要加载的文件名:\n");
+							char filename[100];
+							scanf("%s", filename);
+							status s = LoadGraph(current_graph->G, filename);
+							if (s == ERROR) {
+								printf("\n发生错误\n");
+							} else {
+								printf("\n加载成功\n");
+								current_graph->g_status = GraphStatus::CREATED;
+							}
+						}
+						err_file_2:
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 13: {
+				int op_multi = 1;
+				while (op_multi) {
+					clean_terminal();
+					printf(
+						"\n"
+						"现在的图有: "
+						"\n");
+					for (int i = 0; i < graph_table.length; i++) {
+						printf("%s", graph_table.elem[i].name);
+						if (current_graph == &graph_table.elem[i]) {
+							printf("  *");
+						}
+						printf("\n");
+					}
+					printf("\n");
+					printf("\n");
+					printf(
+						"                  <多图管理菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 添加图\n");
+					printf("    	  2. 删除图\n");
+					printf("    	  3. 查找图\n");
+					printf("    	  4. 切换图\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~4]:");
+					scanf("%d", &op_multi);
+					switch (op_multi) {
+						case 1: {
+							printf("\n请输入待添加图的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							status s = AddGraph(graph_table, name);
+							if (s == ERROR) {
+								printf("\n添加失败!\n");
+								printf("\n多图管理表长度: %d\n",
+										graph_table.length);
+							} else {
+								printf("\n添加成功!\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("\n请输入待删除图的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							if (!strcmp(name, current_graph->name)) {
+								current_graph = &graph_table.elem[0];
+								// strcpy(current_graph->name,
+								// lists.elem[0].name);
+							}
+							status s = RemoveGraph(graph_table, name);
+							if (s == ERROR) {
+								printf(
+									"\n删除失败!图管理表长度为 0 "
+									"或图未找到\n");
+								printf("\n图管理表长度: %d\n",
+										graph_table.length);
+							} else {
+								printf("\n删除成功!\n");
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							printf("\n请输入图管理表的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							int s = LocateGraph(graph_table, name);
+							if (s == ERROR) {
+								printf("\n查找失败!图管理表长度为 0\n");
+								printf("\n图管理表长度: %d\n",
+										graph_table.length);
+							} else if (s == -1) {
+								printf("\n未找到!\n");
+							} else {
+								printf("\n图的位置为: %d\n", s);
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 4: {
+							printf("\n请输入图的名字: \n");
+							char name[30] = "";
+							scanf("%s", name);
+							int s = LocateGraph(graph_table, name);
+							if (s == ERROR) {
+								printf("\n切换失败!图管理表长度为 0\n");
+								printf("\n图管理表长度: %d\n",
+										graph_table.length);
+							} else if (s == -1) {
+								printf("\n图不存在!\n");
+							} else {
+								printf("\n图的位置为: %d\n", s);
+								current_graph = &graph_table.elem[s - 1];
+							}
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+			case 14: {
+				int op_algo = 1;
+				while (op_algo) {
+					clean_terminal();
+					printf("\n");
+					printf(
+						"                  <图算法菜单>                "
+						"\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    	  1. 与某一点距离不超过k的点集\n");
+					printf("    	  2. 最短路\n");
+					printf("    	  3. 连通分量(无向图)\n");
+					printf("    	  0. Exit\n");
+					printf(
+						"-------------------------------------------------\n");
+					printf("    请选择你的操作[0~3]:");
+					scanf("%d", &op_algo);
+					switch (op_algo) {
+						case 1: {
+							printf("请输入待求顶点 u 的 key:");
+							int u;
+							scanf("%d", &u);
+							printf("请输入k:");
+							int k;
+							scanf("%d", &k);
+							auto vertices =
+								VerticesSetLessThanK(current_graph->G, u, k);
+							printf("顶点集为:\n");
+							for (auto i : vertices) {
+								printf("%d ", i);
+							}
+							printf("\n");
+						}
+							getchar();
+							getchar();
+							break;
+						case 2: {
+							printf("请输入待求顶点 u、v 的 key:");
+							int u, v;
+							scanf("%d%d", &u, &v);
+							int i = ShortestPathLength(current_graph->G, u, v);
+							printf("最短路长度: %d\n", i);
+						}
+							getchar();
+							getchar();
+							break;
+						case 3: {
+							int i = ConnectedComponentsNums(current_graph->G);
+							printf("连通分量的个数为: %d\n", i);
+						}
+							getchar();
+							getchar();
+							break;
+						case 0:
+							break;
+					}
+				}
+			}
+				getchar();
+				getchar();
+				break;
+		}
+	}
+	return 0;
+}
+\end{lstlisting}
+
+\newpage
+\begin{lstlisting}[caption={$CMakeLists.txt$}, frame=single]
+cmake_minimum_required(VERSION 3.0.0)
+project(图
+	VERSION 0.1.0
+	LANGUAGES CXX)
+
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++20" COMPILER_SUPPORTS_CXX20)
+
+set( CMAKE_BUILD_TYPE "Debug" )#调试模式
+
+set(SOURCES
+	src/algorithms.cpp
+	src/algorithms_impl.cpp
+	src/graph_impl.cpp
+	src/graph.cpp
+	src/multi_graph_management.cpp
+	src/multi_graph_management_impl.cpp
+	src/utils.cpp 
+	src/main.cpp
+)#创建一个变量，名字叫SOURCE。它包含了所有的cpp文件。
+
+add_executable(main ${SOURCES})
+
+target_include_directories(main
+	PRIVATE 
+		${PROJECT_SOURCE_DIR}/include
+)#设置这个可执行文件hello_headers需要包含的库的路径
+
+target_compile_features(main PRIVATE cxx_std_20)
+set_target_properties(main PROPERTIES CXX_EXTENSIONS OFF)
+	
+\end{lstlisting}
 
 \end{document}

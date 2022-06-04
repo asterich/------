@@ -19,87 +19,87 @@
 \contentsline {subparagraph}{AddList}{6}{subparagraph*.13}%
 \contentsline {subparagraph}{LocateList}{6}{subparagraph*.14}%
 \contentsline {subparagraph}{RemoveList}{6}{subparagraph*.15}%
-\contentsline {subsubsection}{\numberline {1.3.3}文件操作}{7}{subsubsection.1.3.3}%
-\contentsline {subparagraph}{SaveList}{7}{subparagraph*.16}%
-\contentsline {subparagraph}{LoadList}{7}{subparagraph*.17}%
-\contentsline {subsubsection}{\numberline {1.3.4}算法}{8}{subsubsection.1.3.4}%
-\contentsline {subparagraph}{sort\_list}{8}{subparagraph*.18}%
-\contentsline {subparagraph}{max\_partial\_sum}{9}{subparagraph*.19}%
-\contentsline {subparagraph}{k\_subarray}{9}{subparagraph*.20}%
-\contentsline {subsection}{\numberline {1.4}系统测试}{11}{subsection.1.4}%
-\contentsline {subsubsection}{\numberline {1.4.1}线性表操作}{11}{subsubsection.1.4.1}%
-\contentsline {subparagraph}{InitList}{11}{subparagraph*.22}%
-\contentsline {subparagraph}{DestroyList}{12}{subparagraph*.25}%
-\contentsline {subparagraph}{ListEmpty}{12}{subparagraph*.28}%
-\contentsline {subparagraph}{ClearList}{14}{subparagraph*.34}%
-\contentsline {subparagraph}{ListLength}{16}{subparagraph*.40}%
-\contentsline {subparagraph}{ListTraverse}{17}{subparagraph*.46}%
-\contentsline {subparagraph}{GetElem}{18}{subparagraph*.49}%
-\contentsline {subparagraph}{LocateElem}{20}{subparagraph*.54}%
-\contentsline {subparagraph}{PriorElem}{21}{subparagraph*.60}%
-\contentsline {subparagraph}{NextElem}{23}{subparagraph*.66}%
-\contentsline {subparagraph}{ListInsert}{25}{subparagraph*.72}%
-\contentsline {subparagraph}{ListDelete}{26}{subparagraph*.78}%
-\contentsline {subsubsection}{\numberline {1.4.2}多线性表管理}{28}{subsubsection.1.4.2}%
-\contentsline {subparagraph}{AddList}{28}{subparagraph*.84}%
-\contentsline {subparagraph}{切换线性表}{29}{subparagraph*.87}%
-\contentsline {subparagraph}{LocateList}{30}{subparagraph*.92}%
-\contentsline {subparagraph}{RemoveList}{31}{subparagraph*.95}%
-\contentsline {subsubsection}{\numberline {1.4.3}文件操作}{33}{subsubsection.1.4.3}%
-\contentsline {subsubsection}{\numberline {1.4.4}算法}{37}{subsubsection.1.4.4}%
-\contentsline {subparagraph}{sort\_list}{37}{subparagraph*.116}%
-\contentsline {subparagraph}{max\_partial\_sum}{38}{subparagraph*.119}%
-\contentsline {subparagraph}{k\_subarray}{38}{subparagraph*.122}%
-\contentsline {subsubsection}{\numberline {1.4.5}一些小功能}{40}{subsubsection.1.4.5}%
-\contentsline {subsection}{\numberline {1.5}实验小结}{41}{subsection.1.5}%
-\contentsline {section}{\numberline {2}基于二叉链表的二叉树实现}{42}{section.2}%
-\contentsline {subsection}{\numberline {2.1}问题描述}{42}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}系统设计}{42}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}系统实现}{43}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}基本操作}{43}{subsubsection.2.3.1}%
-\contentsline {subparagraph}{CreateBiTree}{43}{subparagraph*.126}%
-\contentsline {subparagraph}{ClearBiTree}{44}{subparagraph*.127}%
-\contentsline {subparagraph}{BiTreeDepth}{45}{subparagraph*.128}%
-\contentsline {subparagraph}{LocateNode}{45}{subparagraph*.129}%
-\contentsline {subparagraph}{Assign}{45}{subparagraph*.130}%
-\contentsline {subparagraph}{GetSibling}{46}{subparagraph*.131}%
-\contentsline {subparagraph}{InsertNode}{46}{subparagraph*.132}%
-\contentsline {subparagraph}{DeleteNode}{47}{subparagraph*.133}%
-\contentsline {subparagraph}{PreOrderTraverse}{49}{subparagraph*.134}%
-\contentsline {subparagraph}{PostOrderTraverse}{49}{subparagraph*.135}%
-\contentsline {subparagraph}{LevelOrderTraverse}{49}{subparagraph*.136}%
-\contentsline {subparagraph}{InOrderTraverse}{50}{subparagraph*.137}%
-\contentsline {subsubsection}{\numberline {2.3.2}文件操作}{50}{subsubsection.2.3.2}%
-\contentsline {subparagraph}{SaveBiTree}{50}{subparagraph*.138}%
-\contentsline {subparagraph}{LoadBiTree}{50}{subparagraph*.139}%
-\contentsline {subsubsection}{\numberline {2.3.3}算法}{51}{subsubsection.2.3.3}%
-\contentsline {subparagraph}{InvertBiTree}{51}{subparagraph*.140}%
-\contentsline {subparagraph}{MaxPathSum}{51}{subparagraph*.141}%
-\contentsline {subparagraph}{LowestCommonAncestor}{51}{subparagraph*.142}%
-\contentsline {subsubsection}{\numberline {2.3.4}多树管理}{53}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.4}系统测试}{53}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}基本操作}{54}{subsubsection.2.4.1}%
-\contentsline {subparagraph}{CreateBiTree}{54}{subparagraph*.144}%
-\contentsline {subparagraph}{ClearBiTree}{56}{subparagraph*.149}%
-\contentsline {subparagraph}{TreeDepth}{57}{subparagraph*.152}%
-\contentsline {subparagraph}{Assign}{60}{subparagraph*.160}%
-\contentsline {subparagraph}{GetSibling}{64}{subparagraph*.169}%
-\contentsline {subparagraph}{InsertNode}{66}{subparagraph*.175}%
-\contentsline {subparagraph}{DeleteNode}{72}{subparagraph*.185}%
-\contentsline {subparagraph}{LocateNode}{75}{subparagraph*.192}%
-\contentsline {subparagraph}{各种遍历}{79}{subparagraph*.202}%
-\contentsline {subsubsection}{\numberline {2.4.2}文件操作}{84}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}算法}{88}{subsubsection.2.4.3}%
-\contentsline {subparagraph}{InvertTree}{88}{subparagraph*.221}%
-\contentsline {subparagraph}{MaxPathSum}{90}{subparagraph*.226}%
-\contentsline {subparagraph}{LowestCommonAncestor}{93}{subparagraph*.233}%
-\contentsline {subsubsection}{\numberline {2.4.4}多树管理}{95}{subsubsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.5}实验小结}{104}{subsection.2.5}%
-\contentsline {section}{\numberline {3}课程的收获和建议}{105}{section.3}%
-\contentsline {subsection}{\numberline {3.1}基于顺序存储结构的线性表实现}{105}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}基于链式存储结构的线性表实现}{105}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}基于二叉链表的二叉树实现}{105}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}基于二叉链表的二叉树实现}{106}{subsection.3.4}%
-\contentsline {section}{参考文献}{107}{section*.256}%
-\contentsline {section}{\numberline {A}附录A 基于顺序存储结构线性表实现的源程序}{107}{appendix.A}%
-\contentsline {section}{\numberline {B}附录B 基于链表的线性表实现的源程序}{131}{appendix.B}%
+\contentsline {subsubsection}{\numberline {1.3.3}文件操作}{8}{subsubsection.1.3.3}%
+\contentsline {subparagraph}{SaveList}{8}{subparagraph*.17}%
+\contentsline {subparagraph}{LoadList}{8}{subparagraph*.18}%
+\contentsline {subsubsection}{\numberline {1.3.4}算法}{9}{subsubsection.1.3.4}%
+\contentsline {subparagraph}{sort\_list}{9}{subparagraph*.19}%
+\contentsline {subparagraph}{max\_partial\_sum}{11}{subparagraph*.22}%
+\contentsline {subparagraph}{k\_subarray}{12}{subparagraph*.24}%
+\contentsline {subsection}{\numberline {1.4}系统测试}{14}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}线性表操作}{14}{subsubsection.1.4.1}%
+\contentsline {subparagraph}{InitList}{14}{subparagraph*.27}%
+\contentsline {subparagraph}{DestroyList}{15}{subparagraph*.30}%
+\contentsline {subparagraph}{ListEmpty}{15}{subparagraph*.33}%
+\contentsline {subparagraph}{ClearList}{17}{subparagraph*.39}%
+\contentsline {subparagraph}{ListLength}{19}{subparagraph*.45}%
+\contentsline {subparagraph}{ListTraverse}{20}{subparagraph*.51}%
+\contentsline {subparagraph}{GetElem}{21}{subparagraph*.54}%
+\contentsline {subparagraph}{LocateElem}{23}{subparagraph*.59}%
+\contentsline {subparagraph}{PriorElem}{24}{subparagraph*.65}%
+\contentsline {subparagraph}{NextElem}{26}{subparagraph*.71}%
+\contentsline {subparagraph}{ListInsert}{28}{subparagraph*.77}%
+\contentsline {subparagraph}{ListDelete}{29}{subparagraph*.83}%
+\contentsline {subsubsection}{\numberline {1.4.2}多线性表管理}{31}{subsubsection.1.4.2}%
+\contentsline {subparagraph}{AddList}{31}{subparagraph*.89}%
+\contentsline {subparagraph}{切换线性表}{32}{subparagraph*.92}%
+\contentsline {subparagraph}{LocateList}{33}{subparagraph*.97}%
+\contentsline {subparagraph}{RemoveList}{34}{subparagraph*.100}%
+\contentsline {subsubsection}{\numberline {1.4.3}文件操作}{36}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.4}算法}{40}{subsubsection.1.4.4}%
+\contentsline {subparagraph}{sort\_list}{40}{subparagraph*.121}%
+\contentsline {subparagraph}{max\_partial\_sum}{41}{subparagraph*.124}%
+\contentsline {subparagraph}{k\_subarray}{41}{subparagraph*.127}%
+\contentsline {subsubsection}{\numberline {1.4.5}一些小功能}{43}{subsubsection.1.4.5}%
+\contentsline {subsection}{\numberline {1.5}实验小结}{44}{subsection.1.5}%
+\contentsline {section}{\numberline {2}基于二叉链表的二叉树实现}{45}{section.2}%
+\contentsline {subsection}{\numberline {2.1}问题描述}{45}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}系统设计}{45}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}系统实现}{46}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}基本操作}{46}{subsubsection.2.3.1}%
+\contentsline {subparagraph}{CreateBiTree}{46}{subparagraph*.131}%
+\contentsline {subparagraph}{ClearBiTree}{48}{subparagraph*.132}%
+\contentsline {subparagraph}{BiTreeDepth}{48}{subparagraph*.133}%
+\contentsline {subparagraph}{LocateNode}{48}{subparagraph*.134}%
+\contentsline {subparagraph}{Assign}{48}{subparagraph*.135}%
+\contentsline {subparagraph}{GetSibling}{49}{subparagraph*.136}%
+\contentsline {subparagraph}{InsertNode}{49}{subparagraph*.137}%
+\contentsline {subparagraph}{DeleteNode}{50}{subparagraph*.138}%
+\contentsline {subparagraph}{PreOrderTraverse}{52}{subparagraph*.140}%
+\contentsline {subparagraph}{PostOrderTraverse}{53}{subparagraph*.141}%
+\contentsline {subparagraph}{LevelOrderTraverse}{53}{subparagraph*.142}%
+\contentsline {subparagraph}{InOrderTraverse}{53}{subparagraph*.143}%
+\contentsline {subsubsection}{\numberline {2.3.2}文件操作}{53}{subsubsection.2.3.2}%
+\contentsline {subparagraph}{SaveBiTree}{53}{subparagraph*.144}%
+\contentsline {subparagraph}{LoadBiTree}{54}{subparagraph*.145}%
+\contentsline {subsubsection}{\numberline {2.3.3}算法}{54}{subsubsection.2.3.3}%
+\contentsline {subparagraph}{InvertBiTree}{54}{subparagraph*.146}%
+\contentsline {subparagraph}{MaxPathSum}{54}{subparagraph*.147}%
+\contentsline {subparagraph}{LowestCommonAncestor}{54}{subparagraph*.148}%
+\contentsline {subsubsection}{\numberline {2.3.4}多树管理}{57}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}系统测试}{58}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}基本操作}{59}{subsubsection.2.4.1}%
+\contentsline {subparagraph}{CreateBiTree}{59}{subparagraph*.152}%
+\contentsline {subparagraph}{ClearBiTree}{61}{subparagraph*.157}%
+\contentsline {subparagraph}{TreeDepth}{62}{subparagraph*.160}%
+\contentsline {subparagraph}{Assign}{65}{subparagraph*.168}%
+\contentsline {subparagraph}{GetSibling}{69}{subparagraph*.177}%
+\contentsline {subparagraph}{InsertNode}{71}{subparagraph*.183}%
+\contentsline {subparagraph}{DeleteNode}{76}{subparagraph*.193}%
+\contentsline {subparagraph}{LocateNode}{79}{subparagraph*.200}%
+\contentsline {subparagraph}{各种遍历}{83}{subparagraph*.210}%
+\contentsline {subsubsection}{\numberline {2.4.2}文件操作}{88}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}算法}{92}{subsubsection.2.4.3}%
+\contentsline {subparagraph}{InvertTree}{92}{subparagraph*.229}%
+\contentsline {subparagraph}{MaxPathSum}{94}{subparagraph*.234}%
+\contentsline {subparagraph}{LowestCommonAncestor}{97}{subparagraph*.241}%
+\contentsline {subsubsection}{\numberline {2.4.4}多树管理}{99}{subsubsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.5}实验小结}{107}{subsection.2.5}%
+\contentsline {section}{\numberline {3}课程的收获和建议}{108}{section.3}%
+\contentsline {subsection}{\numberline {3.1}基于顺序存储结构的线性表实现}{108}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}基于二叉链表的二叉树实现}{108}{subsection.3.2}%
+\contentsline {section}{参考文献}{109}{section*.264}%
+\contentsline {section}{\numberline {A}附录A 基于顺序存储结构线性表实现的源程序}{109}{appendix.A}%
+\contentsline {section}{\numberline {B}附录B 基于链表的线性表实现的源程序}{129}{appendix.B}%
+\contentsline {section}{\numberline {C}附录C 二叉树}{153}{appendix.C}%
+\contentsline {section}{\numberline {D}附录D 图}{181}{appendix.D}%
