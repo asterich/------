@@ -1866,13 +1866,11 @@ void clean_terminal() {
 
 然后是附加功能，尤其是文件操作和多线性表管理.
 
-首先是文件操作。据观察，诸多学生被误用fscanf/fprintf产生的预料之外的错误消耗掉了大量时间(我没有，哈哈哈)。线性表的数据格式较为简单，因而难度还算可以接受; 数据格式的复杂性将会在后面的实验中大大凸显.
+首先是文件操作。据观察，诸多学生被误用fscanf/fprintf产生的预料之外的错误消耗掉了大量时间。线性表的数据格式较为简单，因而难度还算可以接受; 数据格式的复杂性将会在后面的实验中大大凸显.
 
 然后是多线性表管理。指向当前多线性表的指针被声明在线性表管理表的结构体之外，徒增许多难度。一方面，它使得切换线性表的操作与其他操作形式上不统一; 另一方面，删除操作的函数内部无法很好地利用这个指针。这一问题曾造成了删除后指针指向不正确的bug。另外，删除线性表的操作较为复杂。它涉及查找、销毁、移动等操作，稍有不慎就会遗漏其中某个方面。幸运的是，C语言支持结构体的整体赋值(C++则是通过编译器合成的复制赋值运算符\cite{CopyAssignmentCppReference})，移动的操作简单了一些.
 
 与任何C/C++项目一样，指针是令人头疼的问题。线性表的elem成员是动态分配的，这对内存管理和调试提出了一些要求。指针的威力将在后面的实验中凸显出来。
-
-(阿伟，你又野指针辣! 给我去写rust，三回啊三回)
 
 \newpage
 
@@ -1881,22 +1879,19 @@ void clean_terminal() {
 
 \subsection{问题描述}
 
-树是没有环的一种图，是一种非常常见的数据结构，在计算机科学的诸多领域中都有着广泛的应用。当然，树有很多种不同的类型和不同的实现方式。本实验采用二叉链表形式实现一个普通的二叉树。 \\
+树是没有环的一种图，是一种非常常见的数据结构，在计算机科学的诸多领域中都有着广泛的应用。当然，树有很多种不同的类型和不同的实现方式。本实验采用二叉链表形式实现一个普通的二叉树。
 
 \subsection{系统设计}
-
+\noindent
 本项目采用CMake构建。 \\
-
-编译环境: gcc-12 (Homebrew GCC 12.1.0) 12.1.0 on macOS 12.3.1 21E258 x86\_64  \\
-
+编译环境: gcc-12 (Homebrew GCC 12.1.0) 12.1.0 on macOS 12.3.1 x86\_64  \\
 编译选项: -std=c++20 \\
-
+\newline
+\noindent
 文件树如下：
 \dirtree{%
  .1 {.} .
   .2 {CMakeLists.txt} .
-  .2 {build.sh} .
-  .2 {test.dat} .
   .2 {build} .
   .2 {include} .
    .3 {binary\_tree.h} .
@@ -2042,22 +2037,7 @@ status Assign(BiTree &T, KeyType e, TElemType value);
 \end{lstlisting}
 实现: \\
 首先判断对节点关键字的修改操作是否合法，若合法则将value赋值给节点的数据域。
-判断操作的实现: \\
-\begin{lstlisting}[language=C++, frame=single]
-BiTNode *locate_node_if_changeable(BiTree T, KeyType target_key,
-								   TElemType elem_to_change) {
-	BiTNode *target = locate_node(T, target_key);
-	if (!target) {
-		return NULL;
-	}
-	BiTNode *node_to_change = locate_node(T, elem_to_change.key);
-	if (node_to_change && node_to_change != target) {
-		return NULL;
-	}
-	return target;
-}
-\end{lstlisting}
-分别查找待修改节点与新关键字对应节点，如果前者找不到或者后者存在且不等于前者，那么插入操作就是不合法的。
+判断操作: 分别查找待修改节点与新关键字对应节点，如果前者找不到或者后者存在且不等于前者，那么插入操作就是不合法的。
 
 \subparagraph{GetSibling}
 \noindent
@@ -2079,64 +2059,28 @@ status InsertNode(BiTree &T, KeyType e, int LR, TElemType c);
 \end{lstlisting}
 实现: \\
 首先判断插入操作是否合法，若合法则按规则插入。LR决定插入节点与插入位置的相对关系: 0时为左节点，1时为右节点，-1时作为整颗树的根节点。\\
-判断操作的实现: \\
-\begin{lstlisting}[language=C++, frame=single]
-BiTNode *locate_node_if_insertable(BiTree T, KeyType target_key,
-								   TElemType elem_to_insert) {
-	BiTNode *target = locate_node(T, target_key);
-	if (!target) {
-		return NULL;
+判断操作相较于Assign功能的合法性判断较为简单，少了两节点的相等判断。 \\
+插入操作的实现(见图\ref{fig6-101}、图\ref{fig6-102}):
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=6.0in]{flowchart/binary_tree/flowchart/insert_node.png}
 	}
-	BiTNode *node_to_insert = locate_node(T, elem_to_insert.key);
-	if (node_to_insert) {
-		return NULL;
+	\centering
+	\caption{流程图}
+	\label{fig6-101}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=6.0in]{flowchart/binary_tree/flowchart/InsertNode.png}
 	}
-	return target;
-}
-\end{lstlisting}
-相较于Assign功能的合法性判断较为简单，少了两节点的相等判断。 \\
-插入操作的实现:
-\begin{lstlisting}[language=C++, frame=single]
-status insert_node(BiTree &node, int LR, TElemType c) {
-	BiTNode *new_node = (BiTNode *)malloc(sizeof(BiTNode));
-	if (!new_node) {
-		return ERROR;
-	}
-	new_node->lchild = NULL;
-	switch (LR) {
-		case 0: {
-			new_node->rchild = node->lchild;
-			node->lchild = new_node;
-		} break;
-		case 1: {
-			new_node->rchild = node->rchild;
-			node->rchild = new_node;
-		} break;
-		case -1: {  // insert as root; ignoring %node's parent node
-			new_node->rchild = node;
-			node = new_node;
-		} break;
-	}
-	new_node->data = c;
-	return OK;
-}
-
-status InsertNode(BiTree &T, KeyType e, int LR, TElemType c) {
-    status s = OK;
-    BiTNode *target = LR == -1 ? T : locate_node_if_insertable(T, e, c);
-    if (!target) {
-        return ERROR;
-    }
-    s = insert_node(target, LR, c);
-    if (s == ERROR) {
-        return s;
-    }
-    if (LR == -1) {
-        T = target;
-    }
-    return OK;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-102}
+\end{figure}
 LR == -1的情况，变换根节点的操作并没有放到locate\_node中，并不是很优雅，但目前也没有什么好办法。 \\
 
 \subparagraph{DeleteNode}
@@ -2148,40 +2092,31 @@ status DeleteNode(BiTree &T, KeyType e);
 \end{lstlisting}
 实现: \\
 非常麻烦。首先要找到待删除节点的父亲节点和左子树最右节点，然后才能进行删除操作。 \\
-找父亲节点的函数实现如下:
-\begin{lstlisting}[language=C++, frame=single]
-BiTNode *get_father(BiTree T, KeyType e) {
-	if (!T) {
-		return NULL;
+找父亲节点的函数流程图如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[height=5.0in]{flowchart/binary_tree/flowchart/get_father.png}
 	}
-	if (T->lchild && T->lchild->data.key == e) {
-		return T;
-	} else if (T->rchild && T->rchild->data.key == e) {
-		return T;
-	}
-	BiTNode *res_in_l = get_father(T->lchild, e);
-	BiTNode *res_in_r = get_father(T->rchild, e);
-	if (res_in_l) {
-		return res_in_l;
-	} else if (res_in_r) {
-		return res_in_r;
-	}
-	return NULL;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-99}
+\end{figure}
 即递归遍历整颗树。每次将当前节点儿子的关键字与e进行比较，如果为真，返回当前节点，否则递归查找左右子树。只有在空节点时才返回NULL. \\
+\clearpage
 找左子树最右节点的函数实现如下:
-\begin{lstlisting}[language=C++, frame=single]
-BiTNode *get_rightest_node(BiTree T) {
-	if (T->rchild) {
-		return get_rightest_node(T->rchild);
-	} else if (T->lchild) {
-		return get_rightest_node(T->lchild);
-	} else {
-		return T;
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=5.0in]{flowchart/binary_tree/flowchart/get_rightest_node.png}
 	}
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-100}
+\end{figure}
+\noindent
 即优先遍历右子树。\\
 真正的删除操作需要判断左、右子树是否为空，具体实现比较复杂，以下是流程图(\ref{fig6-9}):
 \begin{figure}[H]
@@ -2195,6 +2130,7 @@ BiTNode *get_rightest_node(BiTree T) {
 	\label{fig6-9}
 \end{figure}
 
+\clearpage
 \subparagraph{PreOrderTraverse}
 \noindent
 前序遍历整颗树。 \\
@@ -3813,11 +3749,11 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 
 \subsection{基于顺序存储结构的线性表实现}
 
-描述通过学习计算机基础知识专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。描述网页的设计和实现过程中遇到的问题及如何解决。
+通过本次课程，我掌握了顺序线性表的基本操作和各种算法，对顺序线性表这一数据结构有了更深刻的认识。同时，运用CMake，我的代码组织能力得到了提升。
 
 \subsection{基于二叉链表的二叉树实现}
 
-描述通过学习编程工具Python专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。描述通过学习编程工具Python专题，有何收获，有何建议，如某专题可适当减少讲授时间、某专题可适当增加讲授内容和时间等。
+通过本次课程，我掌握了二叉树的基本操作和各种算法，对二叉树这一数据结构、指针的使用和注意事项等，有了更深刻的认识。
 
 %% \nocite{*} %% 作用是不对文献进行引用，但可以生成文献列表
 
@@ -4677,6 +4613,13 @@ int main(void) {
 							if (!strcmp(name, current_list->name)) {
 								current_list = &lists.elem[0];
 								strcpy(current_list->name, lists.elem[0].name);
+							}
+							status pos_curr =
+								LocateList(lists, current_list->name);
+							status pos_to_be_deleted = LocateList(lists, name);
+							if (pos_to_be_deleted != -1 &&
+								pos_to_be_deleted < pos_curr) {
+								--current_list;
 							}
 							status s = RemoveList(lists, name);
 							if (s == ERROR) {

@@ -58,48 +58,48 @@
 \contentsline {subsection}{\numberline {2.3}系统实现}{46}{subsection.2.3}%
 \contentsline {subsubsection}{\numberline {2.3.1}基本操作}{46}{subsubsection.2.3.1}%
 \contentsline {subparagraph}{CreateBiTree}{46}{subparagraph*.131}%
-\contentsline {subparagraph}{ClearBiTree}{48}{subparagraph*.132}%
+\contentsline {subparagraph}{ClearBiTree}{47}{subparagraph*.132}%
 \contentsline {subparagraph}{BiTreeDepth}{48}{subparagraph*.133}%
 \contentsline {subparagraph}{LocateNode}{48}{subparagraph*.134}%
 \contentsline {subparagraph}{Assign}{48}{subparagraph*.135}%
-\contentsline {subparagraph}{GetSibling}{49}{subparagraph*.136}%
+\contentsline {subparagraph}{GetSibling}{48}{subparagraph*.136}%
 \contentsline {subparagraph}{InsertNode}{49}{subparagraph*.137}%
-\contentsline {subparagraph}{DeleteNode}{50}{subparagraph*.138}%
-\contentsline {subparagraph}{PreOrderTraverse}{52}{subparagraph*.140}%
-\contentsline {subparagraph}{PostOrderTraverse}{53}{subparagraph*.141}%
-\contentsline {subparagraph}{LevelOrderTraverse}{53}{subparagraph*.142}%
-\contentsline {subparagraph}{InOrderTraverse}{53}{subparagraph*.143}%
-\contentsline {subsubsection}{\numberline {2.3.2}文件操作}{53}{subsubsection.2.3.2}%
-\contentsline {subparagraph}{SaveBiTree}{53}{subparagraph*.144}%
-\contentsline {subparagraph}{LoadBiTree}{54}{subparagraph*.145}%
-\contentsline {subsubsection}{\numberline {2.3.3}算法}{54}{subsubsection.2.3.3}%
-\contentsline {subparagraph}{InvertBiTree}{54}{subparagraph*.146}%
-\contentsline {subparagraph}{MaxPathSum}{54}{subparagraph*.147}%
-\contentsline {subparagraph}{LowestCommonAncestor}{54}{subparagraph*.148}%
-\contentsline {subsubsection}{\numberline {2.3.4}多树管理}{57}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.4}系统测试}{58}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}基本操作}{59}{subsubsection.2.4.1}%
-\contentsline {subparagraph}{CreateBiTree}{59}{subparagraph*.152}%
-\contentsline {subparagraph}{ClearBiTree}{61}{subparagraph*.157}%
-\contentsline {subparagraph}{TreeDepth}{62}{subparagraph*.160}%
-\contentsline {subparagraph}{Assign}{65}{subparagraph*.168}%
-\contentsline {subparagraph}{GetSibling}{69}{subparagraph*.177}%
-\contentsline {subparagraph}{InsertNode}{71}{subparagraph*.183}%
-\contentsline {subparagraph}{DeleteNode}{76}{subparagraph*.193}%
-\contentsline {subparagraph}{LocateNode}{79}{subparagraph*.200}%
-\contentsline {subparagraph}{各种遍历}{83}{subparagraph*.210}%
-\contentsline {subsubsection}{\numberline {2.4.2}文件操作}{88}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}算法}{92}{subsubsection.2.4.3}%
-\contentsline {subparagraph}{InvertTree}{92}{subparagraph*.229}%
-\contentsline {subparagraph}{MaxPathSum}{94}{subparagraph*.234}%
-\contentsline {subparagraph}{LowestCommonAncestor}{97}{subparagraph*.241}%
-\contentsline {subsubsection}{\numberline {2.4.4}多树管理}{99}{subsubsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.5}实验小结}{107}{subsection.2.5}%
-\contentsline {section}{\numberline {3}课程的收获和建议}{108}{section.3}%
-\contentsline {subsection}{\numberline {3.1}基于顺序存储结构的线性表实现}{108}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}基于二叉链表的二叉树实现}{108}{subsection.3.2}%
-\contentsline {section}{参考文献}{109}{section*.264}%
-\contentsline {section}{\numberline {A}附录A 基于顺序存储结构线性表实现的源程序}{109}{appendix.A}%
-\contentsline {section}{\numberline {B}附录B 基于链表的线性表实现的源程序}{129}{appendix.B}%
-\contentsline {section}{\numberline {C}附录C 二叉树}{153}{appendix.C}%
-\contentsline {section}{\numberline {D}附录D 图}{181}{appendix.D}%
+\contentsline {subparagraph}{DeleteNode}{52}{subparagraph*.140}%
+\contentsline {subparagraph}{PreOrderTraverse}{55}{subparagraph*.144}%
+\contentsline {subparagraph}{PostOrderTraverse}{55}{subparagraph*.145}%
+\contentsline {subparagraph}{LevelOrderTraverse}{55}{subparagraph*.146}%
+\contentsline {subparagraph}{InOrderTraverse}{55}{subparagraph*.147}%
+\contentsline {subsubsection}{\numberline {2.3.2}文件操作}{56}{subsubsection.2.3.2}%
+\contentsline {subparagraph}{SaveBiTree}{56}{subparagraph*.148}%
+\contentsline {subparagraph}{LoadBiTree}{56}{subparagraph*.149}%
+\contentsline {subsubsection}{\numberline {2.3.3}算法}{56}{subsubsection.2.3.3}%
+\contentsline {subparagraph}{InvertBiTree}{56}{subparagraph*.150}%
+\contentsline {subparagraph}{MaxPathSum}{56}{subparagraph*.151}%
+\contentsline {subparagraph}{LowestCommonAncestor}{57}{subparagraph*.152}%
+\contentsline {subsubsection}{\numberline {2.3.4}多树管理}{59}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}系统测试}{60}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}基本操作}{61}{subsubsection.2.4.1}%
+\contentsline {subparagraph}{CreateBiTree}{61}{subparagraph*.156}%
+\contentsline {subparagraph}{ClearBiTree}{63}{subparagraph*.161}%
+\contentsline {subparagraph}{TreeDepth}{64}{subparagraph*.164}%
+\contentsline {subparagraph}{Assign}{67}{subparagraph*.172}%
+\contentsline {subparagraph}{GetSibling}{71}{subparagraph*.181}%
+\contentsline {subparagraph}{InsertNode}{73}{subparagraph*.187}%
+\contentsline {subparagraph}{DeleteNode}{78}{subparagraph*.197}%
+\contentsline {subparagraph}{LocateNode}{81}{subparagraph*.204}%
+\contentsline {subparagraph}{各种遍历}{85}{subparagraph*.214}%
+\contentsline {subsubsection}{\numberline {2.4.2}文件操作}{90}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}算法}{94}{subsubsection.2.4.3}%
+\contentsline {subparagraph}{InvertTree}{94}{subparagraph*.233}%
+\contentsline {subparagraph}{MaxPathSum}{96}{subparagraph*.238}%
+\contentsline {subparagraph}{LowestCommonAncestor}{99}{subparagraph*.245}%
+\contentsline {subsubsection}{\numberline {2.4.4}多树管理}{101}{subsubsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.5}实验小结}{109}{subsection.2.5}%
+\contentsline {section}{\numberline {3}课程的收获和建议}{110}{section.3}%
+\contentsline {subsection}{\numberline {3.1}基于顺序存储结构的线性表实现}{110}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}基于二叉链表的二叉树实现}{110}{subsection.3.2}%
+\contentsline {section}{参考文献}{111}{section*.268}%
+\contentsline {section}{\numberline {A}附录A 基于顺序存储结构线性表实现的源程序}{111}{appendix.A}%
+\contentsline {section}{\numberline {B}附录B 基于链表的线性表实现的源程序}{131}{appendix.B}%
+\contentsline {section}{\numberline {C}附录C 二叉树}{155}{appendix.C}%
+\contentsline {section}{\numberline {D}附录D 图}{183}{appendix.D}%
