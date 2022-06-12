@@ -1944,60 +1944,46 @@ status CreateBiTree(BiTree &T, TElemType definition[]);
 \noindent
 实现: \\
 本函数从二叉树带空节点的先序遍历 definition[] 创建整颗二叉树。 \\
-具体实现分成两个部分: 先检查有无重复的关键字 key，再从先序遍历建树。具体代码如下:
-\begin{lstlisting}[language=C++, frame=single]
-status CreateBiTree(BiTree &T, TElemType definition[]) {
-	T = NULL;
-	if (check_if_repeated_in_elems(definition) != OK) {
-		return ERROR;
+具体实现分成两个部分: 先检查有无重复的关键字 key，再从先序遍历建树。流程图如下:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=3.0in]{flowchart/binary_tree/flowchart/CreateBiTree.png}
 	}
-	create_binary_tree_by_preorder(T, definition);
-	return OK;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-105}
+\end{figure}
 \noindent
-检查重复关键字的函数实现如下:
-\begin{lstlisting}[language=C++, frame=single]
-status check_if_repeated_in_elems(const TElemType elems[]) {
-	std::unordered_set<KeyType> keys;
-	const TElemType *p_elem = elems;
-	while (p_elem->key != -1) {
-		if (keys.find(p_elem->key) != keys.end()) {
-			return ERROR;
-		}
-		if (p_elem->key != 0) {
-			keys.insert(p_elem->key);
-		}
-		++p_elem;
+检查重复关键字的函数流程如图\ref{fig6-106}:
+\begin{figure}[H]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=6.0in]{flowchart/binary_tree/flowchart/check_if_repeated_in_elems.png}
 	}
-	return OK;
-}
-\end{lstlisting}
+	\centering
+	\caption{流程图}
+	\label{fig6-106}
+\end{figure}
+\noindent
 其中用到了std::unordered\_set, 其作用相当于一个集合。每次迭代时先检查本次的关键字是否已经在集合 keys 里，若存在则返回ERROR, 否则将它加入 keys. 需要注意的是关键字为0的节点。 \\
-先序建树的函数实现如下:
-\begin{lstlisting}[language=C++, frame=single]
-TElemType *create_binary_tree_by_preorder(BiTree &node, TElemType *elem) {
-	if (elem == NULL) {
-        return NULL;
-    }
-    if (elem->key == 0 || elem->key == -1) {
-        node = NULL;
-        return elem;
-    } else {
-        node = (BiTNode *)malloc(sizeof(BiTNode));
-        if (node == NULL) {
-            perror("memory allocation failed");
-            return NULL;
-        }
-        node->data = *elem;
-        TElemType *rightest =
-            create_binary_tree_by_preorder(node->lchild, elem + 1);
-        return create_binary_tree_by_preorder(node->rchild, rightest + 1);
-    }
-}
-\end{lstlisting}
-为什么是这样呢？这是因为在先序遍历中，一个节点左子树的最右节点与右子树的根节点是相邻的。这就意味着在分离左右子树时，左子树的最右节点是有必要知道的。为了取得一个节点的最右节点，我们可以递归地创建左子树和右子树，在创建左子树时把目前节点在elem中的位置前推一位，在创建右子树到头时返回最后节点在先序遍历中的位置。左子树最右节点取得以后，就可以确定左右子树在elem数组中的分界。在含空节点的先序遍历中，这个最右节点一般就是一个空节点，因此递归终止条件是空节点。 \\
+先序建树的函数流程如图\ref{fig6-104}。 \\
+\begin{figure}[htbp]
+	\centering
+	\subfloat{
+		\centering
+		\includegraphics[width=6.0in]{flowchart/binary_tree/flowchart/create_binary_tree_by_preorder.png}
+	}
+	\centering
+	\caption{流程图}
+	\label{fig6-104}
+\end{figure}
+\noindent
+为什么是那样呢？这是因为在先序遍历中，一个节点左子树的最右节点与右子树的根节点是相邻的。这就意味着在分离左右子树时，左子树的最右节点是有必要知道的。为了取得一个节点的最右节点，我们可以递归地创建左子树和右子树，在创建左子树时把目前节点在elem中的位置前推一位，在创建右子树到头时返回最后节点在先序遍历中的位置。左子树最右节点取得以后，就可以确定左右子树在elem数组中的分界。在含空节点的先序遍历中，这个最右节点一般就是一个空节点，因此递归终止条件是空节点。 \\
 
+\clearpage
 \subparagraph{ClearBiTree}
 \noindent
 删除二叉树，并释放所有节点。\\
@@ -3734,27 +3720,37 @@ int LocateTree(MultiTreeTable Trees, const char *TreeName);
 
 本实验的难点在于指针操作。基于二叉链表的二叉树涉及较为复杂的指针操作，尤其需要非常注意空指针的情况。如果忘了处理空指针，很有可能发生段错误，调试也会比较困难。
 
-同时，二叉树的一些操作语义较为复杂，对一些小功能进行一定程度的封装很有必要。(但是说实话，我对自己这次的封装并不是太满意，感觉有点过头了，实现上也不是很优雅)
+同时，二叉树的一些操作在语义上较为复杂，对一些小功能进行一定程度的封装很有必要。(但是说实话，我对自己这次的封装并不是太满意，感觉有点过头了，实现上也不是很优雅)
 
-二叉树的许多操作都是递归实现的。递归代码好想，但是需要保证正确性。另外，递归代码的调试难度也比较大。
+二叉树的许多操作都是递归实现的。递归代码非常好想，但是需要保证正确性。另外，递归代码的调试难度似乎也比较大。将递归算法改写成非递归形式就更有难度了，这需要对其他数据类型(如栈、队列)和递归本身有更深刻的理解和更灵活的运用。
 
-文件操作其实并不是非常复杂，只要能保证各种操作的数据格式一致，就会好写很多。带空节点的先序遍历省去了很多麻烦。(图: 啊对对对)
+文件操作其实并不是非常复杂，只要尽量保证各种操作的数据格式一致，就会好写很多。带空节点的先序遍历省去了很多麻烦。
 
-算法部分其实还好，LCA需要一定的拓展知识。
+算法部分其实还好，LCA的优化算法需要一定的拓展知识。
 
 \newpage
 
 \section{课程的收获和建议}
 
-通过本次课程，我对各种常用的数据结构有了更加深刻的认识，同时我也学会了CMake、LaTeX等工具，我的代码编写能力、报告撰写能力也得到了提高。
+通过本次课程，我对各种常用的数据结构(比如顺序数组、链表、二叉树、图、栈、队列)有了更加深刻的认识，能够根据需要灵活地选择恰当的数据结构，从而简化功能实现、提升代码效率。同时，我也学会了CMake、LaTeX等工具的使用，我的代码编写能力、封装能力、报告撰写能力也得到了提高。
 
 \subsection{基于顺序存储结构的线性表实现}
 
-通过本次课程，我掌握了顺序线性表的基本操作和各种算法，对顺序线性表这一数据结构有了更深刻的认识。同时，运用CMake，我的代码组织能力得到了提升。
+通过本次课程，我掌握了顺序线性表的基本操作和各种算法(如最大子数组和、排序算法)，对顺序线性表这一数据结构、分治与动态规划等算法思想有了更深刻的认识。同时，运用CMake，我的代码组织能力得到了提升。
+
+\subsection{基于链式存储结构的线性表实现}
+
+通过本次课程，我掌握了链表的基本操作，对链表与顺序数组的区别有了深刻体会，对链表这一数据结构、指针的使用和注意事项等，有了更深刻的认识。
 
 \subsection{基于二叉链表的二叉树实现}
 
-通过本次课程，我掌握了二叉树的基本操作和各种算法，对二叉树这一数据结构、指针的使用和注意事项等，有了更深刻的认识。
+通过本次课程，我掌握了二叉树的基本操作和各种算法(如各种遍历方式、翻转二叉树、LCA等)，对二叉树这一数据结构、指针的使用和注意事项等，有了更深刻的理解。
+
+\subsection{基于邻接表的无向图实现}
+
+通过本次课程，我掌握了无向图的基本操作和各种算法(如dfs、bfs、最短路算法等)，对无向图和邻接表、指针的使用和注意事项、文件操作等，有了更清晰的认知。
+
+另外，在"距离小于k的顶点集合"功能中，我尝试了C++20的一些新特性(主要是std::ranges)以将符合要求的顶点过滤出来并转化为顶点关键字，并不影响Dijkstra算法的具体实现，但是能使代码变得更加简洁。在使用这一新特性的过程中，我对现代C++的发展方向有了初步了解。
 
 %% \nocite{*} %% 作用是不对文献进行引用，但可以生成文献列表
 
